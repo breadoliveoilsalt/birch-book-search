@@ -19,7 +19,7 @@ function testReducer(state = {
     //     return {rainDropFactory: null, rainDrops: []}
       default:
         return state
-      }
+    }
 }
 
 export default testReducer
