@@ -1,7 +1,7 @@
 import React from 'react'
 // import sinon from 'sinon'
 // import { expect } from 'chai' - not sure if I need this?? examples are inconsistent
-import { expect } from 'chai-enzyme'
+import { expect } from 'chai'
 import Enzyme, { shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 
