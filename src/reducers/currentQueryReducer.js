@@ -10,7 +10,7 @@ function currentQueryReducer(state = defaultState, action) {
     case 'LOAD_QUERY_TERMS':
       return Object.assign({}, state, {userQuery: action.payload})
     case 'INCREASE_QUERY_STARTING_ID':
-        return Object.assign({}, state, {queryStartingId: queryStartingId + resultsPerPageQuery})
+        return Object.assign({}, state, {queryStartingId: state.queryStartingId + state.resultsPerPageQuery})
     case 'LOAD_QUERY_RESULTS':
       return Object.assign({}, state, {results: [...state.results, ...action.payload]})
     case 'RESET_QUERY':
@@ -20,4 +20,4 @@ function currentQueryReducer(state = defaultState, action) {
   }
 }
 
-export default testReducer
+export default currentQueryReducer
