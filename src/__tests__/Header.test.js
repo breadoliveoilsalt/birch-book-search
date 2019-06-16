@@ -15,9 +15,8 @@ describe("<Header />", function() {
     expect(wrapper.text()).to.equal("Birch")
   })
 
-  /*
   it("contains a birch image", function(){
 
   })
-  */
+  
 })
