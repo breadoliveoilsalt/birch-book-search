@@ -1,15 +1,12 @@
 import { combineReducers } from 'redux'
-import testReducer from './testReducer'
-// import randomDotsReducer from './randomDotsReducer'
-// import rainReducer from './rainReducer'
+import appStatusReducer from './appStatusReducer'
+import currentQueryReducer from './currentQueryReducer'
 
 
 const rootReducer = combineReducers(
   {
-    testReducer: testReducer
-    // randomDots: randomDotsReducer,
-    // rain: rainReducer,
-
+    appStatus: appStatusReducer,
+    currentQuery: currentQueryReducer
   }
 )
 
