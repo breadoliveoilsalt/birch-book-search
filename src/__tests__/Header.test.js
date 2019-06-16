@@ -14,4 +14,10 @@ describe("<Header />", function() {
     const wrapper = shallow(<Header />)
     expect(wrapper.text()).to.equal("Birch")
   })
+
+  /*
+  it("contains a birch image", function(){
+
+  })
+  */
 })
