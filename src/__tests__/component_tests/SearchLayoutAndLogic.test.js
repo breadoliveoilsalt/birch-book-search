@@ -5,7 +5,8 @@ import Adapter from 'enzyme-adapter-react-16'
 
 Enzyme.configure({ adapter: new Adapter() })
 
-import SearchBar from '../components_presentational/SearchBar'
+import SearchBar from '../components_container/SearchLayoutAndLogic'
+// will have to import other components needed here for the tests to pass
 
 describe("<SearchLayoutAndLogic />", function() {
 
@@ -13,7 +14,7 @@ describe("<SearchLayoutAndLogic />", function() {
 
   })
 
-  it("should render < SearchResults /> when there are search results in the Redux state", function() {
+  it("should render < SearchResultsList /> when there are search results in the Redux state", function() {
     // Make sure to test when there are results and not results
   })
 
