@@ -3,10 +3,8 @@ import React from 'react'
 const Header = () => {
 
   return (
-    <div>
-      <h1 className="header">
-        Birch
-      </h1>
+    <div className="header">
+      Birch
     </div>
   )
 
