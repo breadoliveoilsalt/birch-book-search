@@ -7,7 +7,7 @@ import Adapter from 'enzyme-adapter-react-16'
 
 Enzyme.configure({ adapter: new Adapter() })
 
-import Header from '../../components_presentational/header'
+import Header from '../../components_presentational/Header'
 
 describe("<Header />", function() {
   it("renders the text 'Birch' only", function() {

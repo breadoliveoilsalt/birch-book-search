@@ -18,10 +18,37 @@ describe("<SearchBar />", function() {
   })
 
   describe("the Search button", function() {
-    it("should call getBookResults() from basicBookSearchThunk when clicked", function() {
+
+    it("should add the current query to the Redux state", function(){
 
     })
 
+    it("should call getBookRecords() from basicBookSearchThunk when clicked with a startingId of 0, the results per query, and the current query search terms from the Redux state", function() {
+
+    })
+
+    it("should remove any errors displayed when clicked", function() {
+
+    })
+    // Make sure that hitting enter does not cause clear search to run
+
+
+  })
+
+  it("should render a Clear Search button", function(){
+
+
+    describe("the Clear Search button", function(){
+
+      it("should empty the Redux state of the current query and results", function() {
+
+      })
+
+      it("should remove any errors displayed when clicked", function() {
+
+      })
+
+    })
   })
 
 
