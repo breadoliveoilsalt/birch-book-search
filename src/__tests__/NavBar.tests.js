@@ -8,17 +8,17 @@ Enzyme.configure({ adapter: new Adapter() })
 import NavBar from '../components_presentational/NavBar'
 
 describe("<NavBar />", function() {
-  it("should have two links", function() {
+  it("should render two links", function() {
     const wrapper = shallow(<NavBar />)
     expect(wrapper.text()).to.equal("Birch")
   })
 
-  it("should have a link to Search page that loads search page when clicked", function(){
+  it("should render a link to Search page that loads search page when clicked", function(){
 
   })
 
-  it("should have a link to About page that loads the about page when clicked", function(){
-    
+  it("should render a link to About page that loads the about page when clicked", function(){
+
   })
 
 })
