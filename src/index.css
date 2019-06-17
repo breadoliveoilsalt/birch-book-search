@@ -30,7 +30,7 @@ code {
   background-color: blue;
   font-size: 400%;
   font-weight: bold;
-  padding-top: 0.25em;
+  /* padding-top: 0.25em; */
   /* height: 3em; */
   /* display: inline-block; */
   /* clear: both; */
@@ -55,9 +55,17 @@ code {
   /* display: inline-block; */
 }
 
-a.navbar {
+a:link {
   color: black; /* check that this works */
 }
+
+a:visited {
+  color: black; /* check that this works */
+}
+
+/* a:hover {
+  color: blue;
+} */
 
 .navlink {
   display: inline-block;
@@ -111,4 +119,14 @@ input[type="submit"] {
   margin: 1em 0;
   background-color: pink;
   /* font-size: 3em; */
+}
+
+.error-display {
+  /* height: 2em; */
+  border: .25em solid red;
+  width: 75%;
+  margin: 0em auto;
+  margin-bottom: 1em;
+  padding: 0.25em;
+
 }
