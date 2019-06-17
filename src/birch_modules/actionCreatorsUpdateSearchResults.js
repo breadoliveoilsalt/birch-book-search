@@ -1,7 +1,7 @@
-export function loadSearchTerms(payload) {
+export function loadSearchTerms(searchTerms) {
   return (
     {type: 'LOAD_SEARCH_TERMS',
-    payload: payload}
+    payload: searchTerms}
   )
 }
 
@@ -11,10 +11,10 @@ export function increaseSearchStartingID() {
   )
 }
 
-export function loadSearchResults(payload) {
+export function loadSearchResults(results) {
   return (
     {type: 'LOAD_SEARCH_RESULTS',
-    payload: payload}
+    payload: results}
   )
 }
 

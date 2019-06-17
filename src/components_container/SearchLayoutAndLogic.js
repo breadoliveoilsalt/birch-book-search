@@ -1,5 +1,10 @@
 import React, { Component } from 'react'
 
+import { connect } from 'react-redux'
+import { loadError, deleteError, beginBookAPIRequest, endBookAPIRequest } from '../birch_modules/actionCreatorsAppStatus'
+import { loadSearchTerms, increaseSearchStartingID, loadSearchResults, resetSearch } from '../birch_modules/actionCreatorsUpdateSearchResults'
+import { getBookRecords } from '../birch_modules/fetchRequestBasicSearch'
+
 import SearchBar from '../components_presentational/SearchBar'
 import ClearSearchButton from '../components_presentational/ClearSearchButton'
 import ErrorDisplay from '../components_presentational/ErrorDisplay'
@@ -75,4 +80,33 @@ class SearchLayoutAndLogic extends Component {
 
 }
 
-export default SearchLayoutAndLogic
+const mapStateToProps = (state) => {
+  return {
+    makingBookAPIRequest: state.appStatus.makingBookAPIRequest,
+    currentError: state.appStatus.currentError,
+    userSearchTerms: state.currentSearch.userSearchTerms,
+    resultsPerSearch: state.currentSearch.resultsPerSearch,
+    searchStartingID: state.currentSearch.startingSearchID,
+    results: state.currentSearch.results
+  }
+}
+
+// I may not need many of these here, like delete error and load error
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loadError: (message) => dispatch(loadError(message)),
+    deleteError: () => dispatch(deleteError()),
+    beginBookAPIRequest: () => dispatch(beginBookAPIRequest()),
+    endBookAPIRequest: () => dispatch(endBookAPIRequest()),
+    loadSearchTerms: (searchTerms) => dispatch(loadSearchTerms(searchTerms)),
+    increaseSearchStartingID: () => dispatch(increaseSearchStartingID()),
+    loadSearchResults: (results) => dispatch(loadSearchResults(results)),
+    resetSearch: () => dispatch(resetSearch()),
+    getBookRecords:
+      (searchTerms, searchStartingID, resultsPerSearch) =>
+        dispatch(getBookRecords(searchTerms, searchStartingID, resultsPerSearch))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchLayoutAndLogic)
