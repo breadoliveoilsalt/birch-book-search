@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import SearchBar from '../components_presentational/SearchBar'
 import ClearSearchButton from '../components_presentational/ClearSearchButton'
+import Divider from '../components_presentational/Divider'
 
 
 
@@ -52,6 +53,8 @@ class SearchLayoutAndLogic extends Component {
         <ClearSearchButton
           clearSearch={this.clearSearch}
         />
+
+        <Divider />
 
 
       </div>
