@@ -4,7 +4,7 @@ const Divider = () => {
 
   return (
     <div>
-      <div style={{backgroundColor: "blue"}} />
+      <div style={{backgroundColor: "blue", height: "1em"}} />
     </div>
   )
 
