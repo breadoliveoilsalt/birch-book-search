@@ -5,7 +5,7 @@ const ErrorDisplay = ( props ) => {
   if (props.errorMessage) {
     return (
       <div className="error-display">
-        "Error occurred, sorry."
+        {props.errorMessage}
       </div>
     )
   } else {

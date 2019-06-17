@@ -36,14 +36,16 @@ class SearchLayoutAndLogic extends Component {
 
   handleSearchSubmit(event) {
     event.preventDefault()
-    let userInput = document.getElementById("search-input").value
+    let searchTerms = document.getElementById("search-input").value
+    this.props.getBookRecords(searchTerms, this.props.searchStartingID, this.props.resultsPerSearch)
     // probably should look into escaping user user input
     // might want to see react hooks
-    console.log("Here's what the user entered: ", userInput)
+
   }
 
   clearSearch(event) {
     event.preventDefault()
+    this.props.resetSearch()
     console.log("Search Cleared!")
   }
 
@@ -62,7 +64,7 @@ class SearchLayoutAndLogic extends Component {
         />
 
         <ErrorDisplay
-          errorMessage={true}
+          errorMessage={this.props.currentError}
         />
 
         <Divider />
@@ -86,7 +88,7 @@ const mapStateToProps = (state) => {
     currentError: state.appStatus.currentError,
     userSearchTerms: state.currentSearch.userSearchTerms,
     resultsPerSearch: state.currentSearch.resultsPerSearch,
-    searchStartingID: state.currentSearch.startingSearchID,
+    searchStartingID: state.currentSearch.searchStartingID,
     results: state.currentSearch.results
   }
 }
