@@ -30,6 +30,7 @@ code {
   background-color: blue;
   font-size: 400%;
   font-weight: bold;
+  padding-top: 0.25em;
   /* height: 3em; */
   /* display: inline-block; */
   /* clear: both; */
@@ -88,6 +89,7 @@ input[type="submit"] {
   border: 1px solid black;
   background-color: #e7e7e7;
   width: 60%;
+  max-width: 600px;
 }
 
 #search-submit-button {
@@ -96,13 +98,15 @@ input[type="submit"] {
   height: 100%;
   /* height: 2.5em; */
   width: 20%;
+  max-width: 200px;
   /* -webkit-appearance: none;
   -moz-appearance: none; */
   /* font-family: Courier; */
 }
 
 #clear-search-button {
-  width: 75%;
+  width: 80%;
+  max-width: 700px;
   height: 100%;
   margin: 1em 0;
   background-color: pink;
