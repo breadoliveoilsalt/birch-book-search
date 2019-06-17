@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 
 import SearchBar from '../components_presentational/SearchBar'
+import ClearSearchButton from '../components_presentational/ClearSearchButton'
+
 
 
 /*
@@ -16,6 +18,7 @@ class SearchLayoutAndLogic extends Component {
     super(props)
     // this.handleSearchInput = this.handleSearchInput.bind(this)
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this)
+    this.clearSearch = this.clearSearch.bind(this)
   }
 
 
@@ -31,6 +34,11 @@ class SearchLayoutAndLogic extends Component {
     console.log("Here's what the user entered: ", userInput)
   }
 
+  clearSearch(event) {
+    event.preventDefault()
+    console.log("Search Cleared!")
+  }
+
   render() {
 
     return(
@@ -40,6 +48,12 @@ class SearchLayoutAndLogic extends Component {
           handleSearchInput={this.handleSearchInput}
           handleSearchSubmit={this.handleSearchSubmit}
         />
+
+        <ClearSearchButton
+          clearSearch={this.clearSearch}
+        />
+
+
       </div>
 
     )

@@ -20,7 +20,6 @@ code {
   display: flex;
   -webkit-flex-flow: row wrap;
   flex-flow: row wrap; */ /* These wer making the divs inline instead of block! */
-  font: Courier;
   width: 100%;
   text-align: center;
   font-family: "Courier New";
@@ -61,23 +60,45 @@ code {
   /* width: 50%; */
 }
 
-.search-bar{
+.simple-form {
   height: 2em;
-  background-color: green;
+  /* background-color: green; */
 }
 
-.input-border {
-  display: inline-block;
-  height: 2em;
-  border: 1px solid black;
-  background-color: grey;
-  width: 70%;
+input {
+  font-family: Courier;
+  font-size: 100%;
 }
 
-.submit-button {
-  display: inline-block;
+input[type="submit"] {
+  /* background-color: pink; */
   border: 1px solid black;
   height: 2em;
+}
+
+#search-input {
+  display: inline-block;
+  margin-right: 1em;
+  height: 1.8em;
+  border: 1px solid black;
+  background-color: #e7e7e7;
+  width: 60%;
+}
+
+#search-submit-button {
+  display: inline-block;
+  border: 1px solid black;
+  /* height: 2.5em; */
   width: 20%;
+  /* -webkit-appearance: none;
+  -moz-appearance: none; */
   /* font-family: Courier; */
+}
+
+#clear-search-button {
+  width: 75%;
+  height: 2em;
+  margin: 1em 0;
+  background-color: pink;
+  /* font-size: 3em; */
 }

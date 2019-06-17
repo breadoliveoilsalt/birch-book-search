@@ -15,10 +15,10 @@ import React from 'react'
 const SearchBar = (props) => {
 
   return (
-    <div className="search-bar">
+    <div className="simple-form">
       <form onSubmit={props.handleSearchSubmit}>
-        <input className="input-border" id="search-input" type="text" />
-        <input className="sumbit-button" type="submit" value="Search" />
+        <input id="search-input" type="text" />
+        <input id="search-sumbit-button" type="submit" value="Search" />
       </form>
     </div>
   )
