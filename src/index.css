@@ -125,6 +125,7 @@ input[type="submit"] {
   /* height: 2em; */
   border: .25em solid red;
   width: 75%;
+  max-width: 700px;
   margin: 0em auto;
   margin-bottom: 1em;
   padding: 0.25em;
