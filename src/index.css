@@ -1,3 +1,5 @@
+/* CSS works bottom up for responsive design, assuming base case is a device with resolution of 320px wide */
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Courier New", "Segoe UI", "Roboto", "Oxygen",
@@ -5,7 +7,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 72px; /* this sets the ems and font-size %*/
+  font-size: 16px; /* this sets the ems and font-size %*/
 }
 
 code {
@@ -18,7 +20,6 @@ code {
   display: flex;
   -webkit-flex-flow: row wrap;
   flex-flow: row wrap; */ /* These wer making the divs inline instead of block! */
-  background-color: pink;
   font: Courier;
   width: 100%;
   text-align: center;
@@ -27,9 +28,9 @@ code {
 }
 
 .header {
-
   background-color: blue;
-  font-size: 100%;
+  font-size: 400%;
+  font-weight: bold;
   /* height: 3em; */
   /* display: inline-block; */
   /* clear: both; */
@@ -43,8 +44,9 @@ code {
 }
 
 .navbar {
-  font-size: 25%;
+  font-size: 100%;
   margin: 1em 0;
+  background-color: pink;
   /* height: 1em; */
   /* height: 2em; */
   /* font-size: 1em; */
