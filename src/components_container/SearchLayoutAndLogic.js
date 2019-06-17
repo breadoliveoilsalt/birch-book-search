@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import SearchBar from '../components_presentational/SearchBar'
 import ClearSearchButton from '../components_presentational/ClearSearchButton'
 import Divider from '../components_presentational/Divider'
+import SearchResultsList from '../components_presentational/SearchResultsList'
 
 
 
@@ -55,6 +56,10 @@ class SearchLayoutAndLogic extends Component {
         />
 
         <Divider />
+
+        <SearchResultsList
+          results={["Larry", "Moe", "Curley"]}
+        />
 
 
       </div>
