@@ -18,6 +18,13 @@ export function loadSearchResults(results) {
   )
 }
 
+export function loadResultNumber(num) {
+  return (
+    {type: 'LOAD_RESULT_NUMBER',
+    payload: num}
+  )
+}
+
 export function resetSearch() {
   return (
     {type: 'RESET_SEARCH'}

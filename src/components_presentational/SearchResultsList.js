@@ -1,5 +1,6 @@
 import React from 'react'
 
+import SearchResultsHeader from './SearchResultsHeader'
 import BookRecord from './BookRecord'
 import SearchResultsFooter from './SearchResultsFooter'
 
@@ -16,6 +17,7 @@ const SearchResultsList = (props) => {
 
   return (
     <div>
+      <SearchResultsHeader />
       {listToDisplay}
       <SearchResultsFooter />
     </div>
