@@ -84,11 +84,12 @@ function createBookRecords(arrayOfAPIReturns) {
 
     function getImageURL(bookRecord) {
       try {
-        let imageURL = null
-        if (exists(bookRecord.volumeInfo.imageLinks.thumbnail)) {
-          imageURL = bookRecord.volumeInfo.imageLinks.thumbnail
-        }
-        return imageURL
+        return exists(bookRecord.volumeInfo.imageLinks.thumbnail) ? bookRecord.volumeInfo.imageLinks.thumbnail : null
+        // let imageURL = null
+        // if (exists(bookRecord.volumeInfo.imageLinks.thumbnail)) {
+        //   imageURL = bookRecord.volumeInfo.imageLinks.thumbnail
+        // }
+        // return imageURL
       } catch {
         return null
       }
@@ -97,11 +98,12 @@ function createBookRecords(arrayOfAPIReturns) {
     function getTitle(bookRecord) {
       // Consider adding subtitle.
       try {
-        let title = null
-        if (exists(bookRecord.volumeInfo.title)) {
-          title = bookRecord.volumeInfo.title
-        }
-        return title
+        return exists(bookRecord.volumeInfo.title) ? bookRecord.volumeInfo.title : null
+        // let title = null
+        // if (exists(bookRecord.volumeInfo.title)) {
+        //   title = bookRecord.volumeInfo.title
+        // }
+        // return title
       } catch {
         return null
       }
@@ -126,11 +128,12 @@ function createBookRecords(arrayOfAPIReturns) {
 
     function getPublisher(bookRecord) {
       try {
-        let publisher = null
-        if (exists(bookRecord.volumeInfo.publisher)) {
-          publisher = bookRecord.volumeInfo.publisher
-        }
-        return publisher
+        return exists(bookRecord.volumeInfo.publisher) ? bookRecord.volumeInfo.publisher : null
+        // let publisher = null
+        // if (exists(bookRecord.volumeInfo.publisher)) {
+        //   publisher = bookRecord.volumeInfo.publisher
+        // }
+        // return publisher
       } catch {
         return null
       }
@@ -138,12 +141,12 @@ function createBookRecords(arrayOfAPIReturns) {
 
     function getAdditionalInfoURL(bookRecord) {
       try {
-        let additionalInfoURL = null
-        if (exists(bookRecord.volumeInfo.infoLink)) {
-          additionalInfoURL = bookRecord.volumeInfo.infoLink
-        }
-        return additionalInfoURL
-        // return exists(bookRecord.volumeInfo.infoLink) ? bookRecord.volumeInfo.infoLink : null
+        // let additionalInfoURL = null
+        // if (exists(bookRecord.volumeInfo.infoLink)) {
+        //   additionalInfoURL = bookRecord.volumeInfo.infoLink
+        // }
+        // return additionalInfoURL
+        return exists(bookRecord.volumeInfo.infoLink) ? bookRecord.volumeInfo.infoLink : null
       } catch {
         return null
       }
