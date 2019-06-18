@@ -66,8 +66,9 @@ class SearchLayoutAndLogic extends Component {
         />
 
         <SearchResultsList
-          resultNumber = {this.props.resultNumber}
           results={this.props.results}
+          resultNumber={this.props.resultNumber}
+          resultsDisplayed={this.props.results.length}
           makingBookAPIRequest={this.props.makingBookAPIRequest}
         />
 

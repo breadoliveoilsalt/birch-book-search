@@ -17,10 +17,19 @@ const SearchResultsList = (props) => {
 
   return (
     <div>
+
       <SearchResultsHeader
-        resultNumber={props.resultNumber}/>
+        resultNumber={props.resultNumber}
+      />
+
       {listToDisplay}
-      <SearchResultsFooter />
+
+      <SearchResultsFooter
+        makingBookAPIRequest={props.makingBookAPIRequest}
+        resultNumber={props.resultNumber}
+        resultsDisplayed={props.resultsDisplayed}
+      />
+
     </div>
   )
 
