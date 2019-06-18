@@ -54,7 +54,7 @@ class SearchLayoutAndLogic extends Component {
     let tempStartingID = this.props.searchStartingID + this.props.resultsPerSearch
     this.props.getBookRecords(this.props.userSearchTerms, tempStartingID , this.props.resultsPerSearch)
     this.props.increaseSearchStartingID()
-      // This odd sequence is due to a delay in the dispatching actions.
+      // This odd sequence is due to a delay in the dispatching actions.  
   }
 
   render() {
