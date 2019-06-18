@@ -8,7 +8,7 @@ import { getBookRecords } from '../birch_modules/fetchRequestBasicSearch'
 import SearchBar from '../components_presentational/SearchBar'
 import ClearSearchButton from '../components_presentational/ClearSearchButton'
 import ErrorDisplay from '../components_presentational/ErrorDisplay'
-import Divider from '../components_presentational/Divider'
+// import BigDivider from '../components_presentational/BigDivider'
 import SearchResultsList from '../components_presentational/SearchResultsList'
 
 class SearchLayoutAndLogic extends Component {
@@ -16,13 +16,14 @@ class SearchLayoutAndLogic extends Component {
   constructor(props) {
     super(props)
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this)
-    this.clearSearch = this.clearSearch.bind(this)
+    this.handleClearSearch = this.handleClearSearch.bind(this)
   }
 
   handleSearchSubmit(event) {
     event.preventDefault()
     this.props.deleteError()
     this.props.resetSearch()
+    this.props.beginBookAPIRequest()
     let searchTerms = document.getElementById("search-input").value
     let escapedSearchTerms = this.escapeSearchTerms(searchTerms)
     if (escapedSearchTerms === "") {
@@ -38,7 +39,7 @@ class SearchLayoutAndLogic extends Component {
     return searchTerms.trim()
   }
 
-  clearSearch(event) {
+  handleClearSearch(event) {
     event.preventDefault()
     this.props.resetSearch()
     document.getElementById("search-input").value = ""
@@ -50,33 +51,30 @@ class SearchLayoutAndLogic extends Component {
     return(
 
       <div className="">
+
         <SearchBar
           handleSearchInput={this.handleSearchInput}
           handleSearchSubmit={this.handleSearchSubmit}
         />
 
         <ClearSearchButton
-          clearSearch={this.clearSearch}
+          clearSearch={this.handleClearSearch}
         />
 
         <ErrorDisplay
           errorMessage={this.props.currentError}
         />
 
-        <Divider />
-
         <SearchResultsList
           resultNumber = {this.props.resultNumber}
-          results={["Larry", "Moe", "Curley"]}
+          results={this.props.results}
+          makingBookAPIRequest={this.props.makingBookAPIRequest}
         />
-
 
       </div>
 
     )
-
   }
-
 }
 
 const mapStateToProps = (state) => {

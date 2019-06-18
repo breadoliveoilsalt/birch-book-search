@@ -1,10 +1,15 @@
 import React from 'react'
 
-const BookRecord = ( {bookInfo} ) => {
+import SmallDivider from './SmallDivider'
+
+//       { bookInfo.imageURL ? <img src={bookInfo.imageURL} /> : null }
+const BookRecord = ({ bookInfo }) => {
 
   return (
     <div>
-      {bookInfo}
+
+
+      <SmallDivider />
     </div>
   )
 

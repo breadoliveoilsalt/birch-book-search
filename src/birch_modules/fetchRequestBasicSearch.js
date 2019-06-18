@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch'
-import { deleteError, loadError } from './actionCreatorsAppStatus'
+import { endBookAPIRequest, loadError } from './actionCreatorsAppStatus'
 import { loadSearchTerms, increaseSearchStartingID, loadSearchResults, resetSearch, loadResultNumber } from './actionCreatorsUpdateSearchResults'
 import { BookRecord } from './bookRecordClass'
 
@@ -23,11 +23,14 @@ export function getBookRecords(searchTerms, searchStartingID, resultsPerSearch) 
         }
       })
       .then(response => {
+        dispatch(endBookAPIRequest())
         dispatch(loadResultNumber(response.totalItems))
         let bookRecordsForState = createBookRecords(response.items) // argument is an array
         dispatch(loadSearchResults(bookRecordsForState))
+
       })
       .catch(error => {
+        dispatch(endBookAPIRequest())
         dispatch(loadError(error.message))
       })
 
