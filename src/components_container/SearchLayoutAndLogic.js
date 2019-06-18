@@ -18,6 +18,7 @@ class SearchLayoutAndLogic extends Component {
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this)
     this.handleClearSearch = this.handleClearSearch.bind(this)
     this.handleLoadMoreResults = this.handleLoadMoreResults.bind(this)
+    this.jumpToTopOfResults = this.jumpToTopOfResults.bind(this)
   }
 
   handleSearchSubmit(event) {
@@ -54,7 +55,13 @@ class SearchLayoutAndLogic extends Component {
     let tempStartingID = this.props.searchStartingID + this.props.resultsPerSearch
     this.props.getBookRecords(this.props.userSearchTerms, tempStartingID , this.props.resultsPerSearch)
     this.props.increaseSearchStartingID()
-      // This odd sequence is due to a delay in the dispatching actions.  
+    // This odd sequence is due to a delay in the dispatching actions.  See commit 75fbcd8
+  }
+
+  jumpToTopOfResults(event) {
+    event.preventDefault()
+    // document.getElementById("search-results-header").scrollIntoView({behavior:"smooth"})
+    document.getElementById("search-results-header").scrollIntoView(true)
   }
 
   render() {
@@ -82,6 +89,7 @@ class SearchLayoutAndLogic extends Component {
           resultsDisplayed={this.props.results.length}
           makingBookAPIRequest={this.props.makingBookAPIRequest}
           handleLoadMoreResults={this.handleLoadMoreResults}
+          jumpToTopOfResults={this.jumpToTopOfResults}
         />
 
       </div>

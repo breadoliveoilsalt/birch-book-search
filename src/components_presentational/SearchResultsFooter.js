@@ -16,18 +16,19 @@ const SearchResultsFooter = (props) => {
         <form onSubmit={props.handleLoadMoreResults}>
           <input id="search-sumbit-button" type="submit" value="Load More Results" />
         </form>
+        <p><a className="bold-text" href="" onClick={props.jumpToTopOfResults}> Jump To Top of Results </a> </p>
       </div>
     )
   } else if (props.resultsNumber > 0 && props.resultsDisplayed === props.resultNumber) {
     return (
       <div className="search-results-footer">
-        End of results.
+        <p> End of results. </p>
       </div>
     )
   } else {
     return (
       <div className="search-results-footer">
-        Use the Search Bar above to begin!
+        <p> Use the Search Bar above to begin! </p>
       </div>
     )
   }

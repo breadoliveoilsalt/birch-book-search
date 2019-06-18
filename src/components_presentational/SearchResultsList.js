@@ -29,6 +29,7 @@ const SearchResultsList = (props) => {
         resultNumber={props.resultNumber}
         resultsDisplayed={props.resultsDisplayed}
         handleLoadMoreResults={props.handleLoadMoreResults}
+        jumpToTopOfResults={props.jumpToTopOfResults}
       />
 
     </div>
