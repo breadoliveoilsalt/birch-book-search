@@ -159,6 +159,22 @@ input[type="submit"] {
 .bold-text {
   font-weight: bold;
 }
+
 .search-results-footer {
   margin-top: 1em;
+}
+
+.loader {
+  margin: 0 auto;
+  border: 10px solid #e7e7e7;
+  border-top: 10px solid black;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

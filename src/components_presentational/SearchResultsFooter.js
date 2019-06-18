@@ -1,11 +1,13 @@
 import React from 'react'
 
+import Loader from './Loader'
+
 const SearchResultsFooter = (props) => {
 
   if (props.makingBookAPIRequest) {
     return (
       <div className="search-results-footer">
-        Loading...!
+        <Loader />
       </div>
     )
   } else if (props.resultsDisplayed < props.resultNumber) {
