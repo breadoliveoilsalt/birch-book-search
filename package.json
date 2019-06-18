@@ -2,6 +2,9 @@
   "name": "birch-book-search",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "10.15.0"
+  },
   "dependencies": {
     "chai": "^4.2.0",
     "isomorphic-fetch": "^2.2.1",
