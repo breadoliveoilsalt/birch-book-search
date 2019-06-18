@@ -44,6 +44,7 @@ class SearchLayoutAndLogic extends Component {
 
   handleClearSearch(event) {
     event.preventDefault()
+    this.props.deleteError()
     this.props.resetSearch()
     document.getElementById("search-input").value = ""
     console.log("Search Cleared!")

@@ -8,7 +8,7 @@ const SearchResultsHeader = (props) => {
     return (
       <div id="search-results-header">
         <BigDivider />
-        {props.resultNumber} potential result(s).
+          {props.resultNumber} potential result(s).
         <BigDivider />
       </div>
     )

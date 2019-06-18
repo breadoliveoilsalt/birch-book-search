@@ -29,9 +29,10 @@ code {
 }
 
 .header {
-  background-color: blue;
+  /* background-color: blue; */
   font-size: 400%;
   font-weight: bold;
+  margin-top: 0.5em;
   /* padding-top: 0.25em; */
   /* height: 3em; */
   /* display: inline-block; */
@@ -49,7 +50,7 @@ code {
   font-size: 100%;
   font-weight: bold;
   margin: 1em 0;
-  background-color: pink;
+  /* background-color: pink; */
   /* height: 1em; */
   /* height: 2em; */
   /* font-size: 1em; */
