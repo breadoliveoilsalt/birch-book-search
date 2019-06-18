@@ -15,14 +15,19 @@ export function getBookRecords(searchTerms, searchStartingID, resultsPerSearch) 
     fetch(baseURL + "&q=" + searchTerms + "&startIndex=" + searchStartingID + "&maxResults=" + resultsPerSearch)
       .then(response => response.json())
       .then(response => {
+        // problem is I don't get the error message until I turn to json.  So maybe check for
+        // error above, and then get message through converting response json.  Just have to convert it again below.
         if (response.error) {
-          let message = response.error.errors[0].message + "//" + response.error.errors[0].reason
+          let message = response.error.errors[0].message + "//" + response.error.errors[0].reason // console.log this.
           throw new Error(message)
         } else {
           return response
         }
       })
       .then(response => {
+        if (response.totalItems.length === 0) {
+          throw new Error("Sorry, there were no results. Please try another search.")
+        }
         dispatch(endBookAPIRequest())
         dispatch(loadResultNumber(response.totalItems))
         let bookRecordsForState = createBookRecords(response.items) // argument is an array

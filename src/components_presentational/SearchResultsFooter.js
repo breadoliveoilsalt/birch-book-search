@@ -13,7 +13,9 @@ const SearchResultsFooter = (props) => {
   } else if (props.resultsDisplayed < props.resultNumber) {
     return (
       <div className="search-results-footer">
-        Load more button
+        <form onSubmit={props.handleLoadMoreResults}>
+          <input id="search-sumbit-button" type="submit" value="Load More Results" />
+        </form>
       </div>
     )
   } else if (props.resultsNumber > 0 && props.resultsDisplayed === props.resultNumber) {

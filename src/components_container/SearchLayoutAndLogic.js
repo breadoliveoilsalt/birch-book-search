@@ -17,6 +17,7 @@ class SearchLayoutAndLogic extends Component {
     super(props)
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this)
     this.handleClearSearch = this.handleClearSearch.bind(this)
+    this.handleLoadMoreResults = this.handleLoadMoreResults.bind(this)
   }
 
   handleSearchSubmit(event) {
@@ -28,7 +29,7 @@ class SearchLayoutAndLogic extends Component {
     let escapedSearchTerms = this.escapeSearchTerms(searchTerms)
     if (escapedSearchTerms === "") {
       this.props.endBookAPIRequest()
-      this.props.loadError("Invalid search terms. Please try again.")
+      this.props.loadError("Please enter a search term and try again.")
       return
     }
     this.props.loadSearchTerms(escapedSearchTerms)
@@ -45,6 +46,15 @@ class SearchLayoutAndLogic extends Component {
     this.props.resetSearch()
     document.getElementById("search-input").value = ""
     console.log("Search Cleared!")
+  }
+
+  handleLoadMoreResults(event) {
+    event.preventDefault()
+    this.props.beginBookAPIRequest()
+    let tempStartingID = this.props.searchStartingID + this.props.resultsPerSearch
+    this.props.getBookRecords(this.props.userSearchTerms, tempStartingID , this.props.resultsPerSearch)
+    this.props.increaseSearchStartingID()
+      // This odd sequence is due to a delay in the dispatching actions.
   }
 
   render() {
@@ -71,6 +81,7 @@ class SearchLayoutAndLogic extends Component {
           resultNumber={this.props.resultNumber}
           resultsDisplayed={this.props.results.length}
           makingBookAPIRequest={this.props.makingBookAPIRequest}
+          handleLoadMoreResults={this.handleLoadMoreResults}
         />
 
       </div>

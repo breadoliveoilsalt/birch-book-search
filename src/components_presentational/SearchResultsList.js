@@ -28,6 +28,7 @@ const SearchResultsList = (props) => {
         makingBookAPIRequest={props.makingBookAPIRequest}
         resultNumber={props.resultNumber}
         resultsDisplayed={props.resultsDisplayed}
+        handleLoadMoreResults={props.handleLoadMoreResults}
       />
 
     </div>
