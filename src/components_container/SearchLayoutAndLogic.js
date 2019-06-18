@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import { connect } from 'react-redux'
 import { loadError, deleteError, beginBookAPIRequest, endBookAPIRequest } from '../birch_modules/actionCreatorsAppStatus'
-import { loadSearchTerms, increaseSearchStartingID, loadSearchResults, resetSearch } from '../birch_modules/actionCreatorsUpdateSearchResults'
+import { loadSearchTerms, increaseSearchStartingID, loadSearchResults, resetSearch, loadResultNumber } from '../birch_modules/actionCreatorsUpdateSearchResults'
 import { getBookRecords } from '../birch_modules/fetchRequestBasicSearch'
 
 import SearchBar from '../components_presentational/SearchBar'
@@ -89,7 +89,8 @@ const mapStateToProps = (state) => {
     userSearchTerms: state.currentSearch.userSearchTerms,
     resultsPerSearch: state.currentSearch.resultsPerSearch,
     searchStartingID: state.currentSearch.searchStartingID,
-    results: state.currentSearch.results
+    results: state.currentSearch.results,
+    resultNumber: state.currentSearch.resultNumber
   }
 }
 
@@ -104,6 +105,7 @@ const mapDispatchToProps = (dispatch) => {
     loadSearchTerms: (searchTerms) => dispatch(loadSearchTerms(searchTerms)),
     increaseSearchStartingID: () => dispatch(increaseSearchStartingID()),
     loadSearchResults: (results) => dispatch(loadSearchResults(results)),
+    loadResultNumber: (num) => dispatch(loadResultNumber(num)),
     resetSearch: () => dispatch(resetSearch()),
     getBookRecords:
       (searchTerms, searchStartingID, resultsPerSearch) =>

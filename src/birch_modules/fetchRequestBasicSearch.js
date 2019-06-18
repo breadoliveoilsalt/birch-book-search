@@ -1,7 +1,9 @@
 import fetch from 'isomorphic-fetch'
 import { deleteError, loadError } from './actionCreatorsAppStatus'
+// need to load result number
 
-const apiKey = process.env.REACT_APP_GOOGLE_BOOKS_API_KEY
+// const apiKey = process.env.REACT_APP_GOOGLE_BOOKS_API_KEY
+const apiKey =""
 const baseURL = `https://www.googleapis.com/books/v1/volumes?key=${apiKey}`
 
 export function getBookRecords(searchTerms, searchStartingID, resultsPerSearch) {
@@ -9,7 +11,7 @@ export function getBookRecords(searchTerms, searchStartingID, resultsPerSearch) 
 
     dispatch(deleteError())
 
-    let escapedSearchTerms = searchTerms.trim()
+    let escapedSearchTerms = escapeSearchTerms(searchTerms)
 
     if (isEmpty(escapedSearchTerms)) {
       dispatch(loadError("No blank searches please."))
@@ -17,25 +19,41 @@ export function getBookRecords(searchTerms, searchStartingID, resultsPerSearch) 
     }
 
     fetch(baseURL + "&q=" + escapedSearchTerms + "&startIndex=" + searchStartingID + "&maxResults=" + resultsPerSearch)
-    // fetch("https://www.googleapis.com/books/v1/volumes?q=flower&key=AIzaSyB-7zrPGonH670oGFkTLVipMRItxnqNqDo&startIndex=11"      )
-      .then(response => response.json())
+
       .then(response => {
+        // checkForErrorCode(response)
+        return response.json()
+      })
+      .then(response => {
+        if (response.error) {
+          let message = response.error.errors[0].message + ": " + response.error.errors[0].reason
+          throw new Error(message)
+        }
+
         console.log("Here's the response:  ", response)
       })
-      //   if (response.error.code === 400) {
-      //     throw new Error(response)
-      //   }
-      // })
-      // .catch(event => {
-      //   debugger
-      //   dispatch(loadError(`${event.error.errors[0].message}: ${event.error.errors[0].reason}`))
-      //
-      // })
+      .catch(error => {
+        dispatch(loadError(error.message))
+      })
 
   }
 }
 
-
 function isEmpty(searchTerms) {
   return searchTerms === "" ? true : false
+}
+
+function escapeSearchTerms(searchTerms) {
+  // To consider / discuss: what more to escape?
+  return searchTerms.trim()
+}
+
+function checkForErrorCode(response) {
+  debugger
+  let statusCode = response.status
+  if (Math.floor(statusCode/100) === 4) {
+    let errorMessage = "Yo"
+    return new Error("Yo")
+  }
+  debugger
 }
