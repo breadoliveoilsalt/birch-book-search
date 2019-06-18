@@ -11,41 +11,37 @@ import ErrorDisplay from '../components_presentational/ErrorDisplay'
 import Divider from '../components_presentational/Divider'
 import SearchResultsList from '../components_presentational/SearchResultsList'
 
-
-
-/*
-Need to draft for searchbar
-this.props.handleSearchSubmit
-this.props.handleSearchInput
-*/
-
-
 class SearchLayoutAndLogic extends Component {
 
   constructor(props) {
     super(props)
-    // this.handleSearchInput = this.handleSearchInput.bind(this)
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this)
     this.clearSearch = this.clearSearch.bind(this)
   }
 
-
-  // handleSearchInput(event) {
-  //   debugger
-  // }
-
   handleSearchSubmit(event) {
     event.preventDefault()
+    this.props.deleteError()
+    this.props.resetSearch()
     let searchTerms = document.getElementById("search-input").value
-    this.props.getBookRecords(searchTerms, this.props.searchStartingID, this.props.resultsPerSearch)
-    // probably should look into escaping user user input
-    // might want to see react hooks
+    let escapedSearchTerms = this.escapeSearchTerms(searchTerms)
+    if (escapedSearchTerms === "") {
+      this.props.loadError("Invalid search terms. Please try again.")
+      return
+    }
+    this.props.loadSearchTerms(escapedSearchTerms)
+    this.props.getBookRecords(escapedSearchTerms, this.props.searchStartingID, this.props.resultsPerSearch)
+  }
 
+  escapeSearchTerms(searchTerms) {
+    // To consider / discuss: what more to escape?
+    return searchTerms.trim()
   }
 
   clearSearch(event) {
     event.preventDefault()
     this.props.resetSearch()
+    document.getElementById("search-input").value = ""
     console.log("Search Cleared!")
   }
 
