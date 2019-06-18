@@ -55,7 +55,7 @@ class SearchLayoutAndLogic extends Component {
     this.props.beginBookAPIRequest()
     let tempStartingID = this.props.searchStartingID + this.props.resultsPerSearch
     this.props.getBookRecords(this.props.userSearchTerms, tempStartingID , this.props.resultsPerSearch)
-    this.props.increaseSearchStartingID()
+    this.props.increaseSearchStartingID()  
     // This odd sequence is due to a delay in the dispatching actions.  See commit 75fbcd8
   }
 
