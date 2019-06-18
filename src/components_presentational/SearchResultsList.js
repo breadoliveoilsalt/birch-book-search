@@ -17,7 +17,8 @@ const SearchResultsList = (props) => {
 
   return (
     <div>
-      <SearchResultsHeader />
+      <SearchResultsHeader
+        resultNumber={props.resultNumber}/>
       {listToDisplay}
       <SearchResultsFooter />
     </div>

@@ -1,7 +1,6 @@
 export class BookRecord {
 
   constructor(properties) {
-    debugger
     validateProperties(properties)
     this.imageURL = validateImageURL(properties)
     this.title = validateTitle(properties)

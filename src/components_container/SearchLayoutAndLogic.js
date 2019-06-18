@@ -70,6 +70,7 @@ class SearchLayoutAndLogic extends Component {
         <Divider />
 
         <SearchResultsList
+          resultNumber = {this.props.resultNumber}
           results={["Larry", "Moe", "Curley"]}
         />
 

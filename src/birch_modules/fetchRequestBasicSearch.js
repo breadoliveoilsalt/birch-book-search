@@ -1,7 +1,7 @@
 import fetch from 'isomorphic-fetch'
 import { deleteError, loadError } from './actionCreatorsAppStatus'
 import { loadSearchTerms, increaseSearchStartingID, loadSearchResults, resetSearch, loadResultNumber } from './actionCreatorsUpdateSearchResults'
-import BookRecord from './bookRecordClass'
+import { BookRecord } from './bookRecordClass'
 
 
 const apiKey = process.env.REACT_APP_GOOGLE_BOOKS_API_KEY
@@ -33,7 +33,9 @@ export function getBookRecords(searchTerms, searchStartingID, resultsPerSearch) 
       })
       .then(response => {
         dispatch(loadResultNumber(response.totalItems))
-        let bookRecords = createBookRecords(response.items) // argument is an array
+        let bookRecordsForState = createBookRecords(response.items) // argument is an array
+        debugger
+        dispatch(loadSearchResults(bookRecordsForState))
       })
       .catch(error => {
         dispatch(loadError(error.message))
@@ -59,7 +61,7 @@ function createBookRecords(arrayOfAPIReturns) {
 
   arrayOfAPIReturns.forEach( bookRecord => {
     let bookRecordForState = new BookRecord(bookRecord.volumeInfo) // argument is an object
-    booksRecordsForState.push(bookRecordForState)
+    bookRecordsForState.push(bookRecordForState)
   })
 
   return bookRecordsForState

@@ -4,7 +4,7 @@ const SearchResultsHeader = (props) => {
 
   return (
     <div>
-      10,000 result(s) returned.
+      {props.resultNumber} result(s) returned.
     </div>
   )
 
