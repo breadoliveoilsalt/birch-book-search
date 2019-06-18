@@ -16,7 +16,7 @@ const SearchResultsList = (props) => {
   })
 
   return (
-    <div>
+    <div className="search-results-container">
 
       <SearchResultsHeader
         resultNumber={props.resultNumber}

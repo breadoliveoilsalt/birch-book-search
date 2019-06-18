@@ -1,7 +1,7 @@
 import fetch from 'isomorphic-fetch'
 import { endBookAPIRequest, loadError } from './actionCreatorsAppStatus'
 import { loadSearchTerms, increaseSearchStartingID, loadSearchResults, resetSearch, loadResultNumber } from './actionCreatorsUpdateSearchResults'
-import { BookRecord } from './bookRecordClass'
+import { BookRecord } from './bookRecordModel'
 
 
 export function getBookRecords(searchTerms, searchStartingID, resultsPerSearch) {

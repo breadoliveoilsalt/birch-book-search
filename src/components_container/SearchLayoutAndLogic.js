@@ -27,6 +27,7 @@ class SearchLayoutAndLogic extends Component {
     let searchTerms = document.getElementById("search-input").value
     let escapedSearchTerms = this.escapeSearchTerms(searchTerms)
     if (escapedSearchTerms === "") {
+      this.props.endBookAPIRequest()
       this.props.loadError("Invalid search terms. Please try again.")
       return
     }
