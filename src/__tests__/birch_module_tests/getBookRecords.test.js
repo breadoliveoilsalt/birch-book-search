@@ -1,14 +1,14 @@
-// These are not all the relevant imports I will need.  To update.
-
 import React from 'react'
 import { expect } from 'chai'
-import Enzyme, { shallow } from 'enzyme'
-import Adapter from 'enzyme-adapter-react-16'
 
-Enzyme.configure({ adapter: new Adapter() })
-
+import { getBookRecords } from '../../birch_modules/fetchRequestBasicSearch'
 
 describe("getBoookRecords()", function(){
+
+  it("should throw an error if not passed as an argument an object that is a hash", function(){
+
+
+  })
 
   it("takes as arguments the query search terms, startingId, and results per request", function(){
 
@@ -43,6 +43,6 @@ describe("getBoookRecords()", function(){
   })
 
   it("should return the first result starting with startingId", function() {
-    
+
   })
 })
