@@ -16,7 +16,7 @@ export class BookRecord {
     // https://stackoverflow.com/questions/27849064/how-to-implement-private-method-in-es6-class-with-traceur
 
 function validateProperties(properties) {
-  if (typeof properties !== "object") {
+  if (typeof properties !== "object" || properties instanceof Array) {
     throw new Error("Must initialize BookRecord instance by passing in an object/hash.")
   }
 }
