@@ -8,7 +8,6 @@ import { getBookRecords } from '../birch_modules/fetchRequestBasicSearch'
 import SearchBar from '../components_presentational/SearchBar'
 import ClearSearchButton from '../components_presentational/ClearSearchButton'
 import ErrorDisplay from '../components_presentational/ErrorDisplay'
-// import BigDivider from '../components_presentational/BigDivider'
 import SearchResultsList from '../components_presentational/SearchResultsList'
 
 class SearchLayoutAndLogic extends Component {
@@ -34,7 +33,10 @@ class SearchLayoutAndLogic extends Component {
       return
     }
     this.props.loadSearchTerms(escapedSearchTerms)
-    this.props.getBookRecords(escapedSearchTerms, this.props.searchStartingID, this.props.resultsPerSearch)
+    this.props.getBookRecords({
+      searchTerms: escapedSearchTerms,
+      serachStartingID: this.props.searchStartingID,
+      resultsPerSearch: this.props.resultsPerSearch})
   }
 
   escapeSearchTerms(searchTerms) {
@@ -54,7 +56,10 @@ class SearchLayoutAndLogic extends Component {
     event.preventDefault()
     this.props.beginBookAPIRequest()
     let tempStartingID = this.props.searchStartingID + this.props.resultsPerSearch
-    this.props.getBookRecords(this.props.userSearchTerms, tempStartingID , this.props.resultsPerSearch)
+    this.props.getBookRecords({
+      searchTerms: this.props.userSearchTerms,
+      searchStartingID: tempStartingID,
+      resultsPerSearch: this.props.resultsPerSearch})
     this.props.increaseSearchStartingID()  
     // This odd sequence is due to a delay in the dispatching actions.  See commit 75fbcd8
   }

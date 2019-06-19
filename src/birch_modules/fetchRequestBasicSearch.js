@@ -4,13 +4,18 @@ import { loadSearchTerms, increaseSearchStartingID, loadSearchResults, resetSear
 import { BookRecord } from './bookRecordModel'
 
 
-export function getBookRecords(searchTerms, searchStartingID, resultsPerSearch) {
+export function getBookRecords(searchProperties) {
+
+  const searchTerms = searchProperties.searchTerms
+    // Next line: Without '|| 0', searchStartingID === undefined when searchProperties.searchStartingID = 0
+  const searchStartingID = searchProperties.searchStartingID || 0
+  const resultsPerSearch = searchProperties.resultsPerSearch
+
+  const apiKey = process.env.REACT_APP_GOOGLE_BOOKS_API_KEY
+  // const apiKey =""
+  const baseURL = `https://www.googleapis.com/books/v1/volumes?key=${apiKey}`
 
   return function(dispatch) {
-
-    const apiKey = process.env.REACT_APP_GOOGLE_BOOKS_API_KEY
-    // const apiKey =""
-    const baseURL = `https://www.googleapis.com/books/v1/volumes?key=${apiKey}`
 
     fetch(baseURL + "&q=" + searchTerms + "&startIndex=" + searchStartingID + "&maxResults=" + resultsPerSearch)
       .then(response => response.json())
