@@ -5,7 +5,7 @@ import { BookRecord } from './bookRecordModel'
 
 
 // SEE!! : https://michalzalecki.com/testing-redux-thunk-like-you-always-want-it/
-// pay close attn to how he does this.
+// pay close attn to how he does this.  
 
 
 // TO TRY
