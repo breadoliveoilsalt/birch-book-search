@@ -4,6 +4,16 @@ import { loadSearchTerms, increaseSearchStartingID, loadSearchResults, resetSear
 import { BookRecord } from './bookRecordModel'
 
 
+// SEE!! : https://michalzalecki.com/testing-redux-thunk-like-you-always-want-it/
+// pay close attn to how he does this.
+
+
+// TO TRY
+// return new Promise((resolve, reject) => {
+//   resolve(newSearch.search().bind(newSearch))
+// })
+
+
 // export function getBookRecords(searchProperties) {
 //
 //   return function(dispatch) {
