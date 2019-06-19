@@ -4,6 +4,132 @@ import { loadSearchTerms, increaseSearchStartingID, loadSearchResults, resetSear
 import { BookRecord } from './bookRecordModel'
 
 
+// export function getBookRecords(searchProperties) {
+//
+//   return function(dispatch) {
+//
+//     let newSearch = new FetchRequestBasicSearch(searchProperties)
+//
+//     newSearch.search.then(response => {
+//       if (response.totalItems.length === 0) {
+//         throw new Error("Sorry, there were no results. Please try another search.")
+//       }
+//       dispatch(endBookAPIRequest())
+//       dispatch(loadResultNumber(response.totalItems))
+//       let bookRecordsForState = createBookRecords(response.items) // argument is an array
+//       dispatch(loadSearchResults(bookRecordsForState))
+//     })
+//     .catch(error => {
+//       dispatch(endBookAPIRequest())
+//       dispatch(loadError(error.message))
+//     })
+//   }
+// }
+//
+// // PRIVATE FUNCTIONS
+//
+// class FetchRequestBasicSearch {
+//
+//   constructor(searchProperties) {
+//     this.apiKey = process.env.REACT_APP_GOOGLE_BOOKS_API_KEY
+//     this.baseURL = `https://www.googleapis.com/books/v1/volumes?key=${this.apiKey}`
+//     this.searchTerms = searchProperties.searchTerms
+//       // Re: next line: Without '|| 0', searchStartingID === undefined when searchProperties.searchStartingID = 0
+//     this.searchStartingID = searchProperties.searchStartingID || 0
+//     this.resultsPerSearch = searchProperties.resultsPerSearch
+//   }
+//
+//   search() {
+//     let url = this.baseURL + "&q=" + this.searchTerms + "&startIndex=" + this.searchStartingID + "&maxResults=" + this.resultsPerSearch
+//
+//     return fetch(url)
+//       .then(response => response.json())
+//       .then(response => {
+//         debugger
+//         // problem is I don't get the error message until I turn to json.  So maybe check for
+//         // error above, and then get message through converting response json.  Just have to convert it again below.
+//         if (response.error) {
+//           let message = response.error.errors[0].message + "//" + response.error.errors[0].reason // console.log this.
+//           throw new Error(message)
+//         } else {
+//           return response
+//         }
+//       })
+//     }
+// }
+
+
+
+// THIS IS A START BUT LEAVES THE PROMISE PERFORMED BY newSearch.search() unresolved.
+
+// export function getBookRecords(searchProperties) {
+//
+//   return function(dispatch) {
+//
+//     let newSearch = new FetchRequestBasicSearch(searchProperties)
+//
+//     return new Promise(newSearch.search().bind(newSearch))
+//     .then(response => {
+//       if (response.totalItems.length === 0) {
+//         throw new Error("Sorry, there were no results. Please try another search.")
+//       }
+//       dispatch(endBookAPIRequest())
+//       dispatch(loadResultNumber(response.totalItems))
+//       let bookRecordsForState = createBookRecords(response.items) // argument is an array
+//       dispatch(loadSearchResults(bookRecordsForState))
+//     })
+//     .catch(error => {
+//       dispatch(endBookAPIRequest())
+//       dispatch(loadError(error.message))
+//     })
+//   }
+// }
+//
+// // PRIVATE FUNCTIONS
+//
+// class FetchRequestBasicSearch {
+//
+//   constructor(searchProperties) {
+//     this.apiKey = process.env.REACT_APP_GOOGLE_BOOKS_API_KEY
+//     this.baseURL = `https://www.googleapis.com/books/v1/volumes?key=${this.apiKey}`
+//     this.searchTerms = searchProperties.searchTerms
+//       // Re: next line: Without '|| 0', searchStartingID === undefined when searchProperties.searchStartingID = 0
+//     this.searchStartingID = searchProperties.searchStartingID || 0
+//     this.resultsPerSearch = searchProperties.resultsPerSearch
+//   }
+//
+//   search() {
+//     return function() {
+//       let url = this.baseURL + "&q=" + this.searchTerms + "&startIndex=" + this.searchStartingID + "&maxResults=" + this.resultsPerSearch
+//
+//     fetch(url)
+//       .then(response => response.json())
+//       .then(response => {
+//         debugger
+//         // problem is I don't get the error message until I turn to json.  So maybe check for
+//         // error above, and then get message through converting response json.  Just have to convert it again below.
+//         if (response.error) {
+//           let message = response.error.errors[0].message + "//" + response.error.errors[0].reason // console.log this.
+//           throw new Error(message)
+//         } else {
+//           return response
+//         }
+//       })
+//     }
+//   }
+// }
+//
+
+
+
+
+
+
+
+
+
+// WORKS
+//
 export function getBookRecords(searchProperties) {
 
   const searchTerms = searchProperties.searchTerms
