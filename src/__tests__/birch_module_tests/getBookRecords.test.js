@@ -31,11 +31,11 @@ describe('getBookRecords', function() {
     // let url = "/sample"
     // console.log("URL", url)
 
-    fetchMock.getOnce("*", 200)
+    fetchMock.getOnce("*", {status: 500})
 
     let store = mockStore({})
 
-    return store.dispatch(getBookRecords()).then(() => console.log("Actions: ", store.getActions()))
+    return store.dispatch(getBookRecords(searchProperties)).then(() => console.log("Actions: ", store.getActions()))
 
     // WORKS:
     // store.dispatch({type: 'DELETE_ERROR'})
