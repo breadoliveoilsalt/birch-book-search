@@ -4,7 +4,6 @@ import { expect } from 'chai'
 import { loadError, deleteError, beginBookAPIRequest, endBookAPIRequest } from '../../birch_modules/actionCreatorsAppStatus'
 import { loadSearchTerms, increaseSearchStartingID, loadSearchResults, loadResultNumber, resetSearch } from '../../birch_modules/actionCreatorsUpdateSearchResults'
 
-
 const expectedInitialState = {
       appStatus: {
         makingBookAPIRequest: false,
@@ -165,6 +164,7 @@ describe("Root reducer", function() {
 
     expect(newState1).to.deep.equal(expectedNewState1)
 
+    /////
 
     const expectedNewState2 = {
            appStatus: {
@@ -179,8 +179,6 @@ describe("Root reducer", function() {
               resultNumber: 0
             }
           }
-
-
 
     const newState2 = rootReducer(newState1, increaseSearchStartingID())
 
@@ -274,7 +272,7 @@ describe("Root reducer", function() {
      expect(newState).to.deep.equal(expectedNewState)
    })
 
-   it("should reset the state back to the expected initial state when called with #resetSearch()", function(){
+   it("should reset the currentSearch state back to its expected initial state when called with #resetSearch()", function(){
 
      const currentState = {
            appStatus: {
