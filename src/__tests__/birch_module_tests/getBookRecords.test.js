@@ -64,7 +64,10 @@ describe("getBoookRecords()", function(){
     let newState = store.getState()
 
     expect(newState.appStatus.makingBookAPIRequest).to.equal(true)
-    console.log("Passed!")
+    console.log("Passed First!")
+
+    store.dispatch(getBookRecords(searchProperties))
+    console.log("Got to second dispatch")
     // console.log("New store: ", store.getState())
     // return store.dispatch(() => getBookRecords(searchProperties)).then(() => {
     //   let newStore = store.getState()

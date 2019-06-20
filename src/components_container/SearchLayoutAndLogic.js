@@ -60,7 +60,7 @@ class SearchLayoutAndLogic extends Component {
       searchTerms: this.props.userSearchTerms,
       searchStartingID: tempStartingID,
       resultsPerSearch: this.props.resultsPerSearch})
-    this.props.increaseSearchStartingID()  
+    this.props.increaseSearchStartingID()
     // This odd sequence is due to a delay in the dispatching actions.  See commit 75fbcd8
   }
 
@@ -130,8 +130,8 @@ const mapDispatchToProps = (dispatch) => {
     loadResultNumber: (num) => dispatch(loadResultNumber(num)),
     resetSearch: () => dispatch(resetSearch()),
     getBookRecords:
-      (searchTerms, searchStartingID, resultsPerSearch) =>
-        dispatch(getBookRecords(searchTerms, searchStartingID, resultsPerSearch))
+      (searchProperties) =>
+        dispatch(getBookRecords(searchProperties))
   }
 }
 
