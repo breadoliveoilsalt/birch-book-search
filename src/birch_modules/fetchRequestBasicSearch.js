@@ -151,11 +151,14 @@ export function getBookRecords(searchProperties) {
   const apiKey = process.env.REACT_APP_GOOGLE_BOOKS_API_KEY
   // const apiKey =""
   const baseURL = `https://www.googleapis.com/books/v1/volumes?key=${apiKey}`
+  const url = baseURL + "&q=" + searchTerms + "&startIndex=" + searchStartingID + "&maxResults=" + resultsPerSearch
+  // const url = "https://www.breadoliveoilsalt.com"
 
   return function(dispatch) {
 
-    fetch(baseURL + "&q=" + searchTerms + "&startIndex=" + searchStartingID + "&maxResults=" + resultsPerSearch)
+    fetch(url)
       .then(response => {
+        console.log("Response: ", response)
         let responseStatus = checkResponse(response)
         if (responseStatus.error) {
           throw new Error(responseStatus.message)
@@ -163,6 +166,7 @@ export function getBookRecords(searchProperties) {
           return response.json()
         })
       .then(data => {
+        console.log("Data: ", data)
         let dataStatus = checkData(data)
         if (dataStatus.error) {
           throw new Error(dataStatus.message)
