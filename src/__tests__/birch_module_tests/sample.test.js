@@ -23,7 +23,7 @@ function fetchData () {
 it('should execute fetch data', () => {
   const store = mockStore({})
 
-  fetchMock.getOnce('/users.json', {
+  fetchMock.getOnce('*', {
     body: { todos: ['do something'] },
     headers: { 'content-type': 'application/json' }
   })

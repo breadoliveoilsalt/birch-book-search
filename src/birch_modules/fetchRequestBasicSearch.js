@@ -136,55 +136,62 @@ import { BookRecord } from './bookRecordModel'
 
 
 
-
-
-
-// WORKS
-//
-export function getBookRecords(searchProperties) {
-
-  const searchTerms = searchProperties.searchTerms
-    // Next line: Without '|| 0', searchStartingID === undefined when searchProperties.searchStartingID = 0
-  const searchStartingID = searchProperties.searchStartingID || 0
-  const resultsPerSearch = searchProperties.resultsPerSearch
-
-  const apiKey = process.env.REACT_APP_GOOGLE_BOOKS_API_KEY
-  // const apiKey =""
-  const baseURL = `https://www.googleapis.com/books/v1/volumes?key=${apiKey}`
-  const url = baseURL + "&q=" + searchTerms + "&startIndex=" + searchStartingID + "&maxResults=" + resultsPerSearch
-  // const url = "https://www.breadoliveoilsalt.com"
-
+export function getBookRecords() {
   return function(dispatch) {
-
-    return fetch(url)
-      .then(response => {
-        console.log("Response: ", response)
-        let responseStatus = checkResponse(response)
-        if (responseStatus.error) {
-          throw new Error(responseStatus.message)
-        } else
-          return response.json()
-        })
-      .then(data => {
-        console.log("Data: ", data)
-        let dataStatus = checkData(data)
-        if (dataStatus.error) {
-          throw new Error(dataStatus.message)
-        } else
-          return data
-        })
-      .then(data => {
-        dispatch(endBookAPIRequest())
-        dispatch(loadResultNumber(data.totalItems))
-        let bookRecordsForState = createBookRecords(data.items) // argument is an array
-        dispatch(loadSearchResults(bookRecordsForState))
-      })
-      .catch(error => {
-        dispatch(endBookAPIRequest())
-        dispatch(loadError(error.message))
-      })
+    return fetch("http://www.breadoliveoilsalt.com")
+    .then(() => dispatch(loadError()))
+    .then(() => dispatch(resetSearch()))
   }
 }
+
+
+// // WORKS
+// //
+// export function getBookRecords(searchProperties) {
+//
+//   const searchTerms = searchProperties.searchTerms
+//     // Next line: Without '|| 0', searchStartingID === undefined when searchProperties.searchStartingID = 0
+//   const searchStartingID = searchProperties.searchStartingID || 0
+//   const resultsPerSearch = searchProperties.resultsPerSearch
+//
+//   const apiKey = process.env.REACT_APP_GOOGLE_BOOKS_API_KEY
+//   // const apiKey =""
+//   const baseURL = `https://www.googleapis.com/books/v1/volumes?key=${apiKey}`
+//   const url = baseURL + "&q=" + searchTerms + "&startIndex=" + searchStartingID + "&maxResults=" + resultsPerSearch
+//   // const url = "https://www.breadoliveoilsalt.com"
+//   // const url = "/sample"
+//
+//   return function(dispatch) {
+//
+//     return fetch(url)
+//       .then(response => {
+//         console.log("Response: ", response)
+//         let responseStatus = checkResponse(response)
+//         if (responseStatus.error) {
+//           throw new Error(responseStatus.message)
+//         } else
+//           return response.json()
+//         })
+//       .then(data => {
+//         // console.log("Data: ", data)
+//         let dataStatus = checkData(data)
+//         if (dataStatus.error) {
+//           throw new Error(dataStatus.message)
+//         } else
+//           return data
+//         })
+//       .then(data => {
+//         dispatch(endBookAPIRequest())
+//         dispatch(loadResultNumber(data.totalItems))
+//         let bookRecordsForState = createBookRecords(data.items) // argument is an array
+//         dispatch(loadSearchResults(bookRecordsForState))
+//       })
+//       .catch(error => {
+//         dispatch(endBookAPIRequest())
+//         dispatch(loadError(error.message))
+//       })
+//   }
+// }
 
 // PRIVATE FUNCTIONS
 

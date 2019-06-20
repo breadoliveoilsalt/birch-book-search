@@ -10,6 +10,15 @@ import { getBookRecords } from '../../birch_modules/fetchRequestBasicSearch'
 import { loadError, deleteError, beginBookAPIRequest, endBookAPIRequest } from '../../birch_modules/actionCreatorsAppStatus'
 import { loadSearchTerms, increaseSearchStartingID, loadSearchResults, loadResultNumber, resetSearch } from '../../birch_modules/actionCreatorsUpdateSearchResults'
 
+const searchProperties = {
+  searchTerms: "A good book",
+  searchStartingID: 0,
+  resultsPerSearch: 20
+}
+//
+// const apiKey = process.env.REACT_APP_GOOGLE_BOOKS_API_KEY
+// const baseURL = `https://www.googleapis.com/books/v1/volumes?key=${apiKey}`
+// const url = baseURL + "&q=" + searchProperties.searchTerms + "&startIndex=" + searchProperties.searchStartingID + "&maxResults=" + searchProperties.resultsPerSearch
 
 describe('getBookRecords', function() {
 
@@ -18,19 +27,15 @@ describe('getBookRecords', function() {
   })
 
   it("does stuff", function() {
+    //
+    // let url = "/sample"
+    // console.log("URL", url)
 
-    fetchMock.getOnce('/todos', {
-      body: { todos: ['do something'] },
-      headers: { 'content-type': 'application/json' }
-    })
+    fetchMock.getOnce("*", 200)
 
-    const store = mockStore({})
+    let store = mockStore({})
 
-    const searchProperties = {
-      searchTerms: "A good book",
-      searchStartingID: 0,
-      resultsPerSearch: 20
-    }
+    return store.dispatch(getBookRecords()).then(() => console.log("Actions: ", store.getActions()))
 
     // WORKS:
     // store.dispatch({type: 'DELETE_ERROR'})
@@ -39,10 +44,11 @@ describe('getBookRecords', function() {
     // store.dispatch(deleteError())
 
     // NOT GETTING ACTIONS:
-    store.dispatch(getBookRecords(searchProperties)).then(console.log("Actions: ", store.getActions()))
+    // store.dispatch(getBookRecords(searchProperties)).then((resp) => console.log(resp))
 
+    // console.log(fetchMock.lastUrl())
     // NOT GETTING ACTIONS:
-    store.dispatch(getBookRecords(searchProperties))
-    console.log("Actions: ", store.getActions())
+    // store.dispatch(getBookRecords(searchProperties))
+    // console.log("Actions: ", store.getActions())
   })
 })
