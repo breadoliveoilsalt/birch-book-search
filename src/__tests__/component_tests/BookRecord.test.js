@@ -8,7 +8,8 @@ Enzyme.configure({ adapter: new Adapter() })
 import BookRecord from '../components_container/BookRecord'
 
 describe("<BookRecord />", function() {
-  it("should render a book image if one is specified in the relevant Redux object", function() {
+
+  it("should render a book image if one is specified in the relevant props object", function() {
 
   })
 
