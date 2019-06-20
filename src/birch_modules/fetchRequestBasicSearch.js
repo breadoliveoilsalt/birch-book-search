@@ -5,7 +5,8 @@ import { BookRecord } from './bookRecordModel'
 
 
 // SEE!! : https://michalzalecki.com/testing-redux-thunk-like-you-always-want-it/
-// pay close attn to how he does this.  
+// pay close attn to how he does this.
+// I probably just need a return before my fetch!
 
 
 // TO TRY
@@ -154,32 +155,30 @@ export function getBookRecords(searchProperties) {
   return function(dispatch) {
 
     fetch(baseURL + "&q=" + searchTerms + "&startIndex=" + searchStartingID + "&maxResults=" + resultsPerSearch)
-      .then(response => response.json())
       .then(response => {
-        // problem is I don't get the error message until I turn to json.  So maybe check for
-        // error above, and then get message through converting response json.  Just have to convert it again below.
-        if (response.error) {
-          let message = response.error.errors[0].message + "//" + response.error.errors[0].reason // console.log this.
-          throw new Error(message)
-        } else {
-          return response
-        }
-      })
-      .then(response => {
-        if (response.totalItems.length === 0) {
-          throw new Error("Sorry, there were no results. Please try another search.")
-        }
+        let responseStatus = checkResponse(response)
+        if (responseStatus.error) {
+          throw new Error(responseStatus.message)
+        } else
+          return response.json()
+        })
+      .then(data => {
+        let dataStatus = checkData(data)
+        if (dataStatus.error) {
+          throw new Error(dataStatus.message)
+        } else
+          return data
+        })
+      .then(data => {
         dispatch(endBookAPIRequest())
-        dispatch(loadResultNumber(response.totalItems))
-        let bookRecordsForState = createBookRecords(response.items) // argument is an array
+        dispatch(loadResultNumber(data.totalItems))
+        let bookRecordsForState = createBookRecords(data.items) // argument is an array
         dispatch(loadSearchResults(bookRecordsForState))
-
       })
       .catch(error => {
         dispatch(endBookAPIRequest())
         dispatch(loadError(error.message))
       })
-
   }
 }
 
@@ -196,4 +195,40 @@ function createBookRecords(arrayOfAPIReturns) {
 
   return bookRecordsForState
 
+}
+
+function checkResponse(response) {
+
+  let status = {error: false, message: null}
+
+  let statusCodeIndicator = Math.floor(response.status/100)
+
+  if (statusCodeIndicator === 4) {
+    status.error = true
+    status.message = "Sorry, there was an error with the search terms. Please try again."
+  } else if (statusCodeIndicator === 5) {
+    status.error = true
+    status.message = "Sorry, there appears to be a server error. Please try again in a bit."
+  }
+
+  return status
+}
+
+function checkData(data) {
+  let status = {error: false, message: null}
+  if (data.error) {
+    try {
+      let longerMessage = data.error.errors[0].message + "//" + data.error.errors[0].reason
+      status.error = true
+      status.message = longerMessage
+    } catch {
+      status.error = true
+      status.message = "Sorry, there appears to be an error. Please try again."
+    }
+  } else if (data.totalItems.length === 0) {
+    status.error = true
+    status.message = "Sorry, there were no results. Please try another search."
+  }
+
+  return status
 }

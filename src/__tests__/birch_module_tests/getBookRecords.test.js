@@ -7,10 +7,11 @@ describe("getBoookRecords()", function(){
 
   it("should throw an error if not passed as an argument an object that is a hash", function(){
 
+    // To come in light of revisions
 
   })
 
-  it("takes as arguments the query search terms, startingId, and results per request", function(){
+  it("takes an argument a hash with the properties  query search terms, startingId, and results per request", function(){
 
   })
 
