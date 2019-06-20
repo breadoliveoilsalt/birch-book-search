@@ -26,8 +26,23 @@ describe('getBookRecords', function() {
 
     const store = mockStore({})
 
-    store.dispatch({type: 'DELETE_ERROR'})
+    const searchProperties = {
+      searchTerms: "A good book",
+      searchStartingID: 0,
+      resultsPerSearch: 20
+    }
 
+    // WORKS:
+    // store.dispatch({type: 'DELETE_ERROR'})
+
+    // WORKS:
+    // store.dispatch(deleteError())
+
+    // NOT GETTING ACTIONS:
+    store.dispatch(getBookRecords(searchProperties)).then(console.log("Actions: ", store.getActions()))
+
+    // NOT GETTING ACTIONS:
+    store.dispatch(getBookRecords(searchProperties))
     console.log("Actions: ", store.getActions())
-})
+  })
 })
