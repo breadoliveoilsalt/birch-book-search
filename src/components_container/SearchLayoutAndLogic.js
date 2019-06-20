@@ -129,9 +129,7 @@ const mapDispatchToProps = (dispatch) => {
     loadSearchResults: (results) => dispatch(loadSearchResults(results)),
     loadResultNumber: (num) => dispatch(loadResultNumber(num)),
     resetSearch: () => dispatch(resetSearch()),
-    getBookRecords:
-      (searchProperties) =>
-        dispatch(getBookRecords(searchProperties))
+    getBookRecords: (searchProperties) => dispatch(getBookRecords(searchProperties))
   }
 }
 
