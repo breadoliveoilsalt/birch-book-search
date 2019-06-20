@@ -1,3 +1,5 @@
+import fetchMock from 'fetch-mock'
+
 import configureStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 
@@ -21,6 +23,10 @@ function fetchData () {
 it('should execute fetch data', () => {
   const store = mockStore({})
 
+  fetchMock.getOnce('/users.json', {
+    body: { todos: ['do something'] },
+    headers: { 'content-type': 'application/json' }
+  })
   // Return the promise
   return store.dispatch(fetchData())
     .then(() => {
