@@ -59,6 +59,62 @@ describe("loadError(message)", function() {
   })
 })
 
+describe("deleteError()", function() {
+
+  it("returns an object {type: 'DELETE_ERROR'}", function() {
+
+    let returnValue = loadError(message)
+    let expectedReturnValue = {type: 'DELETE_ERROR'}
+
+    expect(returnValue).to.deep.equal(expectedReturnValue)
+  })
+
+  describe("when called with dispatch, replaces the error in the state with null", function() {
+
+    let initialState = {
+          appStatus: {
+            makingBookAPIRequest: false,
+            currentError: "There's an error here"
+          },
+          currentSearch:
+           { userSearchTerms: null,
+             resultsPerSearch: 20,
+             searchStartingID: 0,
+             results: [],
+             resultNumber: 0
+           }
+         }
+
+    let initialState = store.getState()
+
+    expect(initialState).to.deep.equal(expectedInitialState)
+
+    let message = "You need more specific search terms"
+
+    store.dispatch(loadError(message))
+
+    let expectedNewState = {
+          appStatus: {
+            makingBookAPIRequest: false,
+            currentError: "You need more specific search terms"
+          },
+          currentSearch:
+           { userSearchTerms: null,
+             resultsPerSearch: 20,
+             searchStartingID: 0,
+             results: [],
+             resultNumber: 0
+           }
+         }
+
+    let newState = store.getState()
+
+    expect(newState).to.deep.equal(expectedNewState)
+    expect(newState).to.not.equal(initialState)
+
+  })
+})
+
 // export function loadError(payload) {
 //   return (
 //     {type: 'LOAD_ERROR',
