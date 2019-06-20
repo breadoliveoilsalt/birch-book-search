@@ -1,7 +1,7 @@
-export function loadError(payload) {
+export function loadError(message) {
   return (
     {type: 'LOAD_ERROR',
-    payload: payload}
+    payload: message}
   )
 }
 

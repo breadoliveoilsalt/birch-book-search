@@ -1,4 +1,4 @@
-import React from 'react'
+// import React from 'react'
 
 import thunk from 'redux-thunk'
 import configureMockStore from 'redux-mock-store' // this is only helpful for seeing if something was dispatched
