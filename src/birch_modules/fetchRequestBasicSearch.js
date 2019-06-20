@@ -156,7 +156,7 @@ export function getBookRecords(searchProperties) {
 
   return function(dispatch) {
 
-    fetch(url)
+    return fetch(url)
       .then(response => {
         console.log("Response: ", response)
         let responseStatus = checkResponse(response)
