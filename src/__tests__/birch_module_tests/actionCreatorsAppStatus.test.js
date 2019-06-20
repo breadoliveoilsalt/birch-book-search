@@ -1,6 +1,17 @@
-import configureStore from '../../configureStore'
+// import configureStore from '../../configureStore'
+
+
+
 import { expect } from 'chai'
 import { loadError, deleteError, beginBookAPIRequest, endBookAPIRequest } from '../../birch_modules/actionCreatorsAppStatus'
+
+
+import configureStore from 'redux-mock-store'
+import thunk from 'redux-thunk'
+import loggerMiddleware from '../../middleware/logger'
+
+const middlewares = [ loggerMiddleware, thunk ] // add your middlewares like `redux-thunk`
+const mockStore = configureStore(middlewares)
 
 const expectedInitialState = {
       appStatus: {
@@ -63,7 +74,7 @@ describe("deleteError()", function() {
 
   it("returns an object {type: 'DELETE_ERROR'}", function() {
 
-    let returnValue = loadError(message)
+    let returnValue = deleteError()
     let expectedReturnValue = {type: 'DELETE_ERROR'}
 
     expect(returnValue).to.deep.equal(expectedReturnValue)
@@ -85,18 +96,14 @@ describe("deleteError()", function() {
            }
          }
 
-    let initialState = store.getState()
+    const store = mockStore(initialState)
 
-    expect(initialState).to.deep.equal(expectedInitialState)
-
-    let message = "You need more specific search terms"
-
-    store.dispatch(loadError(message))
+    store.dispatch(deleteError())
 
     let expectedNewState = {
           appStatus: {
             makingBookAPIRequest: false,
-            currentError: "You need more specific search terms"
+            currentError: null
           },
           currentSearch:
            { userSearchTerms: null,
@@ -107,7 +114,11 @@ describe("deleteError()", function() {
            }
          }
 
+    console.log("Current Store: ", store.getState())
     let newState = store.getState()
+
+    let actions = store.getActions()
+    console.log("Actions:", actions)
 
     expect(newState).to.deep.equal(expectedNewState)
     expect(newState).to.not.equal(initialState)
