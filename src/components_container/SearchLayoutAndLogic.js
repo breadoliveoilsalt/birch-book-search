@@ -10,7 +10,7 @@ import ClearSearchButton from '../components_presentational/ClearSearchButton'
 import ErrorDisplay from '../components_presentational/ErrorDisplay'
 import SearchResultsList from '../components_presentational/SearchResultsList'
 
-class SearchLayoutAndLogic extends Component {
+export class SearchLayoutAndLogic extends Component {
 
   constructor(props) {
     super(props)
