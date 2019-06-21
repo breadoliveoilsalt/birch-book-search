@@ -17,7 +17,6 @@ describe("<ErrorDisplay />", function() {
 
   it("should not render when the errorMessage props is null", function(){
     const wrapper = shallow(<ErrorDisplay errorMessage={null} />)
-    console.log("W", wrapper.debug())
     expect(wrapper.isEmptyRender()).to.be.true
   })
 
