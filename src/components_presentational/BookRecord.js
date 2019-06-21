@@ -2,13 +2,15 @@ import React from 'react'
 
 import SmallDivider from './SmallDivider'
 
-const BookRecord = ({ bookInfo }) => {
+const BookRecord = ({ bookInfo, number }) => {
 
   return (
 
     <div>
 
-      { bookInfo.imageURL ? <img class="book-thumbnail" src={bookInfo.imageURL} /> : <p> <span className="bold-text">(No image Available)</span></p> }
+      <p> <span className="bold-text"> # {number} </span></p>
+
+      { bookInfo.imageURL ? <img className="book-thumbnail" src={bookInfo.imageURL} /> : <p> <span className="bold-text">(No image Available)</span></p> }
 
       <p> <span className="bold-text">Title: </span> { bookInfo.title ? bookInfo.title : "Not Available"} </p>
 

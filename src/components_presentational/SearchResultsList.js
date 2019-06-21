@@ -8,9 +8,10 @@ const SearchResultsList = (props) => {
 
   const resultsDisplayed = props.results.length
 
-  const listToDisplay = props.results.map( result => {
+  const listToDisplay = props.results.map( (result, index) => {
+
     return (
-      <BookRecord bookInfo={result} />
+      <BookRecord key={index} number={index + 1} bookInfo={result} />
     )
   })
 
