@@ -5,16 +5,31 @@ import Adapter from 'enzyme-adapter-react-16'
 
 Enzyme.configure({ adapter: new Adapter() })
 
-import ErrorDisplay from '../components_container/ErrorDisplay'
+import ErrorDisplay from '../../components_presentational/ErrorDisplay'
 
 
 describe("<ErrorDisplay />", function() {
-  it("should not render when the Redux state has a value of null under currentError", function(){
 
+  it("should have a class name 'error-display'", function() {
+    const wrapper = shallow(<ErrorDisplay errorMessage={"Something went wrong."}/>)
+    expect(wrapper.hasClass("error-display")).to.be.true
   })
 
-  it("should render with the appropriate text when there is a currentError in the Redux State", function(){
-
+  it("should not render when the errorMessage props is null", function(){
+    const wrapper = shallow(<ErrorDisplay errorMessage={null} />)
+    console.log("W", wrapper.debug())
+    expect(wrapper.isEmptyRender()).to.be.true
   })
-  
+
+  it("should render when the errorMessage props is a string", function(){
+    const wrapper = shallow(<ErrorDisplay errorMessage={"Big Error"} />)
+    expect(wrapper.isEmptyRender()).to.be.false
+  })
+
+  it("should dislay the errorMessage passed as a prop", function(){
+    let error = "Big Error"
+    const wrapper = shallow(<ErrorDisplay errorMessage={error} />)
+    expect(wrapper.text()).to.include(error)
+  })
+
 })
