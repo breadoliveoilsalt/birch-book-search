@@ -3,7 +3,6 @@ import { expect } from 'chai'
 import Enzyme, { shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import { Link } from 'react-router-dom'
-import SearchLayoutAndLogic from '../../components_container/SearchLayoutAndLogic'
 
 Enzyme.configure({ adapter: new Adapter() })
 
