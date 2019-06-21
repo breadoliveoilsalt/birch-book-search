@@ -15,8 +15,4 @@ describe("<Header />", function() {
     expect(wrapper.text()).to.equal("Birch")
   })
 
-  it("renders a birch image", function(){
-
-  })
-
 })
