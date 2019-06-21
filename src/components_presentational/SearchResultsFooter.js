@@ -19,7 +19,7 @@ const SearchResultsFooter = (props) => {
         <p><a className="bold-text" href="" onClick={props.jumpToTopOfResults}> Jump To Top of Results </a> </p>
       </div>
     )
-  } else if (props.resultsNumber > 0 && props.resultsDisplayed === props.resultNumber) {
+  } else if (props.resultsNumber > 0 && props.resultsDisplayed >= props.resultNumber) {
     return (
       <div className="search-results-footer">
         <p> End of results. </p>

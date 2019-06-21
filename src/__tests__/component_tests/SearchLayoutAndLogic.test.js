@@ -2,6 +2,8 @@ import React from 'react'
 import { expect } from 'chai'
 import Enzyme, { shallow, mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
+// import { Provider } from 'react-redux'
+// import configureStore from '../../configureStore'
 
 import sinon from 'sinon'
 
@@ -10,10 +12,10 @@ Enzyme.configure({ adapter: new Adapter() })
 import { SearchLayoutAndLogic } from '../../components_container/SearchLayoutAndLogic'
 // will have to import other components needed here for the tests to pass?
 
-describe("<SearchLayoutAndLogic resultsDisplayed={[]}/>", function() {
+describe("<SearchLayoutAndLogic />", function() {
 
   it("should render", function() {
-    const wrapper = mount(<SearchLayoutAndLogic />)
+    const wrapper = shallow(<SearchLayoutAndLogic />)
     console.log(wrapper.debug())
   })
 })

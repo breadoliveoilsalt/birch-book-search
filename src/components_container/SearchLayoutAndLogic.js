@@ -77,7 +77,6 @@ export class SearchLayoutAndLogic extends Component {
       <div className="">
 
         <SearchBar
-          handleSearchInput={this.handleSearchInput}
           handleSearchSubmit={this.handleSearchSubmit}
         />
 
