@@ -18,16 +18,15 @@ describe("<ClearSearchButton />", function() {
     expect(wrapper.exists("form input[type='submit']")).to.be.true
   })
 
-  it("clicking the button calls the function passed via props", function(){
+  it("clicking the button submits the form that calls the function passed via props", function(){
+
+      const clearSearchSpy = sinon.spy()
+      const wrapper = shallow(<ClearSearchButton clearSearch={clearSearchSpy}/>)
+
+      wrapper.find("form").simulate("submit")
+
+      expect(clearSearchSpy.calledOnce).to.be.true
 
   })
 
-
-  //
-  // it('simulates click events', () => {
-  //     const onButtonClick = sinon.spy();
-  //     const wrapper = shallow(<Foo onButtonClick={onButtonClick} />);
-  //     wrapper.find('button').simulate('click');
-  //     expect(onButtonClick).to.have.property('callCount', 1);
-  //   });
 })
