@@ -15,6 +15,10 @@ import { BookRecord } from './bookRecordModel'
 // })
 
 
+// LATER NOTE: IF I REALLY BREAK basicSearch into a class, and just do #basicSearch
+// that can return an error, then the getBookRecord doesn't really need then chains, does it? Maybe it does,
+// just b/c we are depending on an async thing in general.
+
 // export function getBookRecords(searchProperties) {
 //
 //   return function(dispatch) {
