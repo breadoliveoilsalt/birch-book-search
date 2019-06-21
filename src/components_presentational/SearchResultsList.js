@@ -6,6 +6,8 @@ import SearchResultsFooter from './SearchResultsFooter'
 
 const SearchResultsList = (props) => {
 
+  const resultsDisplayed = props.results.length
+
   const listToDisplay = props.results.map( result => {
     return (
       <BookRecord bookInfo={result} />
@@ -24,7 +26,7 @@ const SearchResultsList = (props) => {
       <SearchResultsFooter
         makingBookAPIRequest={props.makingBookAPIRequest}
         resultNumber={props.resultNumber}
-        resultsDisplayed={props.resultsDisplayed}
+        resultsDisplayed={resultsDisplayed}
         handleLoadMoreResults={props.handleLoadMoreResults}
         jumpToTopOfResults={props.jumpToTopOfResults}
       />

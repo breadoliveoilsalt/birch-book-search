@@ -1,19 +1,19 @@
 import React from 'react'
 import { expect } from 'chai'
-import Enzyme, { shallow } from 'enzyme'
+import Enzyme, { shallow, mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 
 import sinon from 'sinon'
 
 Enzyme.configure({ adapter: new Adapter() })
 
-import SearchLayoutAndLogic from '../../components_container/SearchLayoutAndLogic'
+import { SearchLayoutAndLogic } from '../../components_container/SearchLayoutAndLogic'
 // will have to import other components needed here for the tests to pass?
 
-describe("<SearchLayoutAndLogic />", function() {
+describe("<SearchLayoutAndLogic resultsDisplayed={[]}/>", function() {
 
   it("should render", function() {
-    const wrapper = shallow(<SearchLayoutAndLogic />)
+    const wrapper = mount(<SearchLayoutAndLogic />)
     console.log(wrapper.debug())
   })
 })

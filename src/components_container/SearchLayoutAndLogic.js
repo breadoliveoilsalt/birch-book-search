@@ -40,7 +40,7 @@ export class SearchLayoutAndLogic extends Component {
   }
 
   escapeSearchTerms(searchTerms) {
-    // To consider / discuss: what more to escape?
+    // To consider: What more to escape? Does the component propertly have responsibility for this?
     return searchTerms.trim()
   }
 
@@ -92,7 +92,6 @@ export class SearchLayoutAndLogic extends Component {
         <SearchResultsList
           results={this.props.results}
           resultNumber={this.props.resultNumber}
-          resultsDisplayed={this.props.results.length}
           makingBookAPIRequest={this.props.makingBookAPIRequest}
           handleLoadMoreResults={this.handleLoadMoreResults}
           jumpToTopOfResults={this.jumpToTopOfResults}
