@@ -30,13 +30,35 @@ describe("<SearchLayoutAndLogic />", function() {
     expect(wrapper.find(ClearSearchButton)).to.exist
     expect(wrapper.find(ErrorDisplay)).to.exist
     expect(wrapper.find(SearchResultsList)).to.exist
+
+    // console.log(wrapper.find(ClearSearchButton).props().clearSearch)
+    // expect(wrapper.find(ClearSearchButton).props().clearSearch).to.equal(wrapper.instance().handleClearSearch)
+  })
+
+  it("should have a function #handleClearSearch that is passed to the ClearSearchButton component as a prop", function() {
+    const wrapper = shallow(<SearchLayoutAndLogic />)
+    expect(wrapper.find(ClearSearchButton).props().clearSearch).to.equal(wrapper.instance().handleClearSearch)
+  })
+
+  it("should have a function #handleSearchSubmit that is passed to the SearchBar component as a prop", function() {
+    const wrapper = shallow(<SearchLayoutAndLogic />)
+    expect(wrapper.find(SearchBar).props().handleSearchSubmit).to.equal(wrapper.instance().handleSearchSubmit)
+  })
+
+  it("should have a function #handleLoadMoreResults that is passed to SearchResultsList component as a prop", function() {
+    const wrapper = shallow(<SearchLayoutAndLogic />)
+    expect(wrapper.find(SearchResultsList).props().handleLoadMoreResults).to.equal(wrapper.instance().handleLoadMoreResults)
+  })
+
+  it("should have a function #jumpToTopOfResults that is passed to the SearchResultsList component as a prop", function() {
+    const wrapper = shallow(<SearchLayoutAndLogic />)
+    expect(wrapper.find(SearchResultsList).props().jumpToTopOfResults).to.equal(wrapper.instance().jumpToTopOfResults)
   })
 
   it("should have a function #escapeSearchTerms that trims white space from a string argument", function(){
       const wrapper = shallow(<SearchLayoutAndLogic />)
       expect(wrapper.instance().escapeSearchTerms("  Something  ")).to.equal("Something")
   })
-
 
   it("should have a function #handleSearchSubmit that gets user input from the search endBookAPIRequest", function(){
 
