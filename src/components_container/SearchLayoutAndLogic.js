@@ -66,7 +66,6 @@ export class SearchLayoutAndLogic extends Component {
 
   jumpToTopOfResults(event) {
     event.preventDefault()
-    // document.getElementById("search-results-header").scrollIntoView({behavior:"smooth"})
     document.getElementById("search-results-header").scrollIntoView(true)
   }
 

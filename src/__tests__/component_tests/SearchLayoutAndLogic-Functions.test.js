@@ -12,14 +12,17 @@ const mockStore = configureMockStore(middlewares)
 
 import sinon from 'sinon'
 
+import { Provider } from 'react-redux'
+import configureStore from '../../configureStore'
+
 Enzyme.configure({ adapter: new Adapter() })
 
+// import SearchLayoutAndLogic from '../../components_container/SearchLayoutAndLogic'
 import { SearchLayoutAndLogic } from '../../components_container/SearchLayoutAndLogic'
 import SearchBar from '../../components_presentational/SearchBar'
 import ClearSearchButton from '../../components_presentational/ClearSearchButton'
 import ErrorDisplay from '../../components_presentational/ErrorDisplay'
 import SearchResultsList from '../../components_presentational/SearchResultsList'
-// will have to import other components needed here for the tests to pass?
 
 describe("<SearchLayoutAndLogic />", function() {
 
@@ -30,9 +33,6 @@ describe("<SearchLayoutAndLogic />", function() {
     expect(wrapper.find(ClearSearchButton)).to.exist
     expect(wrapper.find(ErrorDisplay)).to.exist
     expect(wrapper.find(SearchResultsList)).to.exist
-
-    // console.log(wrapper.find(ClearSearchButton).props().clearSearch)
-    // expect(wrapper.find(ClearSearchButton).props().clearSearch).to.equal(wrapper.instance().handleClearSearch)
   })
 
   it("should have a function #handleClearSearch that is passed to the ClearSearchButton component as a prop", function() {
@@ -56,20 +56,35 @@ describe("<SearchLayoutAndLogic />", function() {
   })
 
   it("should have a function #escapeSearchTerms that trims white space from a string argument", function(){
-      const wrapper = shallow(<SearchLayoutAndLogic />)
-      expect(wrapper.instance().escapeSearchTerms("  Something  ")).to.equal("Something")
+    const wrapper = shallow(<SearchLayoutAndLogic />)
+    expect(wrapper.instance().escapeSearchTerms("  Something  ")).to.equal("Something")
   })
 
-  it("should have a function #handleSearchSubmit that gets user input from the search endBookAPIRequest", function(){
+  it("should do something", function(){
+    const wrapper = shallow(<SearchLayoutAndLogic />)
+    console.log(wrapper.instance())
+
+  })
+  // it("should have a function #handleSearchSubmit that gets user input from the search endBookAPIRequest", function(){
+  //
+  //   const store = configureStore()
+  //
+  //   let wrapper = mount(<SearchLayoutAndLogic store={mockStore}/>)
+  //
+  //
+  // })
 
 
-      let store = mockStore({})
-      // const wrapper = shallow(<SearchLayoutAndLogic />).dive()
 
-      const wrapper = shallow(<SearchLayoutAndLogic store={store} />)
-      let eventStub = new Event("submit")
-      wrapper.instance().handleSearchSubmit(eventStub)
-
+})
+/////////
+      // let store = mockStore({})
+      // // const wrapper = shallow(<SearchLayoutAndLogic />).dive()
+      //
+      // const wrapper = shallow(<SearchLayoutAndLogic store={store} />)
+      // let eventStub = new Event("submit")
+      // wrapper.instance().handleSearchSubmit(eventStub)
+      //
 
     //   Getting:
     //
@@ -96,11 +111,7 @@ describe("<SearchLayoutAndLogic />", function() {
       // .value = "termy"
       // console.log(wrapper.find("#search-input").text())
       // expect(wrapper.instance().escapeSearchTerms("  Something  ")).to.equal("Something")
-  })
-
-
-
-})
+/////////
 
   //
   //
