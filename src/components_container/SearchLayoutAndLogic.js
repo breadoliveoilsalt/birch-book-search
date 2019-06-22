@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { loadError, deleteError, beginBookAPIRequest, endBookAPIRequest } from '../birch_modules/actionCreatorsAppStatus'
 import { loadSearchTerms, increaseSearchStartingID, loadSearchResults, resetSearch, loadResultNumber } from '../birch_modules/actionCreatorsUpdateSearchResults'
-import { getBookRecords } from '../birch_modules/fetchRequestBasicSearch'
+import { getBookRecordsBasicSearch } from '../birch_modules/getBookRecordsThunk'
 
 import SearchBar from '../components_presentational/SearchBar'
 import ClearSearchButton from '../components_presentational/ClearSearchButton'
@@ -33,7 +33,7 @@ export class SearchLayoutAndLogic extends Component {
       return
     }
     this.props.loadSearchTerms(escapedSearchTerms)
-    this.props.getBookRecords({
+    this.props.getBookRecordsBasicSearch({
       searchTerms: escapedSearchTerms,
       serachStartingID: this.props.searchStartingID,
       resultsPerSearch: this.props.resultsPerSearch})
@@ -56,7 +56,7 @@ export class SearchLayoutAndLogic extends Component {
     event.preventDefault()
     this.props.beginBookAPIRequest()
     let tempStartingID = this.props.searchStartingID + this.props.resultsPerSearch
-    this.props.getBookRecords({
+    this.props.getBookRecordsBasicSearch({
       searchTerms: this.props.userSearchTerms,
       searchStartingID: tempStartingID,
       resultsPerSearch: this.props.resultsPerSearch})
@@ -126,7 +126,7 @@ const mapDispatchToProps = (dispatch) => {
     loadSearchResults: (results) => dispatch(loadSearchResults(results)),
     loadResultNumber: (num) => dispatch(loadResultNumber(num)),
     resetSearch: () => dispatch(resetSearch()),
-    getBookRecords: (searchProperties) => dispatch(getBookRecords(searchProperties))
+    getBookRecordsBasicSearch: (searchProperties) => dispatch(getBookRecordsBasicSearch(searchProperties))
   }
 }
 
