@@ -11,7 +11,7 @@ import ClearSearchButton from '../../components_presentational/ClearSearchButton
 import ErrorDisplay from '../../components_presentational/ErrorDisplay'
 import SearchResultsList from '../../components_presentational/SearchResultsList'
 
-describe("<SearchLayoutAndLogic />", function() {
+describe("<SearchLayoutAndLogic /> - Testing Rendering Children and Passing Props to Children", function() {
 
   it("should render the SearchBar, ClearSearchButton, ErrorDisplay, and SearchResultsList Components", function() {
     const wrapper = shallow(<SearchLayoutAndLogic />)
