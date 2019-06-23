@@ -40,7 +40,10 @@ const state = {
        }
      }
 
-it('renders without crashing', () => {
+
+describe("SearchLayoutAndLogic#handleSearchSubmit", function() {
+
+  // Set up:
 
   const props = {
     deleteError: sinon.spy(),
@@ -65,6 +68,20 @@ it('renders without crashing', () => {
 
   wrapper.instance().handleSearchSubmit(event)
 
-  expect(wrapper.instance().props.deleteError.calledOnce).to.be.true
+  // Test:
+
+  it("calls #this.props.deleteError", function() {
+      expect(wrapper.instance().props.deleteError.calledOnce).to.be.true
+  })
+
+  it("calls #this.props.resetSearch", function() {
+      expect(wrapper.instance().props.resetSearch.calledOnce).to.be.true
+  })
+
+  it("calls #this.props.beginBookAPIRequest", function() {
+      expect(wrapper.instance().props.beginBookAPIRequest.calledOnce).to.be.true
+  })
+
+
 
 })
