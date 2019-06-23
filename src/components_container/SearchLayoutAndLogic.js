@@ -42,7 +42,7 @@ export class SearchLayoutAndLogic extends Component {
   getSearchTerms() {
     return document.getElementById("search-input").value
   }
-  
+
   escapeSearchTerms(searchTerms) {
     // To consider: What more to escape? Does the component propertly have responsibility for this?
     return searchTerms.trim()
@@ -53,7 +53,6 @@ export class SearchLayoutAndLogic extends Component {
     this.props.deleteError()
     this.props.resetSearch()
     document.getElementById("search-input").value = ""
-    console.log("Search Cleared!")
   }
 
   handleLoadMoreResults(event) {

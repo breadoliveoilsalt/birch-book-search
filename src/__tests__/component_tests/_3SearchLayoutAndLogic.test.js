@@ -1,5 +1,3 @@
-// Hugely helpful: https://circleci.com/blog/continuously-testing-react-applications-with-jest-and-enzyme/
-
 import React from 'react'
 import ReactDOM from 'react-dom'
 
@@ -8,6 +6,7 @@ import thunk from 'redux-thunk'
 import fetchMock from 'fetch-mock'
 import { expect } from 'chai'
 import { Provider } from 'react-redux'
+import configureStore from '../../configureStore'
 
 import sinon from 'sinon'
 
@@ -24,8 +23,6 @@ import Enzyme, { shallow, mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 Enzyme.configure({ adapter: new Adapter() })
 
-import configureStore from '../../configureStore'
-
 const state = {
       appStatus: {
         makingBookAPIRequest: false,
@@ -40,15 +37,171 @@ const state = {
        }
      }
 
+/// CAN PUT ALL THIS IN A DESCRIBE WRAPPER FOR THE LOGIC OF THE Component
+describe("#handleSearchSubmit", function() {
 
-describe("SearchLayoutAndLogic#handleSearchSubmit", function() {
+  describe("when SearchLayoutAndLogic#escapeSearchTerms returns a non-empty string", function() {
 
-  // Set up:
+    // Set up:
+
+    const props = {
+      deleteError: sinon.spy(),
+      resetSearch: sinon.spy(),
+      beginBookAPIRequest: sinon.spy(),
+      loadError: sinon.spy(),
+      endBookAPIRequest: sinon.spy(),
+      loadSearchTerms: sinon.spy(),
+      getBookRecordsBasicSearch: sinon.spy()
+    }
+
+    const wrapper = shallow(<SearchLayoutAndLogic {...props} />)
+
+    wrapper.instance().getSearchTerms = sinon.stub().returns("  A Good Book  ")
+    wrapper.instance().escapeSearchTerms = sinon.stub().returns("A Good Book")
+
+    const event = {
+      preventDefault: sinon.spy()
+    }
+
+    wrapper.instance().handleSearchSubmit(event)
+
+    // Tests:
+
+    it("calls #preventDefault on the event", function(){
+      expect(event.preventDefault.called).to.be.true
+    })
+
+    it("calls #this.props.deleteError", function() {
+        expect(wrapper.instance().props.deleteError.called).to.be.true
+    })
+
+    it("calls #this.props.resetSearch", function() {
+        expect(wrapper.instance().props.resetSearch.called).to.be.true
+    })
+
+    it("calls #this.props.beginBookAPIRequest", function() {
+        expect(wrapper.instance().props.beginBookAPIRequest.called).to.be.true
+    })
+
+    it("calls SearchLayoutAndLogic#getSearchTerms and SearchLayoutAndLogic#escapeSearchTerms", function() {
+        expect(wrapper.instance().getSearchTerms.called).to.be.true
+        expect(wrapper.instance().escapeSearchTerms.called).to.be.true
+    })
+
+    it("calls #this.props.loadSearchTerms and #this.props.getBookRecordsBasicSearch, and not #this.props.endBookAPIRequest or #this.props.loadError, if escapeSearchTerms returns a non-empty string", function(){
+      expect(wrapper.instance().props.loadSearchTerms.called).to.be.true
+      expect(wrapper.instance().props.getBookRecordsBasicSearch.called).to.be.true
+      expect(wrapper.instance().props.endBookAPIRequest.called).to.be.false
+      expect(wrapper.instance().props.loadError.called).to.be.false
+    })
+
+  })
+
+  describe("#escapeSearchTerms returns an empty string", function() {
+
+    // Set up:
+
+    const props = {
+      deleteError: sinon.spy(),
+      resetSearch: sinon.spy(),
+      beginBookAPIRequest: sinon.spy(),
+      loadError: sinon.spy(),
+      endBookAPIRequest: sinon.spy(),
+      loadSearchTerms: sinon.spy(),
+      getBookRecordsBasicSearch: sinon.spy(),
+      increaseSearchStartingID: sinon.spy()
+    }
+
+    const wrapper = shallow(<SearchLayoutAndLogic {...props} />)
+
+    wrapper.instance().getSearchTerms = sinon.stub().returns("  ")
+    wrapper.instance().escapeSearchTerms = sinon.stub().returns("")
+
+    const event = {
+      preventDefault: sinon.spy()
+    }
+
+    wrapper.instance().handleSearchSubmit(event)
+
+    // Tests:
+
+    it("calls #preventDefault on the event", function(){
+      expect(event.preventDefault.called).to.be.true
+    })
+
+    it("calls #this.props.deleteError", function() {
+        expect(wrapper.instance().props.deleteError.called).to.be.true
+    })
+
+    it("calls #this.props.resetSearch", function() {
+        expect(wrapper.instance().props.resetSearch.called).to.be.true
+    })
+
+    it("calls #this.props.beginBookAPIRequest", function() {
+        expect(wrapper.instance().props.beginBookAPIRequest.called).to.be.true
+    })
+
+    it("calls SearchLayoutAndLogic#getSearchTerms and SearchLayoutAndLogic#escapeSearchTerms", function() {
+        expect(wrapper.instance().getSearchTerms.called).to.be.true
+        expect(wrapper.instance().escapeSearchTerms.called).to.be.true
+    })
+
+    it("calls #this.props.endBookAPIRequest and #this.props.loadError, and not #this.props.loadSearchTerms and #this.props.getBookRecordsBasicSearch", function(){
+
+      expect(wrapper.instance().props.endBookAPIRequest.called).to.be.true
+      expect(wrapper.instance().props.loadError.called).to.be.true
+      expect(wrapper.instance().props.loadSearchTerms.called).to.be.false
+      expect(wrapper.instance().props.getBookRecordsBasicSearch.called).to.be.false
+    })
+
+  })
+
+})
+
+describe("#getSearchTerms", function() {
+
+  it("calls document.getElementById(#search-input).value", function(){
+
+
+    // INCOMPLETE TEST
+    const wrapper = shallow(<SearchLayoutAndLogic />)
+    // document.getElementById("search-input") = sinon.stub()
+    global.window.document.getElementById = sinon.stub().returns({value: "Some Search Terms"})
+
+    wrapper.instance().getSearchTerms()
+
+    expect(global.window.document.getElementById.called).to.be.true
+
+
+    // let searchInputBox = wrapper.find("#search-input")
+    // console.log(searchInputBox.props())
+  })
+
+
+})
+
+
+describe("#escapeSearchTerms", function() {
+
+  it("returns a trimmed up version of the argument passed to it", function(){
+
+    const wrapper = shallow(<SearchLayoutAndLogic />)
+
+    const output = wrapper.instance().escapeSearchTerms("  Wow  ")
+
+    expect(output).to.equal("Wow")
+
+  })
+
+})
+
+describe("#handleClearSearch", function() {
 
   const props = {
     deleteError: sinon.spy(),
     resetSearch: sinon.spy(),
     beginBookAPIRequest: sinon.spy(),
+    loadError: sinon.spy(),
     endBookAPIRequest: sinon.spy(),
     loadSearchTerms: sinon.spy(),
     getBookRecordsBasicSearch: sinon.spy()
@@ -60,28 +213,96 @@ describe("SearchLayoutAndLogic#handleSearchSubmit", function() {
     preventDefault: sinon.spy()
   }
 
-  wrapper.instance().getSearchTerms = sinon.stub()
-  wrapper.instance().getSearchTerms.returns("  A Good Book  ")
+  wrapper.instance().handleClearSearch(event)
 
-  wrapper.instance().escapeSearchTerms = sinon.stub()
-  wrapper.instance().escapeSearchTerms.returns("A Good Book")
-
-  wrapper.instance().handleSearchSubmit(event)
-
-  // Test:
-
-  it("calls #this.props.deleteError", function() {
-      expect(wrapper.instance().props.deleteError.calledOnce).to.be.true
+  it("calls #preventDefault on the event", function() {
+    expect(event.preventDefault.called).to.be.true
   })
 
-  it("calls #this.props.resetSearch", function() {
-      expect(wrapper.instance().props.resetSearch.calledOnce).to.be.true
+  it("calls this.props.deleteError()", function(){
+    expect(deleteError.called).to.be.true
   })
 
-  it("calls #this.props.beginBookAPIRequest", function() {
-      expect(wrapper.instance().props.beginBookAPIRequest.calledOnce).to.be.true
+  it("calls this.props.resetSearch()", function() {
+    expect(resetSearch.called).to.be.true
   })
 
 
+  /// INCOMPLETE TEST - HAVE TO TEST THAT THIS IS CALLED:     document.getElementById("search-input").value = ""
 
 })
+
+describe("#handleLoadMoreResults", function() {
+
+  const props = {
+    deleteError: sinon.spy(),
+    resetSearch: sinon.spy(),
+    beginBookAPIRequest: sinon.spy(),
+    loadError: sinon.spy(),
+    endBookAPIRequest: sinon.spy(),
+    loadSearchTerms: sinon.spy(),
+    getBookRecordsBasicSearch: sinon.spy(),
+    increaseSearchStartingID: sinon.spy()
+  }
+
+  const wrapper = shallow(<SearchLayoutAndLogic {...props} />)
+
+  const event = {
+    preventDefault: sinon.spy()
+  }
+
+  wrapper.instance().handleLoadMoreResults(event)
+
+  it("calls #preventDefault on the event", function() {
+    expect(event.preventDefault.called).to.be.true
+  })
+
+  it("calls this.props.beginBookAPIRequest()", function(){
+    expect(wrapper.instance().props.beginBookAPIRequest.called).to.be.true
+  })
+
+  it("calls this.props.getBookRecordsBasicSearch()", function() {
+    expect(wrapper.instance().props.getBookRecordsBasicSearch.called).to.be.true
+    /// INCOMPLETE TESTS - HOW DO I SEE THAT THE ARGUMENT IS INCREASED??
+  })
+
+  it("calls this.props.increaseSearchStartingID()", function() {
+    expect(wrapper.instance().props.increaseSearchStartingID.called).to.be.true
+  })
+
+})
+
+
+//
+// jumpToTopOfResults(event) {
+//   event.preventDefault()
+//   document.getElementById("search-results-header").scrollIntoView(true)
+// }
+
+
+// SAVE FOR LATER FOR WHEN I NEED TO CONNECT TO THE STORE, BUT MOVE ON.
+  // it("returns the value of the document element with id 'search-input'", function() {
+  //
+  //   let store = configureStore()
+  //
+  //   const wrapper = mount(<ConnectedSearchLayoutAndLogic store={store} />)
+  //
+  //   // document.getElementById("#search-input").value = "Yippie"
+  //
+  //   let searchInputBox = wrapper.find("#search-input")
+  //   searchInputBox.value = "Yo"
+  //
+  //   console.log(searchInputBox)
+  //
+  //   console.log(wrapper.props())
+  //   // console.log(val.value)
+  //   expect(searchInputBox).to.exist
+  //   // global.window.document.getElementById = sinon.stub()
+  //
+  //
+  //
+  // })
+
+// getSearchTerms() {
+//   return document.getElementById("search-input").value
+// }
