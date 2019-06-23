@@ -38,6 +38,9 @@ const state = {
      }
 
 /// CAN PUT ALL THIS IN A DESCRIBE WRAPPER FOR THE LOGIC OF THE Component
+
+describe("<SearchLayoutAndLogic /> - Testing What Functions Call: ", function() {
+
   describe("#handleSearchSubmit", function() {
 
     describe("when SearchLayoutAndLogic#escapeSearchTerms returns a non-empty string", function() {
@@ -180,7 +183,6 @@ const state = {
 
   })
 
-
   describe("#escapeSearchTerms", function() {
 
     it("returns a trimmed up version of the argument passed to it", function(){
@@ -288,6 +290,14 @@ const state = {
     /// INCOMPLETE TEST - SEE ERRORS RENDERED IN CONSOLE.
   })
 
+})
+
+
+describe("<SearchLayoutAndLogic /> - Testing that the Props Functions Called Above Dispatch: ", function() {
+
+
+
+})
 
 
 // SAVE FOR LATER FOR WHEN I NEED TO CONNECT TO THE STORE, BUT MOVE ON.
