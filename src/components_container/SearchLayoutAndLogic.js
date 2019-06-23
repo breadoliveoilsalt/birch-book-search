@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import { connect } from 'react-redux'
 import { loadError, deleteError, beginBookAPIRequest, endBookAPIRequest } from '../birch_modules/actionCreatorsAppStatus'
-import { loadSearchTerms, increaseSearchStartingID, loadSearchResults, resetSearch, loadResultNumber } from '../birch_modules/actionCreatorsUpdateSearchResults'
+import { loadSearchTerms, increaseSearchStartingID, resetSearch } from '../birch_modules/actionCreatorsUpdateSearchResults'
 import { getBookRecordsBasicSearch } from '../birch_modules/getBookRecordsThunk'
 
 import SearchBar from '../components_presentational/SearchBar'
@@ -116,8 +116,6 @@ const mapStateToProps = (state) => {
   }
 }
 
-// I may not need many of these here, like delete error and load error
-
 const mapDispatchToProps = (dispatch) => {
   return {
     loadError: (message) => dispatch(loadError(message)),
@@ -126,8 +124,6 @@ const mapDispatchToProps = (dispatch) => {
     endBookAPIRequest: () => dispatch(endBookAPIRequest()),
     loadSearchTerms: (searchTerms) => dispatch(loadSearchTerms(searchTerms)),
     increaseSearchStartingID: () => dispatch(increaseSearchStartingID()),
-    loadSearchResults: (results) => dispatch(loadSearchResults(results)),
-    loadResultNumber: (num) => dispatch(loadResultNumber(num)),
     resetSearch: () => dispatch(resetSearch()),
     getBookRecordsBasicSearch: (searchProperties) => dispatch(getBookRecordsBasicSearch(searchProperties))
   }
