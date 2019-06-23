@@ -25,7 +25,7 @@ export class SearchLayoutAndLogic extends Component {
     this.props.deleteError()
     this.props.resetSearch()
     this.props.beginBookAPIRequest()
-    let searchTerms = document.getElementById("search-input").value
+    let searchTerms = this.getSearchTerms()
     let escapedSearchTerms = this.escapeSearchTerms(searchTerms)
     if (escapedSearchTerms === "") {
       this.props.endBookAPIRequest()
@@ -39,6 +39,10 @@ export class SearchLayoutAndLogic extends Component {
       resultsPerSearch: this.props.resultsPerSearch})
   }
 
+  getSearchTerms() {
+    return document.getElementById("search-input").value
+  }
+  
   escapeSearchTerms(searchTerms) {
     // To consider: What more to escape? Does the component propertly have responsibility for this?
     return searchTerms.trim()
