@@ -7,7 +7,7 @@ const SearchResultsHeader = (props) => {
   if (props.resultNumber !== 0) {
     return (
       <div id="search-results-header">
-        <BigDivider />
+        <BigDivider className="search-results-header"/>
           {props.resultNumber} potential result(s).
         <BigDivider />
       </div>

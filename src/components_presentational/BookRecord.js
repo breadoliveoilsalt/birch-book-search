@@ -4,9 +4,11 @@ import SmallDivider from './SmallDivider'
 
 const BookRecord = ({ bookInfo, number }) => {
 
+  // TOOK OUT       <SmallDivider /> FROM THE BOTTOM
+
   return (
 
-    <div>
+    <div className="book-record">
 
       <p> <span className="bold-text"> # {number} </span></p>
 
@@ -19,8 +21,6 @@ const BookRecord = ({ bookInfo, number }) => {
       <p> <span className="bold-text">Publisher: </span> { bookInfo.publisher ? bookInfo.publisher : "Not Available"} </p>
 
       { bookInfo.additionalInfoURL ? <p><a className="bold-text" href={bookInfo.additionalInfoURL} target="_blank">Click here for more info!</a></p> : null }
-
-      <SmallDivider />
 
     </div>
   )

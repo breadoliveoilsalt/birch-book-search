@@ -28,7 +28,7 @@ const SearchResultsFooter = (props) => {
   } else {
     return (
       <div className="search-results-footer">
-        <p> Use the Search Bar above to begin! </p>
+        <p className="search-results-header-text"> Use the Search Bar above to begin! </p>
       </div>
     )
   }

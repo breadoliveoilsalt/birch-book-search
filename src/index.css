@@ -8,6 +8,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 16px; /* this sets the ems and font-size %*/
+  background-image: url("./images/birch-tree-background.png") /* 320px wide per base case above */
 }
 
 code {
@@ -32,7 +33,12 @@ code {
   /* background-color: blue; */
   font-size: 400%;
   font-weight: bold;
+  margin: 0 auto;
   margin-top: 0.5em;
+  background-color: white;
+  border: .1em solid grey;
+  width: 90%;
+  max-width: 700px;
   /* padding-top: 0.25em; */
   /* height: 3em; */
   /* display: inline-block; */
@@ -49,7 +55,12 @@ code {
 .navbar {
   font-size: 100%;
   font-weight: bold;
-  margin: 1em 0;
+  margin: 1em auto;
+  background-color: white;
+  border: .25em solid grey;
+  width: 90%;
+  max-width: 700px;
+  padding: .25em 0;
   /* background-color: pink; */
   /* height: 1em; */
   /* height: 2em; */
@@ -84,15 +95,16 @@ input {
 
 input[type="submit"] {
   /* background-color: pink; */
-  border: 1px solid black;
+  border: .25em solid black;
+  height: 2.5em;
   /* height: 200%; */
 }
 
 #search-input {
   display: inline-block;
   margin-right: 1em;
-  height: 100%;
-  border: 1px solid black;
+  height: 2em;
+  border: .25em solid black;
   background-color: #e7e7e7;
   width: 60%;
   max-width: 600px;
@@ -100,7 +112,7 @@ input[type="submit"] {
 
 #search-submit-button {
   display: inline-block;
-  border: 1px solid black;
+  border: 1em solid black;
   height: 100%;
   /* height: 2.5em; */
   width: 20%;
@@ -111,17 +123,19 @@ input[type="submit"] {
 }
 
 #clear-search-button {
-  width: 80%;
-  max-width: 700px;
+  width: 60%;
+  max-width: 600px;
   height: 100%;
   margin-top: 1em;
   background-color: black;
   color: white;
+  border: .25em solid grey;
   /* font-size: 3em; */
 }
 
 .error-display {
   /* height: 2em; */
+  background-color: pink;
   border: .25em solid red;
   width: 75%;
   max-width: 700px;
@@ -129,6 +143,7 @@ input[type="submit"] {
   margin-top: 1em;
   /* margin-bottom: 1em; */
   padding: 0.25em;
+  font-weight: bold;
 
 }
 
@@ -149,21 +164,39 @@ input[type="submit"] {
   width: 80%;
 }
 
-.book-thumbnail {
+#search-results-header {
+  background-color: white;
+  border: .25em solid grey;
+  margin-top: 1em;
+  /* padding-bottom: 2em; */
+}
 
+.search-results-header-text {
+  padding-bottom: .75em;
 }
 
 .bold-text {
   font-weight: bold;
 }
 
+.book-record {
+  background-color: white;
+  border: .25em solid grey;
+  margin-top: 1em;
+}
+
 .search-results-footer {
+  padding-top: 1em;
+  /* padding-bottom: 0; */
   margin-top: 1em;
   margin-bottom: 3em;
+  background-color: white;
+  border: .25em solid grey;
 }
 
 .loader {
   margin: 0 auto;
+  margin-bottom: 1em;
   border: 10px solid #e7e7e7;
   border-top: 10px solid black;
   border-radius: 50%;
@@ -175,4 +208,13 @@ input[type="submit"] {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+@media (min-width: 800px) {
+
+  body {
+    font-size: 20px;
+  }
+
+
 }
