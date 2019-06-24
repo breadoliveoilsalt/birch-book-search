@@ -16,13 +16,7 @@ code {
     monospace;
 }
 
-/* probably need a div {} that is 0em auto */
-
 .app-container {
-  /* display: -webkit-flex;
-  display: flex;
-  -webkit-flex-flow: row wrap;
-  flex-flow: row wrap; */ /* These wer making the divs inline instead of block! */
   width: 100%;
   text-align: center;
   font-family: "Courier New";
@@ -30,7 +24,6 @@ code {
 }
 
 .header {
-  /* background-color: blue; */
   font-size: 400%;
   font-weight: bold;
   margin: 0 auto;
@@ -39,13 +32,6 @@ code {
   border: .1em solid grey;
   width: 90%;
   max-width: 700px;
-  /* padding-top: 0.25em; */
-  /* height: 3em; */
-  /* display: inline-block; */
-  /* clear: both; */
-  /* width: 50%; */
-  /* display: block; */
-
 }
 
 .strikethrough {
@@ -61,31 +47,23 @@ code {
   width: 90%;
   max-width: 700px;
   padding: .25em 0;
-  /* background-color: pink; */
-  /* height: 1em; */
-  /* height: 2em; */
-  /* font-size: 1em; */
-
-  /* display: inline-block; */
 }
 
 a:link {
-  color: black; /* check that this works */
+  color: black;
 }
 
 a:visited {
-  color: black; /* check that this works */
+  color: black;
 }
 
-/* a:hover {
-  color: blue;
-} */
+a:hover {
+  color: grey;
+}
 
 .navlink {
   display: inline-block;
   margin: 0 1em;
-  /* width: 10em; */
-  /* width: 50%; */
 }
 
 input {
@@ -93,11 +71,10 @@ input {
   font-size: 100%;
 }
 
+/* Necessary to override browser's built in rendering */
 input[type="submit"] {
-  /* background-color: pink; */
   border: .25em solid black;
   height: 2.5em;
-  /* height: 200%; */
 }
 
 #search-input {
@@ -108,18 +85,15 @@ input[type="submit"] {
   background-color: #e7e7e7;
   width: 60%;
   max-width: 600px;
+  padding-left: .5em; /* so curser is not right up against edge */
 }
 
 #search-submit-button {
   display: inline-block;
   border: 1em solid black;
   height: 100%;
-  /* height: 2.5em; */
   width: 20%;
   max-width: 200px;
-  /* -webkit-appearance: none;
-  -moz-appearance: none; */
-  /* font-family: Courier; */
 }
 
 #clear-search-button {
@@ -130,18 +104,15 @@ input[type="submit"] {
   background-color: black;
   color: white;
   border: .25em solid grey;
-  /* font-size: 3em; */
 }
 
 .error-display {
-  /* height: 2em; */
   background-color: pink;
   border: .25em solid red;
   width: 75%;
   max-width: 700px;
   margin: 0em auto;
   margin-top: 1em;
-  /* margin-bottom: 1em; */
   padding: 0.25em;
   font-weight: bold;
 
@@ -168,7 +139,6 @@ input[type="submit"] {
   background-color: white;
   border: .25em solid grey;
   margin-top: 1em;
-  /* padding-bottom: 2em; */
 }
 
 .search-results-header-text {
@@ -187,7 +157,6 @@ input[type="submit"] {
 
 .search-results-footer {
   padding-top: 1em;
-  /* padding-bottom: 0; */
   margin-top: 1em;
   margin-bottom: 3em;
   background-color: white;
@@ -215,6 +184,5 @@ input[type="submit"] {
   body {
     font-size: 20px;
   }
-
 
 }
