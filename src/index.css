@@ -155,6 +155,9 @@ input[type="submit"] {
   margin-top: 1em;
 }
 
+.book-thumbnail {
+  border: .1em solid black;
+}
 .search-results-footer {
   padding-top: 1em;
   margin-top: 1em;
