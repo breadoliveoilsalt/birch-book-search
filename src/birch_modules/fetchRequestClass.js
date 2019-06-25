@@ -1,14 +1,17 @@
-import fetch from 'isomorphic-fetch'
+
+import 'isomorphic-fetch'
+// Bad for testing - caused mockFetch not to work
+// import fetch from 'isomorphic-fetch'
 
 export class FetchRequest {
 
   constructor(searchProperties) {
       this.apiKey = process.env.REACT_APP_GOOGLE_BOOKS_API_KEY
       this.baseURL = `https://www.googleapis.com/books/v1/volumes?key=${this.apiKey}`
-      this.searchTerms = searchProperties.searchTerms
+      this.searchTerms = searchProperties.searchTerms || null
         // Re: next line: Without '|| 0', searchStartingID === undefined when searchProperties.searchStartingID = 0
       this.searchStartingID = searchProperties.searchStartingID || 0
-      this.resultsPerSearch = searchProperties.resultsPerSearch
+      this.resultsPerSearch = searchProperties.resultsPerSearch || 20
     }
 
   basicSearch() {
@@ -17,7 +20,6 @@ export class FetchRequest {
 
     return fetch(url)
       .then(response => {
-        console.log("Response: ", response)
         let responseStatus = checkResponse(response)
         if (responseStatus.error) {
           throw new Error(responseStatus.message)

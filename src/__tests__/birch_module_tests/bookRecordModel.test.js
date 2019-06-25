@@ -2,7 +2,7 @@ import { expect } from 'chai'
 
 import { BookRecord } from '../../birch_modules/bookRecordModel'
 
-describe("BookRecordClass", function() {
+describe("BookRecordModel", function() {
 
   it("should throw an error if not initialized with an object that is a hash", function(){
 
