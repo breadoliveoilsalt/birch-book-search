@@ -52,7 +52,6 @@ export class SearchLayoutAndLogic extends Component {
   }
 
   escapeSearchTerms(searchTerms) {
-    // To consider: What more to escape? Does the component propertly have responsibility for this?
     return searchTerms.trim()
   }
 

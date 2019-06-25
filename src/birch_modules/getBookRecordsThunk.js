@@ -7,14 +7,19 @@ export function getBookRecordsBasicSearch(request, ModelToReturn) {
 
     return request()
       .then(data => {
-        dispatch(endBookAPIRequest())
-        dispatch(loadResultNumber(data.totalItems))
-        let bookRecordsForState = createBookRecords(data.items)
-        dispatch(loadSearchResults(bookRecordsForState))
+        if (data.error) {
+          throw Error(data.message)
+        } else {
+          dispatch(endBookAPIRequest())
+          dispatch(loadResultNumber(data.totalItems))
+          let bookRecordsForState = createBookRecords(data.items)
+          dispatch(loadSearchResults(bookRecordsForState))
+        }
       })
       .catch(error => {
         dispatch(endBookAPIRequest())
-        dispatch(loadError(error.message))
+        let message = error.message ? error.message : "Sorry, something went wrong. Please try again."
+        dispatch(loadError(message))
       })
   }
 

@@ -1,6 +1,4 @@
 import 'isomorphic-fetch'
-// Bad for testing - caused mockFetch not to work
-// import fetch from 'isomorphic-fetch'
 
 export class FetchRequest {
 
@@ -23,17 +21,18 @@ export class FetchRequest {
         .then(response => {
           let responseStatus = checkResponse(response)
           if (responseStatus.error) {
-            throw new Error(responseStatus.message)
+            return responseStatus
           } else
             return response.json()
           })
         .then(data => {
           let dataStatus = checkData(data)
           if (dataStatus.error) {
-            throw new Error(dataStatus.message)
+            return dataStatus
           } else
             return data
           })
+        // Note: Any .catch() trigger handled by getBookRecordsThunk
     }
   }
 
