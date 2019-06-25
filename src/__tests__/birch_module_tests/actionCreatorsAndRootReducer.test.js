@@ -294,7 +294,4 @@ describe("Root reducer", function() {
 
    })
 
-
-
-
 })

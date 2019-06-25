@@ -1,4 +1,3 @@
-
 import 'isomorphic-fetch'
 // Bad for testing - caused mockFetch not to work
 // import fetch from 'isomorphic-fetch'
