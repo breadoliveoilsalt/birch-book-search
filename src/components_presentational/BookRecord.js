@@ -1,10 +1,7 @@
 import React from 'react'
 
-import SmallDivider from './SmallDivider'
-
 const BookRecord = ({ bookInfo, number }) => {
 
-  // TOOK OUT       <SmallDivider /> FROM THE BOTTOM
 
   return (
 
