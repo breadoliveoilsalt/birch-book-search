@@ -17,21 +17,24 @@ export class FetchRequest {
 
     let url = this.baseURL + "&q=" + this.searchTerms + "&startIndex=" + this.searchStartingID + "&maxResults=" + this.resultsPerSearch
 
-    return fetch(url)
-      .then(response => {
-        let responseStatus = checkResponse(response)
-        if (responseStatus.error) {
-          throw new Error(responseStatus.message)
-        } else
-          return response.json()
-        })
-      .then(data => {
-        let dataStatus = checkData(data)
-        if (dataStatus.error) {
-          throw new Error(dataStatus.message)
-        } else
-          return data
-        })
+    return function() {
+
+      return fetch(url)
+        .then(response => {
+          let responseStatus = checkResponse(response)
+          if (responseStatus.error) {
+            throw new Error(responseStatus.message)
+          } else
+            return response.json()
+          })
+        .then(data => {
+          let dataStatus = checkData(data)
+          if (dataStatus.error) {
+            throw new Error(dataStatus.message)
+          } else
+            return data
+          })
+    }
   }
 
 }

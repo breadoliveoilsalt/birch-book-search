@@ -5,6 +5,9 @@ import { loadError, deleteError, beginBookAPIRequest, endBookAPIRequest } from '
 import { loadSearchTerms, increaseSearchStartingID, resetSearch } from '../birch_modules/actionCreatorsUpdateSearchResults'
 import { getBookRecordsBasicSearch } from '../birch_modules/getBookRecordsThunk'
 
+import { FetchRequest } from '../birch_modules/fetchRequestClass'
+import { BookRecord } from '../birch_modules/bookRecordModel'
+
 import SearchBar from '../components_presentational/SearchBar'
 import ClearSearchButton from '../components_presentational/ClearSearchButton'
 import ErrorDisplay from '../components_presentational/ErrorDisplay'
@@ -33,10 +36,15 @@ export class SearchLayoutAndLogic extends Component {
       return
     }
     this.props.loadSearchTerms(escapedSearchTerms)
-    this.props.getBookRecordsBasicSearch({
+
+    let searchProperties = {
       searchTerms: escapedSearchTerms,
       serachStartingID: this.props.searchStartingID,
-      resultsPerSearch: this.props.resultsPerSearch})
+      resultsPerSearch: this.props.resultsPerSearch
+    }
+    let request = new FetchRequest(searchProperties).basicSearch()
+    let ModelToReturn = BookRecord
+    this.props.getBookRecordsBasicSearch(request, ModelToReturn)
   }
 
   getSearchTerms() {
@@ -59,12 +67,16 @@ export class SearchLayoutAndLogic extends Component {
     event.preventDefault()
     this.props.beginBookAPIRequest()
     let tempStartingID = this.props.searchStartingID + this.props.resultsPerSearch
-    this.props.getBookRecordsBasicSearch({
+    let searchProperties = {
       searchTerms: this.props.userSearchTerms,
       searchStartingID: tempStartingID,
-      resultsPerSearch: this.props.resultsPerSearch})
-    this.props.increaseSearchStartingID()
-    // This odd sequence is due to a delay in the dispatching actions.  See commit 75fbcd8
+      resultsPerSearch: this.props.resultsPerSearch
+    }
+
+    let request = new FetchRequest(searchProperties).basicSearch()
+    let ModelToReturn = BookRecord
+    this.props.getBookRecordsBasicSearch(request, ModelToReturn)
+    this.props.increaseSearchStartingID() // Called here due to delay in dispach. See commit 75fbcd8
   }
 
   jumpToTopOfResults(event) {
@@ -125,7 +137,7 @@ const mapDispatchToProps = (dispatch) => {
     loadSearchTerms: (searchTerms) => dispatch(loadSearchTerms(searchTerms)),
     increaseSearchStartingID: () => dispatch(increaseSearchStartingID()),
     resetSearch: () => dispatch(resetSearch()),
-    getBookRecordsBasicSearch: (searchProperties) => dispatch(getBookRecordsBasicSearch(searchProperties))
+    getBookRecordsBasicSearch: (request, ModelToReturn) => dispatch(getBookRecordsBasicSearch(request, ModelToReturn))
   }
 }
 

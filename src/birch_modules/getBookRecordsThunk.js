@@ -1,15 +1,11 @@
 import { endBookAPIRequest, loadError } from './actionCreatorsAppStatus'
 import { loadSearchResults, loadResultNumber } from './actionCreatorsUpdateSearchResults'
-import { FetchRequest } from './fetchRequestClass'
-import { BookRecord as RecordObject } from './bookRecordModel'
 
-export function getBookRecordsBasicSearch(searchProperties) {
+export function getBookRecordsBasicSearch(request, ModelToReturn) {
 
   return function(dispatch) {
 
-    let request = new FetchRequest(searchProperties)
-
-    return request.basicSearch()
+    return request()
       .then(data => {
         dispatch(endBookAPIRequest())
         dispatch(loadResultNumber(data.totalItems))
@@ -21,19 +17,18 @@ export function getBookRecordsBasicSearch(searchProperties) {
         dispatch(loadError(error.message))
       })
   }
-}
 
-///// PRIVATE FUNCTIONS
+  function createBookRecords(arrayOfAPIReturns) {
 
-function createBookRecords(arrayOfAPIReturns) {
+    let bookRecordsForState = []
 
-  let bookRecordsForState = []
+    arrayOfAPIReturns.forEach( bookRecord => {
+      let bookRecordForState = new ModelToReturn(bookRecord.volumeInfo)
+      bookRecordsForState.push(bookRecordForState)
+    })
 
-  arrayOfAPIReturns.forEach( bookRecord => {
-    let bookRecordForState = new RecordObject(bookRecord.volumeInfo) // argument is an object
-    bookRecordsForState.push(bookRecordForState)
-  })
+    return bookRecordsForState
 
-  return bookRecordsForState
+  }
 
 }
