@@ -1,7 +1,7 @@
 import { endBookAPIRequest, loadError } from './actionCreatorsAppStatus'
 import { loadSearchResults, loadResultNumber } from './actionCreatorsUpdateSearchResults'
 import { FetchRequest } from './fetchRequestClass'
-import { BookRecord } from './bookRecordModel'
+import { BookRecord as RecordObject } from './bookRecordModel'
 
 export function getBookRecordsBasicSearch(searchProperties) {
 
@@ -30,7 +30,7 @@ function createBookRecords(arrayOfAPIReturns) {
   let bookRecordsForState = []
 
   arrayOfAPIReturns.forEach( bookRecord => {
-    let bookRecordForState = new BookRecord(bookRecord.volumeInfo) // argument is an object
+    let bookRecordForState = new RecordObject(bookRecord.volumeInfo) // argument is an object
     bookRecordsForState.push(bookRecordForState)
   })
 
