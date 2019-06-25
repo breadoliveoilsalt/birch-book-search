@@ -171,6 +171,15 @@ input[type="submit"] {
   animation: spin 1s linear infinite;
 }
 
+.about-page {
+  background-color: white;
+  margin: 0 auto;
+  width: 80%;
+  border: .25em solid grey;
+  font-weight: bold;
+  padding: 1em;
+}
+
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
