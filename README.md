@@ -46,7 +46,7 @@ Everyone interacting in the project’s codebases, issue trackers, chat rooms an
 
 ## Creating the App and Creating Tests for It
 
-Here is a summary of my process for creating the app and its tests:
+Creating the app was a lot of fun and lead to much learning about testing.  Here is a summary of my process for creating the app and its tests:
 
 1. Start reading about the Google Books API.  Get a sense of what it can do and how to integrate it.
 
@@ -59,7 +59,9 @@ Here is a summary of my process for creating the app and its tests:
 
 5. Build out the components for the app. Connect it to the Google Books API and the Redux store.  Add some styling, taking a mobile-first approach and assuming the screen was 320px wide. Continue to play with stying here and there as the app takes shape and I notice things that need tweaking.
 
-6. Start imaging how to move the app's logic toward an OOD structure.  Come up with a BookRecordModel class (to create objects from the Google Books API data) and a FetchRequest class with a #basicSearch method (on the theory that perhaps this class could be extended at a later point to integrate other types of searches).
+6. Start imaging how to move the app's logic more toward an OOD structure.  Come up with a BookRecordModel class (to create objects from the Google Books API data) and a FetchRequest class with a #basicSearch method (on the theory that perhaps this class could be extended at a later point to integrate other types of searches).
+
+7. Run back to the apps tests and start writing out the logic for the tests. Scrap most of the original descriptions I came up with as I learn more about the approaches people advocate when testing React Components, Redux dispatching, Thunks, and fetch actions. Make many mistakes. Keep hammering away at the tests. Realize that many problems I have with my test creation stem from too many objects and methods being tightly coupled and inter-dependent.  Attempt to refactor code and decouple objects/methods through dependency injection, attempting in particular to decouple the thunk that handles the fetching and dispatching from the BookRecordModel and the FetchRequest class.  Continue to work on tests, which seem to be going better and make more sense thanks to the decoupling.
 
 
 -----
