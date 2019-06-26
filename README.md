@@ -1,3 +1,54 @@
+# Birch
+
+Welcome to Birch, a tool to search for your next favorite book!
+
+## Introduction
+
+Birch connects to the Google Books API to deliver search results entered into the app's search bar.  The app was built using [React]((https://github.com/facebook/create-react-app) and has a [Redux-managed state](https://redux.js.org/). It relies on [Thunks](https://github.com/reduxjs/redux-thunk) to handle asynchronous Redux dispatching and [React Router](https://reacttraining.com/react-router/) to handle navigation.
+
+A live demo of the app is available via Heroku at https://birch-book-search.herokuapp.com/.
+
+For more on the process of creating the app and creating tests for it, please see further below.
+
+## Running the App Locally
+
+To run the app locally:
+
+1. Fork it in GitHub and clone it to your computer.
+
+2. In your terminal, `cd` into the parent directory the app.  
+
+3. In your terminal, run `npm install` to download dependencies.
+
+4. You will need an API key specifically for Google Books for the app to connect to the Google Books API. See instructions [here](https://console.developers.google.com/apis/credentials?project=_).  The API key then needs to be launched with the app as an environment variable.  We recommend accomplishing this by:
+
+  - creating a file in your root directory called `.env`,
+  - running `git init` and adding the `.env` file to you `.gitignore` file, and
+  - pasting into .env the following: REACT_APP_GOOGLE_BOOKS_API_KEY = "your actual API key"
+
+5. In your terminal, from the app's parent director, run `npm start`.  Then head to localhost:3000 in your browser to use the app.
+
+To close out the program, close your browser, and in the terminal where you ran `npm start`, hit control+c (on a Mac).  
+
+To run the program again, repeat step 5.  
+
+## Contributions, Bugs, Licence, and Code of Conduct
+
+Contributing:
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/breadoliveoilsalt/browseum. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the Contributor Covenant (http://contributor-covenant.org) code of conduct.
+
+License:
+The app is available as open source under the terms of the MIT License (http://opensource.org/licenses/MIT).
+
+Code of Conduct:
+Everyone interacting in the project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the code of conduct (https://github.com/breadoliveoilsalt/browseum/blob/master/CODE_OF_CONDUCT.md).
+
+-----
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
