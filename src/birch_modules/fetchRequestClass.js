@@ -21,7 +21,7 @@ export class FetchRequest {
         .then(response => {
           let responseStatus = checkResponse(response)
           if (responseStatus.error) {
-            return responseStatus
+            throw responseStatus
           } else
             return response.json()
           })
@@ -32,7 +32,8 @@ export class FetchRequest {
           } else
             return data
           })
-        // Note: Any .catch() trigger handled by getBookRecordsThunk
+        .catch(object => object)
+
     }
   }
 
@@ -66,7 +67,7 @@ function checkData(data) {
       status.message = longerMessage
     } catch {
       status.error = true
-      status.message = "Sorry, there appears to be an error. Please try again."
+      status.message = "Sorry, there appears to be a data error. Please try again."
     }
   } else if (data.totalItems.length === 0) {
     status.error = true
