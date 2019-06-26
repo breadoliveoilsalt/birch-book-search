@@ -46,7 +46,7 @@ describe('#getBookBasicSearch', function() {
         loadSearchResults(mockData.items)
       ]
 
-      starterDispatch()
+      return starterDispatch()
         .then(() => store.getActions())
         .then(actions => expect(actions.to.deep.equal(expectedActions)))
 
@@ -68,7 +68,7 @@ describe('#getBookBasicSearch', function() {
         loadError(mockData.message)
       ]
 
-      starterDispatch()
+      return starterDispatch()
         .then(() => store.getActions())
         .then(actions => expect(actions.to.deep.equal(expectedActions)))
 
@@ -103,7 +103,7 @@ describe('#getBookBasicSearch', function() {
 
         let expectedDispatchedData = mockFetchResponseItems.map(item => new BookRecord(item))
 
-        starterDispatch()
+        return starterDispatch()
           .then(() => store.getActions())
           .then(actions => expect(actions[2].to.deep.equal(expectedDispatchedData)))
 

@@ -77,6 +77,7 @@ describe("FetchRequest", function() {
       let returnedFunctionWithFetchRequest = new FetchRequest(sampleSearchProperties).basicSearch()
 
       returnedFunctionWithFetchRequest()
+
       expect(fetchMock.called()).to.be.true
 
       fetchMock.restore()
@@ -91,11 +92,9 @@ describe("FetchRequest", function() {
 
       let getReturnValue = async () => await returnedFunctionWithFetchRequest()
 
-      let expectedReturnValue =  { error: true, message: 'Sorry, there appears to be an error. Please try again.' }
+      let expectedReturnValue = { error: true, message:'Sorry, there was an error with the search terms. Please try again.' }
 
-      getReturnValue().then(result => console.log("4", result))
-
-      getReturnValue().then(result => expect(result).to.deep.equal(expectedReturnValue))
+      return getReturnValue().then(result => expect(result).to.deep.equal(expectedReturnValue))
 
       fetchMock.restore()
     })
@@ -108,67 +107,12 @@ describe("FetchRequest", function() {
 
       let getReturnValue = async () => await returnedFunctionWithFetchRequest()
 
-      getReturnValue().then(result => console.log(result))
+      let expectedReturnValue = { error: true, message: 'Sorry, there appears to be a server error. Please try again in a bit.' }
 
-      // let expectedReturnValue =  { error: true, message: 'Sorry, there appears to be an error. Please try again.' }
-
-      // return getReturnValue().then(result => expect(result).to.deep.equal(expectedReturnValue))
+      return getReturnValue().then(result => expect(result).to.deep.equal(expectedReturnValue))
 
     })
 
   })
 
 })
-
-
-//
-//
-//       // Please note: this is such a clunky test. Same below.  Because basicSearch() is async and returns a promise,
-//       // I had a very hard time using it with `expect`.  I ultimately came up with the idea to use
-//       // async/await.  When adding `return result()`, the test was being interrupted
-//       // by the error being thrown in result().  So I knew fetchMock was working and the error I wanted
-//       // to test was, in fact, being thrown.  [Note: without prepending `return`, nothing happened.
-//       // But how to check that with `expect`?  Using `throw()`
-//       // wasn't working.   And I kept getting warnings at the top of the test that a promise [here result()],
-//       // wasn't being resolved without a catch statement.  So I figured result() needed a catch, and if that
-//       // catch was being hit, then it proved we had an error being throw.
-//       // Cluncky indeed.
-//
-//       // Should build out with way to test the error message that is thrown.
-//
-//       fetchMock.mock("*", 400)
-//
-//       let requestInstance = new FetchRequest(sampleSearchProperties)
-//
-//       let result = async () => await requestInstance.basicSearch()
-//
-//       return result().catch(() => expect(true).to.be.true)
-//
-//       fetchMock.restore()
-//
-//     })
-//
-//
-//     it("throws an error if the response status code is 500", function() {
-//
-//       // See clunky test notes above
-//
-//       fetchMock.mock("*", 500, {overwriteRoutes: true})
-//
-//       let requestInstance = new FetchRequest(sampleSearchProperties)
-//
-//       let result = async () => await requestInstance.basicSearch()
-//
-//       return result().catch(() => expect(true).to.be.true)
-//
-//       fetchMock.restore()
-//
-//     })
-//
-//     // it("Not sure how to test presently: returns certain error messages when throwing errors", function() {
-//     //
-//     //   expect(true).to.be.false
-//     //
-//     // })
-//   })
-// })
