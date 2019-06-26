@@ -2,61 +2,111 @@ import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import fetchMock from 'fetch-mock'
 import { expect } from 'chai'
+import sinon from 'sinon'
 
 import { getBookRecordsBasicSearch } from '../../birch_modules/getBookRecordsThunk'
 
-import { loadError, deleteError, beginBookAPIRequest, endBookAPIRequest } from '../../birch_modules/actionCreatorsAppStatus'
-import { loadSearchTerms, increaseSearchStartingID, loadSearchResults, loadResultNumber, resetSearch } from '../../birch_modules/actionCreatorsUpdateSearchResults'
+import { loadError, beginBookAPIRequest, endBookAPIRequest } from '../../birch_modules/actionCreatorsAppStatus'
+import { loadSearchTerms, loadSearchResults, loadResultNumber } from '../../birch_modules/actionCreatorsUpdateSearchResults'
+
+import { BookRecord } from '../../birch_modules/bookRecordModel'
 
 const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
 
-const sampleSearchProperties = {
-  searchTerms: "A good book",
-  searchStartingID: 0,
-  resultsPerSearch: 20
-}
-
 describe('#getBookBasicSearch', function() {
 
-  it("calls the request function passed to it", function(){
+  it("calling dispatch on #getBooksBasicSearch calls the request function passed with it", function(){
+
+    let store = mockStore({})
+
+        // Below, used Promise.resolve() to deal with fact that request() is followed by a .then
+    let requestMock = sinon.mock().returns(Promise.resolve())
+
+    return store.dispatch(getBookRecordsBasicSearch({request: requestMock })).then(
+      expect(requestMock.calledOnce).to.be.true
+    )
+
   })
 
+  it("if there is no data.error property from the response to the request function, it dispatches endBookAPIRequest, loadResultNumber, and loadSearchResults", function() {
+
+      let store = mockStore({})
+      let mockData = {status: 200, totalItems: 3, items: [1,2,3]}
+
+      let requestMock = sinon.mock().returns(Promise.resolve(mockData))
+
+      let starterDispatch = async function() {
+        await store.dispatch(getBookRecordsBasicSearch({request: requestMock }))
+      }
+
+      let expectedActions = [
+        endBookAPIRequest(),
+        loadResultNumber(mockData.totalItems),
+        loadSearchResults(mockData.items)
+      ]
+
+      starterDispatch()
+        .then(() => store.getActions())
+        .then(actions => expect(actions.to.deep.equal(expectedActions)))
+
+  })
+
+  it("if there is a data.error property from the response to the request function, it dispatches #endBookAPIRequest and #loadError", function() {
+
+      let store = mockStore({})
+      let mockData = {status: 200, totalItems: 3, items: [1,2,3], error: true, message: "Something went wrong"}
+
+      let requestMock = sinon.mock().returns(Promise.resolve(mockData))
+
+      let starterDispatch = async function() {
+        await store.dispatch(getBookRecordsBasicSearch({request: requestMock }))
+      }
+
+      let expectedActions = [
+        endBookAPIRequest(),
+        loadError(mockData.message)
+      ]
+
+      starterDispatch()
+        .then(() => store.getActions())
+        .then(actions => expect(actions.to.deep.equal(expectedActions)))
+
+    })
+
+    it("if there is no data.error property from the response to the request function, it dispatches loadSearchResults with instances of the ModelToReturn passed to #getBookRecordsBasicSearch", function() {
+
+        let store = mockStore({})
+
+        let mockFetchResponseItems = [{
+          "imageURL": "http://books.google.com/books/content?id=2o_mEBpjucUC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+          "title": "Jimmy the Squirrel",
+          "authors": "Amr Taher",
+          "publisher": "AuthorHouse",
+          "additionalInfoURL": "http://books.google.com/books?id=2o_mEBpjucUC&dq=jimmy&hl=&source=gbs_api"
+        },
+        {
+          "imageURL": "http://books.google.com/books/content?id=OsbuBD3mkkkC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
+          "title": "Jimmy Page",
+          "authors": "George Case",
+          "publisher": "Hal Leonard Corporation",
+          "additionalInfoURL": "http://books.google.com/books?id=OsbuBD3mkkkC&dq=jimmy&hl=&source=gbs_api"
+        }]
+
+        let mockData = {status: 200, totalItems: 3, items: mockFetchResponseItems}
+
+        let requestMock = sinon.mock().returns(Promise.resolve(mockData))
+
+        let starterDispatch = async function() {
+          await store.dispatch(getBookRecordsBasicSearch({request: requestMock }))
+        }
+
+        let expectedDispatchedData = mockFetchResponseItems.map(item => new BookRecord(item))
+
+        starterDispatch()
+          .then(() => store.getActions())
+          .then(actions => expect(actions[2].to.deep.equal(expectedDispatchedData)))
+
+    })
+
 })
-  // afterEach(() => {
-  //   fetchMock.restore()
-  // })
-  //
-  // it("does stuff", function() {
-  //
-  //   let body = new FormData()
-  //   body.append("status", "500")
-  //   let response = new Response(null, {status:400})
-  //   console.log("Resp:", response)
-  //
-  //   fetchMock.getOnce("*", response)
-  //   let store = mockStore({})
-  //   return store.dispatch(getBookRecords(searchProperties)).then(() => console.log("Actions: ", store.getActions()))
-
-// GETTING CLOSE, I CAN SEE ACTIONS HERE, ALTHOUGH 500 CODE NOT RESPECTED
-//     fetchMock.getOnce("*", {status: 500})
-//     let store = mockStore({})
-//     return store.dispatch(getBookRecords(searchProperties)).then(() => console.log("Actions: ", store.getActions()))
-//
-//   })
-// })
-
-
-    // WORKS:
-    // store.dispatch({type: 'DELETE_ERROR'})
-
-    // WORKS:
-    // store.dispatch(deleteError())
-
-    // NOT GETTING ACTIONS:
-    // store.dispatch(getBookRecords(searchProperties)).then((resp) => console.log(resp))
-
-    // console.log(fetchMock.lastUrl())
-    // NOT GETTING ACTIONS:
-    // store.dispatch(getBookRecords(searchProperties))
-    // console.log("Actions: ", store.getActions())

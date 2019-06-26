@@ -71,7 +71,7 @@ export class SearchLayoutAndLogic extends Component {
   handleLoadMoreResults(event) {
     event.preventDefault()
     this.props.beginBookAPIRequest()
-  
+
     let searchProperties = {
       searchTerms: this.props.userSearchTerms,
       searchStartingID: this.props.searchStartingID + this.props.resultsPerSearch,
@@ -140,7 +140,7 @@ const mapDispatchToProps = (dispatch) => {
     loadSearchTerms: (searchTerms) => dispatch(loadSearchTerms(searchTerms)),
     increaseSearchStartingID: () => dispatch(increaseSearchStartingID()),
     resetSearch: () => dispatch(resetSearch()),
-    getBookRecordsBasicSearch: (request, ModelToReturn) => dispatch(getBookRecordsBasicSearch(request, ModelToReturn))
+    getBookRecordsBasicSearch: (searchParameters) => dispatch(getBookRecordsBasicSearch(searchParameters))
   }
 }
 
