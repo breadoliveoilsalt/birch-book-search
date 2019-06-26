@@ -4,19 +4,19 @@ Welcome to Birch, a tool to search for your next favorite book!
 
 ## Introduction
 
-Birch connects to the Google Books API to deliver search results entered into the app's search bar.  The app was built using [React]((https://github.com/facebook/create-react-app) and has a [Redux-managed state](https://redux.js.org/). It relies on [Thunks](https://github.com/reduxjs/redux-thunk) to handle asynchronous Redux dispatching and [React Router](https://reacttraining.com/react-router/) to handle navigation.
+Birch connects to the Google Books API to deliver search results entered into the app's search bar.  The app was built using [React](https://github.com/facebook/create-react-app) and has a [Redux-managed state](https://redux.js.org/). It relies on [Thunks](https://github.com/reduxjs/redux-thunk) to handle asynchronous Redux dispatching and [React Router](https://reacttraining.com/react-router/) to handle navigation.
 
 A live demo of the app is available via Heroku at https://birch-book-search.herokuapp.com/.
 
 For more on the process of creating the app and creating tests for it, please see further below.
 
-## Running the App Locally
+## Running the App Locally and Running Tests
 
 To run the app locally:
 
 1. Fork it in GitHub and clone it to your computer.
 
-2. In your terminal, `cd` into the parent directory the app.  
+2. In your terminal, `cd` into the root directory the app.  
 
 3. In your terminal, run `npm install` to download dependencies.
 
@@ -26,11 +26,11 @@ To run the app locally:
   - running `git init` and adding the `.env` file to you `.gitignore` file, and
   - pasting into .env the following: REACT_APP_GOOGLE_BOOKS_API_KEY = "your actual API key"
 
-5. In your terminal, from the app's parent director, run `npm start`.  Then head to localhost:3000 in your browser to use the app.
+5. In your terminal, from the app's root directory, run `npm start`.  Then head to localhost:3000 in your browser to use the app.
 
-To close out the program, close your browser, and in the terminal where you ran `npm start`, hit control+c (on a Mac).  
+6. To close out the program, close your browser, and in the terminal where you ran `npm start`, hit control+c (on a Mac). To run the program again, repeat step 5.  
 
-To run the program again, repeat step 5.  
+To run and see tests for the app, in your terminal from the app's root directory, run `npm test --verbose`
 
 ## Contributions, Bugs, Licence, and Code of Conduct
 
@@ -44,76 +44,22 @@ The app is available as open source under the terms of the MIT License (http://o
 Code of Conduct:
 Everyone interacting in the project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the code of conduct (https://github.com/breadoliveoilsalt/browseum/blob/master/CODE_OF_CONDUCT.md).
 
+## Creating the App and Creating Tests for It
+
+Here is a summary of my process for creating the app and its tests:
+
+1. Start reading about the Google Books API.  Get a sense of what it can do and how to integrate it.
+
+2. Sit down with paper and pencil and sketch out some imaginings on what the app would look like.  Still using paper, make an initial identification of the React components needed, their hierarchy, and which components should be presentational (as opposed to container components with functions).  Also brainstorm the shape of the Redux state and dispatching functions needed to update the state.
+
+3. Create a working frame of the app using create-react-app. Start installing and integrating dependencies, such as Redux, Thunks, and React Router. Make sure Redux state is connected to the app.  
+
+4. Get learning about how to do tests with React, Redux, and Thunks. Take a stab at the red/green/refactor pattern by writing tests only with descriptions for what I wanted to test, not the logic for the tests themselves.
+  - This was my first time creating a test suite for an app.  I had been playing around with Mocha and Chai lately, but I knew there was going to be a big learning curve when it came to test suites that seemed relevant for an app like this, such as Jest, Enzyme, Sinon, fetchMock, and Redux Mock Store.  At that moment, in the interest of time, I figured that I would write descriptions of tests to get my brain working in a testing mindset and then flush out the test's logic as I continued to simultaneously build the app and learn more about testing.
+
+5. Build out the components for the app. Connect it to the Google Books API and the Redux store.  Add some styling, taking a mobile-first approach and assuming the screen was 320px wide. Continue to play with stying here and there as the app takes shape and I notice things that need tweaking.
+
+6. Start imaging how to move the app's logic toward an OOD structure.  Come up with a BookRecordModel class (to create objects from the Google Books API data) and a FetchRequest class with a #basicSearch method (on the theory that perhaps this class could be extended at a later point to integrate other types of searches).
+
+
 -----
-
-
-
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
