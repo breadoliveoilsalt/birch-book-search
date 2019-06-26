@@ -20,7 +20,7 @@ To run the app locally:
 
 3. In your terminal, run `npm install` to download dependencies.
 
-4. You will need provide an API key specifically for Google Books in order for the app to connect to the Google Books API. See instructions [here](https://console.developers.google.com/apis/credentials?project=_) for how to obtain an API key.  The API key then needs to be launched with the app as an environment variable.  We recommend accomplishing this by:
+4. You will need provide an API key specifically for Google Books in order for the app to connect to the Google Books API. See instructions [here](https://console.developers.google.com/apis/credentials?project=_) for how to obtain an API key.  The app then needs to be launched with the API key as an environment variable.  We recommend accomplishing this by:
 
   - creating a file in your root directory called `.env`,
   - running `git init` and adding the `.env` file to you `.gitignore` file, and
@@ -32,13 +32,14 @@ To run the app locally:
 
 To run and see tests for the app, in your terminal from the app's root directory, run `npm test`.  When the testing program loads, type `a` to run all tests.
 
-## Contributions, Bugs, License, and Code of Conduct
+## Contributions and License
 
-Contributing:
+### Contributing:
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/breadoliveoilsalt/birch-book-search. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the Contributor Covenant (http://contributor-covenant.org) code of conduct.
 
-License:
+### License:
+
 The app is available as open source under the terms of the MIT License (http://opensource.org/licenses/MIT).
 
 ## Summary of Creating the App and Creating Tests for It
