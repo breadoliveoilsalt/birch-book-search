@@ -2,8 +2,6 @@ import React from 'react'
 
 const ClearSearchButton = (props) => {
 
-  // you might want to have logic that this only appears if there are search results
-
   return (
     <div className="">
       <form onSubmit={props.clearSearch}>

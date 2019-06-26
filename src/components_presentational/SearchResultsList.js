@@ -34,7 +34,7 @@ const SearchResultsList = (props) => {
 
     </div>
   )
-
+  
 }
 
 export default SearchResultsList

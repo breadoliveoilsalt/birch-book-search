@@ -1,5 +1,4 @@
 import { applyMiddleware, createStore } from 'redux'
-// import thunkMiddleware from 'redux-thunk'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension/logOnlyInProduction'
 import monitorReducersEnhancer from './enhancers/monitorReducer'

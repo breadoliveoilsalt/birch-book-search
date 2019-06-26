@@ -2,7 +2,6 @@ import React from 'react'
 
 const BookRecord = ({ bookInfo, number }) => {
 
-
   return (
 
     <div className="book-record">

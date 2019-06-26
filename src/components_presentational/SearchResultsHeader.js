@@ -15,6 +15,7 @@ const SearchResultsHeader = (props) => {
   } else {
     return null
   }
+  
 }
 
 export default SearchResultsHeader

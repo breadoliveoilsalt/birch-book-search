@@ -32,6 +32,7 @@ const SearchResultsFooter = (props) => {
       </div>
     )
   }
+  
 }
 
 export default SearchResultsFooter

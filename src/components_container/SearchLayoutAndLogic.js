@@ -114,9 +114,9 @@ export class SearchLayoutAndLogic extends Component {
         />
 
       </div>
-
     )
   }
+
 }
 
 const mapStateToProps = (state) => {

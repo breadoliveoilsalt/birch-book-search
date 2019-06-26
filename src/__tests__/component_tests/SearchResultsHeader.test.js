@@ -26,7 +26,7 @@ describe("<SearchResultsHeader />", function() {
   it("should render text indicating how many results returned", function() {
 
     const wrapper = shallow(<SearchResultsHeader resultNumber={15}/>)
-    expect(wrapper.text()).to.include("15 potential result(s).")
+    expect(wrapper.text()).to.include("15 potential result(s)")
 
   })
 

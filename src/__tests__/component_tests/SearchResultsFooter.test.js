@@ -25,12 +25,12 @@ describe("<SearchResultsFooter />", function() {
 
     const wrapper = shallow(<SearchResultsFooter makingBookAPIRequest={false} resultsNumber={10} resultsDisplayed={15} />)
     console.log(wrapper.debug())
-    // expect(wrapper.find("input[value='Load More Results']")).to.exist
+
     expect(wrapper.find("input[value='Load More Results']")).to.exist
 
-    describe("the button should call props.handleLoadMoreResults when clicked", function() {
-
-    })
+    // describe("the button should call props.handleLoadMoreResults when clicked", function() {
+    //
+    // })
   })
 
 
