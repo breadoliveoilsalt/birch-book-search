@@ -41,10 +41,5 @@ describe("<SearchLayoutAndLogic /> - Testing Rendering Children and Passing Prop
     const wrapper = shallow(<SearchLayoutAndLogic />)
     expect(wrapper.find(SearchResultsList).props().jumpToTopOfResults).to.equal(wrapper.instance().jumpToTopOfResults)
   })
-  //
-  // it("should have a function #escapeSearchTerms that trims white space from a string argument", function(){
-  //   const wrapper = shallow(<SearchLayoutAndLogic />)
-  //   expect(wrapper.instance().escapeSearchTerms("  Something  ")).to.equal("Something")
-  // })
 
 })
