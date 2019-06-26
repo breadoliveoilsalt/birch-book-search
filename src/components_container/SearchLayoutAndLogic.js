@@ -79,7 +79,7 @@ export class SearchLayoutAndLogic extends Component {
     }
 
     this.props.getBookRecordsBasicSearch(this.searchParameters(searchProperties))
-    this.props.increaseSearchStartingID() // Called here due to delay in dispach. See commit 75fbcd8
+    this.props.increaseSearchStartingID() 
   }
 
   jumpToTopOfResults(event) {

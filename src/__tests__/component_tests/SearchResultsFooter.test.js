@@ -2,6 +2,7 @@ import React from 'react'
 import { expect } from 'chai'
 import Enzyme, { shallow, mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
+import sinon from 'sinon'
 
 Enzyme.configure({ adapter: new Adapter() })
 
@@ -14,38 +15,47 @@ describe("<SearchResultsFooter />", function() {
   it("should load the Loader component when props.makingBookAPIRequest is true", function() {
 
     const wrapper1 = shallow(<SearchResultsFooter makingBookAPIRequest={true} />)
+
     expect(wrapper1.find(Loader)).to.exist
+    expect(wrapper1.find(Loader).isEmptyRender()).to.be.false
 
     const wrapper2 = shallow(<SearchResultsFooter makingBookAPIRequest={false}/>)
     expect(wrapper2.find(Loader).isEmptyRender()).to.be.true
 
   })
 
-  it("should display a button to load more results when props.resultsDisplayed is less than props.resultsNumber", function() {
+  it("should display a 'Load More Results' button to load more results when props.resultsDisplayed is less than props.resultsNumber", function() {
 
-    const wrapper = shallow(<SearchResultsFooter makingBookAPIRequest={false} resultsNumber={10} resultsDisplayed={15} />)
-    console.log(wrapper.debug())
+    // let handleLoadMoreResultsSpy = sinon.spy()
 
+    const props = {
+      makingBookAPIRequest: false,
+      resultsNumber: 15,
+      resultsDisplayed: 10
+    }
+
+    const wrapper = shallow(<SearchResultsFooter {...props} />)
+
+    console.log(wrapper.props())
     expect(wrapper.find("input[value='Load More Results']")).to.exist
-
-    // describe("the button should call props.handleLoadMoreResults when clicked", function() {
-    //
-    // })
   })
-
 
   it("should display a link to jump to the top of the page when props.resultsDisplayed is less than props.resultsNumber", function() {
 
-    const wrapper = shallow(<SearchResultsFooter resultsNumber={20} resultsDisplayed={15} />)
-    console.log(wrapper.debug())
-    // expect(wrapper.find("a").text()).to.equal("Jump To Top of Results")
+    const wrapper = mount(<SearchResultsFooter resultsNumber={20} resultsDisplayed={15} />)
+
+    console.log(wrapper.text())
+    // expect(wrapper.find("a")).to.exist
+    // expect(wrapper.find("a").text()).to.include("Jump To Top of Results")
 
   })
 
-  it("should display a link to jump to the top of the page that calls props.jumpToTopOfResults when clicked", function() {
-
-  })
 })
+
+
+
+
+// })
 //
 //   <SearchResultsFooter
 //     makingBookAPIRequest={props.makingBookAPIRequest}

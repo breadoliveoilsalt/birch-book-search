@@ -24,13 +24,13 @@ To run the app locally:
 
   - creating a file in your root directory called `.env`,
   - running `git init` and adding the `.env` file to you `.gitignore` file, and
-  - pasting into .env the following: REACT_APP_GOOGLE_BOOKS_API_KEY = "your actual API key"
+  - pasting into `.env` the following: `REACT_APP_GOOGLE_BOOKS_API_KEY = "your actual API key"`
 
 5. In your terminal, from the app's root directory, run `npm start`.  Then head to localhost:3000 in your browser to use the app.
 
 6. To close out the program, close your browser, and in the terminal where you ran `npm start`, hit control+c (on a Mac). To run the program again, repeat step 5.  
 
-To run and see tests for the app, in your terminal from the app's root directory, run `npm test --verbose`
+To run and see tests for the app, in your terminal from the app's root directory, run `npm test --verbose`.  When the testing program loads, type `a` to run all tests.
 
 ## Contributions, Bugs, Licence, and Code of Conduct
 
@@ -55,11 +55,11 @@ Creating the app was a lot of fun and lead to much learning about testing.  Here
 3. Create a working frame of the app using create-react-app. Start installing and integrating dependencies, such as Redux, Thunks, and React Router. Make sure Redux state is connected to the app.  
 
 4. Get learning about how to do tests with React, Redux, and Thunks. Take a stab at the red/green/refactor pattern by writing tests only with descriptions for what I wanted to test, not the logic for the tests themselves.
-  - This was my first time creating a test suite for an app.  I had been playing around with Mocha and Chai lately, but I knew there was going to be a big learning curve when it came to test suites that seemed relevant for an app like this, such as Jest, Enzyme, Sinon, fetchMock, and Redux Mock Store.  At that moment, in the interest of time, I figured that I would write descriptions of tests to get my brain working in a testing mindset and then flush out the test's logic as I continued to simultaneously build the app and learn more about testing.
+  - Side Note: This was my first time creating a test suite for an app.  I had been playing around with Mocha and Chai lately, but I knew there was going to be a big learning curve when it came to test suites that seemed relevant for an app like this, such as Jest, Enzyme, Sinon, fetchMock, and Redux Mock Store.  At that moment, in the interest of time, I figured that I would write descriptions of tests to get my brain working in a testing mindset and then flush out the test's logic as I continued to simultaneously build the app and learn more about testing.
 
 5. Build out the components for the app. Connect it to the Google Books API and the Redux store.  Add some styling, taking a mobile-first approach and assuming the screen was 320px wide. Continue to play with stying here and there as the app takes shape and I notice things that need tweaking.
 
-6. Start imaging how to move the app's logic more toward an OOD structure.  Come up with a BookRecordModel class (to create objects from the Google Books API data) and a FetchRequest class with a #basicSearch method (on the theory that perhaps this class could be extended at a later point to integrate other types of searches).
+6. Start imaging how to move the app's logic more toward object oriented design.  Come up with a BookRecordModel class (to create objects from the Google Books API data) and a FetchRequest class with a #basicSearch method (on the theory that perhaps this class could be extended at a later point to integrate other types of searches).
 
 7. Run back to the apps tests and start writing out the logic for the tests. Scrap most of the original descriptions I came up with as I learn more about the approaches people advocate when testing React Components, Redux dispatching, Thunks, and fetch actions. Make many mistakes. Keep hammering away at the tests. Realize that many problems I have with my test creation stem from too many objects and methods being tightly coupled and inter-dependent.  Attempt to refactor code and decouple objects/methods through dependency injection, attempting in particular to decouple the thunk that handles the fetching and dispatching from the BookRecordModel and the FetchRequest class.  Continue to work on tests, which seem to be going better and make more sense thanks to the decoupling.
 

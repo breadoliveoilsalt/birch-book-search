@@ -7,7 +7,7 @@ import loggerMiddleware from './middleware/logger'
 import rootReducer from './reducers/rootReducer'
 
 export default function configureStore(preloadedState) {
-  // const middlewares = [loggerMiddleware, thunkMiddleware]
+  
   const middlewares = [loggerMiddleware, thunk]
   const middlewareEnhancer = applyMiddleware(...middlewares)
 

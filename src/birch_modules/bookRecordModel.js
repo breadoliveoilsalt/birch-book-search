@@ -11,9 +11,7 @@ export class BookRecord {
 
 }
 
-// PRIVATE FUNCTIONS RELEVANT TO VALIDATING
-  // SEE VARIOUS ALTERNATIVES TO PRIVATE FUNCTIONS HERE, E.G.:
-    // https://stackoverflow.com/questions/27849064/how-to-implement-private-method-in-es6-class-with-traceur
+///// PRIVATE FUNCTIONS
 
 function validateProperties(properties) {
   if (typeof properties !== "object" || properties instanceof Array) {
@@ -30,7 +28,6 @@ function validateImageURL(properties) {
 }
 
 function validateTitle(properties) {
-  // Consider adding subtitle.
   try {
     return exists(properties.title) ? properties.title : null
   } catch {

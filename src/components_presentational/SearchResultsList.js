@@ -9,7 +9,6 @@ const SearchResultsList = (props) => {
   const resultsDisplayed = props.results.length
 
   const listToDisplay = props.results.map( (result, index) => {
-
     return (
       <BookRecord key={index} number={index + 1} bookInfo={result} />
     )
@@ -34,7 +33,7 @@ const SearchResultsList = (props) => {
 
     </div>
   )
-  
+
 }
 
 export default SearchResultsList

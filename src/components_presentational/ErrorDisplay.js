@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ErrorDisplay = ( props ) => {
+const ErrorDisplay = (props) => {
 
   if (props.errorMessage) {
     return (
