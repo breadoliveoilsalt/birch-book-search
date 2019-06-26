@@ -16,6 +16,10 @@ code {
     monospace;
 }
 
+html {
+  overflow-y: scroll;
+}
+
 .app-container {
   width: 100%;
   text-align: center;
