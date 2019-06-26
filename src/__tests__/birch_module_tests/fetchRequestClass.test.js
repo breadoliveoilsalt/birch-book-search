@@ -4,10 +4,6 @@ import { FetchRequest } from '../../birch_modules/FetchRequestClass'
 import sinon from 'sinon'
 import fetchMock from 'fetch-mock'
 
-// NOTE: for fetchMock to work with isomorphic-fetch, actual file must rely on
-// import 'isomorphic-fetch' - NOT import fetch from 'isomorphic-fetch'
-
-
 const sampleSearchProperties = {
   searchTerms: "A Good Book",
   searchStartingID: 0,

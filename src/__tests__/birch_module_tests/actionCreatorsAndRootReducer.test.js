@@ -143,7 +143,7 @@ describe("Root reducer", function() {
 
    })
 
-   it("should should increase the searchStartingID by 20 when called with #increaseSearchStartingID()", function() {
+   it("should should increase the searchStartingID by 20 when called with #increaseSearchStartingID", function() {
 
      const expectedNewState1 = {
            appStatus: {
@@ -251,7 +251,7 @@ describe("Root reducer", function() {
 
    })
 
-   it("should add the search results number into the state when called with #loadResultNumber()", function() {
+   it("should add the search results number into the state when called with #loadResultNumber", function() {
 
      const expectedNewState = {
            appStatus: {
@@ -272,7 +272,7 @@ describe("Root reducer", function() {
      expect(newState).to.deep.equal(expectedNewState)
    })
 
-   it("should reset the currentSearch state back to its expected initial state when called with #resetSearch()", function(){
+   it("should reset the currentSearch state back to its expected initial state when called with #resetSearch", function(){
 
      const currentState = {
            appStatus: {

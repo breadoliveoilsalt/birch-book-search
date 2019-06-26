@@ -52,10 +52,10 @@ describe('#getBookBasicSearch', function() {
 
   })
 
-  it("if there is no data.error property from the response to the request function, it dispatches endBookAPIRequest, loadResultNumber, and loadSearchResults", function() {
+  it("if there is no data.error property from the response to the request function, it dispatches #endBookAPIRequest, #loadResultNumber, and #loadSearchResults", function() {
 
       let store = mockStore({})
-      
+
       let mockData = {status: 200, totalItems: 3, items: mockFetchResponseItems}
 
       let requestMock = sinon.mock().returns(Promise.resolve(mockData))
@@ -98,7 +98,7 @@ describe('#getBookBasicSearch', function() {
     })
 
 
-  it("if there is no data.error property from the response to the request function, it dispatches loadSearchResults with instances of the ModelToReturn passed to #getBookRecordsBasicSearch", function() {
+  it("if there is no data.error property from the response to the request function, it dispatches #loadSearchResults with instances of the ModelToReturn passed to #getBookRecordsBasicSearch", function() {
 
       let store = mockStore({})
 

@@ -14,8 +14,6 @@ describe("<SearchResultsList />", function() {
 
   it("should render the SearchResultsHeader and SearchResultsFooter Components", function() {
 
-      // Note: Throughout all tests, SearchResultsList throws and error with shallow
-      // rendering without results provided, b/c it cannot read props.results.length
     const wrapper = shallow(<SearchResultsList results={[]}/>)
 
     expect(wrapper.find(SearchResultsHeader)).to.exist
