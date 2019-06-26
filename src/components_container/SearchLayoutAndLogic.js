@@ -42,9 +42,8 @@ export class SearchLayoutAndLogic extends Component {
       serachStartingID: this.props.searchStartingID,
       resultsPerSearch: this.props.resultsPerSearch
     }
-    let request = new FetchRequest(searchProperties).basicSearch()
-    let ModelToReturn = BookRecord
-    this.props.getBookRecordsBasicSearch(request, ModelToReturn)
+
+    this.props.getBookRecordsBasicSearch(this.searchParameters(searchProperties))
   }
 
   getSearchTerms() {
@@ -53,6 +52,13 @@ export class SearchLayoutAndLogic extends Component {
 
   escapeSearchTerms(searchTerms) {
     return searchTerms.trim()
+  }
+
+  searchParameters(searchProperties) {
+    return {
+        request: new FetchRequest(searchProperties).basicSearch(),
+        ModelToReturn: BookRecord
+      }
   }
 
   handleClearSearch(event) {
@@ -65,16 +71,14 @@ export class SearchLayoutAndLogic extends Component {
   handleLoadMoreResults(event) {
     event.preventDefault()
     this.props.beginBookAPIRequest()
-    let tempStartingID = this.props.searchStartingID + this.props.resultsPerSearch
+  
     let searchProperties = {
       searchTerms: this.props.userSearchTerms,
-      searchStartingID: tempStartingID,
+      searchStartingID: this.props.searchStartingID + this.props.resultsPerSearch,
       resultsPerSearch: this.props.resultsPerSearch
     }
 
-    let request = new FetchRequest(searchProperties).basicSearch()
-    let ModelToReturn = BookRecord
-    this.props.getBookRecordsBasicSearch(request, ModelToReturn)
+    this.props.getBookRecordsBasicSearch(this.searchParameters(searchProperties))
     this.props.increaseSearchStartingID() // Called here due to delay in dispach. See commit 75fbcd8
   }
 

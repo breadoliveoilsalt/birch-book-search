@@ -1,7 +1,7 @@
 import { endBookAPIRequest, loadError } from './actionCreatorsAppStatus'
 import { loadSearchResults, loadResultNumber } from './actionCreatorsUpdateSearchResults'
 
-export function getBookRecordsBasicSearch(request, ModelToReturn) {
+export function getBookRecordsBasicSearch( {request, ModelToReturn} ) {
 
   return function(dispatch) {
 
