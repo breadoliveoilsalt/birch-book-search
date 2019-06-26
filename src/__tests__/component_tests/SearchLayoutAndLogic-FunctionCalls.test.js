@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { expect } from 'chai'
 import sinon from 'sinon'
-// Note: this imports the non-Redux connected version of the component
+
 import { SearchLayoutAndLogic } from '../../components_container/SearchLayoutAndLogic'
 import Enzyme, { shallow, mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
@@ -130,23 +130,17 @@ describe("<SearchLayoutAndLogic /> - Testing What Functions Call: ", function() 
 
   describe("#getSearchTerms", function() {
 
-    it("calls document.getElementById(#search-input).value", function(){
+    it("calls document.getElementById", function(){
 
-
-      // INCOMPLETE TEST
       const wrapper = shallow(<SearchLayoutAndLogic />)
-      // document.getElementById("search-input") = sinon.stub()
+
       global.window.document.getElementById = sinon.stub().returns({value: "Some Search Terms"})
 
       wrapper.instance().getSearchTerms()
 
       expect(global.window.document.getElementById.called).to.be.true
 
-
-      // let searchInputBox = wrapper.find("#search-input")
-      // console.log(searchInputBox.props())
     })
-
 
   })
 
@@ -182,6 +176,8 @@ describe("<SearchLayoutAndLogic /> - Testing What Functions Call: ", function() 
       preventDefault: sinon.spy()
     }
 
+    global.window.document.getElementById = sinon.stub().returns({value: "Some Search Terms"})
+
     wrapper.instance().handleClearSearch(event)
 
     it("calls #preventDefault on the event", function() {
@@ -189,15 +185,16 @@ describe("<SearchLayoutAndLogic /> - Testing What Functions Call: ", function() 
     })
 
     it("calls this.props.deleteError()", function(){
-      expect(deleteError.called).to.be.true
+      expect(props.deleteError.called).to.be.true
     })
 
     it("calls this.props.resetSearch()", function() {
-      expect(resetSearch.called).to.be.true
+      expect(props.resetSearch.called).to.be.true
     })
 
-
-    /// INCOMPLETE TEST - HAVE TO TEST THAT THIS IS CALLED:     document.getElementById("search-input").value = ""
+    it("calls document.getElementById", function() {
+      expect(global.window.document.getElementById.called).to.be.true
+    })
 
   })
 
@@ -232,29 +229,12 @@ describe("<SearchLayoutAndLogic /> - Testing What Functions Call: ", function() 
 
     it("calls this.props.getBookRecordsBasicSearch()", function() {
       expect(wrapper.instance().props.getBookRecordsBasicSearch.called).to.be.true
-      /// INCOMPLETE TESTS - HOW DO I SEE THAT THE ARGUMENT IS INCREASED??
     })
 
     it("calls this.props.increaseSearchStartingID()", function() {
       expect(wrapper.instance().props.increaseSearchStartingID.called).to.be.true
     })
 
-  })
-
-  describe("#jumpToTopOfResults()", function() {
-
-    const wrapper = shallow(<SearchLayoutAndLogic />)
-
-    const event = {
-      preventDefault: sinon.spy()
-    }
-
-    wrapper.instance().jumpToTopOfResults(event)
-
-    it("calls #preventDefault on the event", function() {
-      expect(event.preventDefault.called).to.be.true
-    })
-    /// INCOMPLETE TEST - SEE ERRORS RENDERED IN CONSOLE.
   })
 
 })

@@ -12,7 +12,7 @@ const sampleSearchProperties = {
 
 describe("FetchRequest", function() {
 
-  it("should return an instance of BookRecord", function() {
+  it("should return an instance of FetchRequest", function() {
 
     let request = new FetchRequest(sampleSearchProperties)
     expect(request).to.be.an.instanceof(FetchRequest)

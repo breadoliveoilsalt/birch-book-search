@@ -52,7 +52,7 @@ describe("Root reducer", function() {
 
    })
 
-   it("should replace an error message in the statue with null when called with #deleteError(message)", function() {
+   it("should replace an error message in the state with null when called with #deleteError(message)", function() {
 
      const currentState = {
            appStatus: {

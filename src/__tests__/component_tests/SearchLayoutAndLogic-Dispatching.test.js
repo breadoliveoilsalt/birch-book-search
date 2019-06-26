@@ -12,7 +12,6 @@ const mockStore = configureMockStore(middlewares)
 
 import * as actionCreatorsAppStatus from '../../birch_modules/actionCreatorsAppStatus'
 import * as actionCreatorsUpdateSearchResults from '../../birch_modules/actionCreatorsUpdateSearchResults'
-// Not tested here: import { getBookRecordsBasicSearch } from '../../birch_modules/getBookRecordsThunk'
 
 import Enzyme, { shallow, mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
