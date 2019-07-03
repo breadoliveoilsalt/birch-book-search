@@ -16,6 +16,8 @@ function currentSearchReducer(state = defaultState, action) {
       return Object.assign({}, state, {results: [...state.results, ...action.payload]})
     case 'LOAD_RESULT_NUMBER':
       return Object.assign({}, state, {resultNumber: action.payload})
+    case 'CLEAR_PRIOR_SEARCH':
+      return Object.assign({}, state, {searchStartingID: 0, results: [], resultNumber: 0})
     case 'RESET_SEARCH':
       return defaultState
     default:

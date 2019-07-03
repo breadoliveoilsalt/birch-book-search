@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import { connect } from 'react-redux'
 import { loadError, deleteError, beginBookAPIRequest, endBookAPIRequest } from '../birch_modules/actionCreatorsAppStatus'
-import { loadSearchTerms, increaseSearchStartingID, resetSearch } from '../birch_modules/actionCreatorsUpdateSearchResults'
+import { loadSearchTerms, increaseSearchStartingID, clearPriorSearch, resetSearch } from '../birch_modules/actionCreatorsUpdateSearchResults'
 import { getBookRecordsBasicSearch } from '../birch_modules/getBookRecordsThunk'
 
 import { FetchRequest } from '../birch_modules/fetchRequestClass'
@@ -26,7 +26,8 @@ export class SearchLayoutAndLogic extends Component {
   handleSearchSubmit(event) {
     event.preventDefault()
     this.props.deleteError()
-    this.props.resetSearch()
+    this.props.clearPriorSearch()
+    // this.props.resetSearch()
     this.props.beginBookAPIRequest()
     // let searchTerms = this.getSearchTerms()
     let escapedSearchTerms = this.escapeSearchTerms(this.props.userSearchTerms)
@@ -68,7 +69,6 @@ export class SearchLayoutAndLogic extends Component {
     event.preventDefault()
     this.props.deleteError()
     this.props.resetSearch()
-    document.getElementById("search-input").value = ""
   }
 
   handleLoadMoreResults(event) {
@@ -99,6 +99,7 @@ export class SearchLayoutAndLogic extends Component {
         <SearchBar
           handleSearchSubmit={this.handleSearchSubmit}
           loadSearchTerms={this.props.loadSearchTerms}
+          userSearchTerms={this.props.userSearchTerms}
         />
 
         <ClearSearchButton
@@ -143,6 +144,7 @@ const mapDispatchToProps = (dispatch) => {
     endBookAPIRequest: () => dispatch(endBookAPIRequest()),
     loadSearchTerms: (searchTerms) => dispatch(loadSearchTerms(searchTerms)),
     increaseSearchStartingID: () => dispatch(increaseSearchStartingID()),
+    clearPriorSearch: () => dispatch(clearPriorSearch()),
     resetSearch: () => dispatch(resetSearch()),
     getBookRecordsBasicSearch: (searchParameters) => dispatch(getBookRecordsBasicSearch(searchParameters))
   }

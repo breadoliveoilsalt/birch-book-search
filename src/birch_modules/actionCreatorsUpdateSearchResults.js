@@ -25,6 +25,12 @@ export function loadResultNumber(num) {
   )
 }
 
+export function clearPriorSearch() {
+  return (
+    {type: 'CLEAR_PRIOR_SEARCH'}
+  )
+}
+
 export function resetSearch() {
   return (
     {type: 'RESET_SEARCH'}
