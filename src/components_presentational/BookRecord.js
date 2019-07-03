@@ -16,7 +16,7 @@ const BookRecord = ({ bookInfo, number }) => {
 
       <p> <span className="bold-text">Publisher: </span> { bookInfo.publisher ? bookInfo.publisher : "Not Available"} </p>
 
-      { bookInfo.additionalInfoURL ? <p><a className="bold-text" href={bookInfo.additionalInfoURL} target="_blank" rel="noopener noreferrer">Click here for more info!</a></p> : null }
+      { bookInfo.additionalInfoURL ? <p><a className="bold-text" href={bookInfo.additionalInfoURL} target="_blank" rel="noopener noreferrer">Click here<br />for more info!</a></p> : null }
 
     </div>
   )

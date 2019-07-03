@@ -153,6 +153,7 @@ input[type="submit"] {
   background-color: white;
   border: .25em solid grey;
   margin-top: 1em;
+  padding: .75em;
 }
 
 .book-thumbnail {
