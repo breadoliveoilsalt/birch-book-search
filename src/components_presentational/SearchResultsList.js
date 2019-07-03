@@ -4,11 +4,11 @@ import SearchResultsHeader from './SearchResultsHeader'
 import BookRecord from './BookRecord'
 import SearchResultsFooter from './SearchResultsFooter'
 
-const SearchResultsList = (props) => {
+const SearchResultsList = ({ results, resultNumber, makingBookAPIRequest, handleLoadMoreResults, jumpToTopOfResults}) => {
 
-  const resultsDisplayed = props.results.length
+  const resultsDisplayed = results.length
 
-  const listToDisplay = props.results.map( (result, index) => {
+  const listToDisplay = results.map( (result, index) => {
     return (
       <BookRecord key={index} number={index + 1} bookInfo={result} />
     )
@@ -18,17 +18,17 @@ const SearchResultsList = (props) => {
     <div className="search-results-container">
 
       <SearchResultsHeader
-        resultNumber={props.resultNumber}
+        resultNumber={resultNumber}
       />
 
       {listToDisplay}
 
       <SearchResultsFooter
-        makingBookAPIRequest={props.makingBookAPIRequest}
-        resultNumber={props.resultNumber}
+        makingBookAPIRequest={makingBookAPIRequest}
+        resultNumber={resultNumber}
         resultsDisplayed={resultsDisplayed}
-        handleLoadMoreResults={props.handleLoadMoreResults}
-        jumpToTopOfResults={props.jumpToTopOfResults}
+        handleLoadMoreResults={handleLoadMoreResults}
+        jumpToTopOfResults={jumpToTopOfResults}
       />
 
     </div>

@@ -28,14 +28,13 @@ export class SearchLayoutAndLogic extends Component {
     this.props.deleteError()
     this.props.resetSearch()
     this.props.beginBookAPIRequest()
-    let searchTerms = this.getSearchTerms()
-    let escapedSearchTerms = this.escapeSearchTerms(searchTerms)
+    // let searchTerms = this.getSearchTerms()
+    let escapedSearchTerms = this.escapeSearchTerms(this.props.userSearchTerms)
     if (escapedSearchTerms === "") {
       this.props.endBookAPIRequest()
       this.props.loadError("Please enter a search term and try again.")
       return
     }
-    this.props.loadSearchTerms(escapedSearchTerms)
 
     let searchProperties = {
       searchTerms: escapedSearchTerms,
@@ -45,10 +44,14 @@ export class SearchLayoutAndLogic extends Component {
 
     this.props.getBookRecordsBasicSearch(this.searchParameters(searchProperties))
   }
-
-  getSearchTerms() {
-    return document.getElementById("search-input").value
-  }
+  //
+  // getSearchTerms(event) {
+  //   debugger
+  //
+  // }
+  // getSearchTerms() {
+  //   return document.getElementById("search-input").value
+  // }
 
   escapeSearchTerms(searchTerms) {
     return searchTerms.trim()
@@ -79,7 +82,7 @@ export class SearchLayoutAndLogic extends Component {
     }
 
     this.props.getBookRecordsBasicSearch(this.searchParameters(searchProperties))
-    this.props.increaseSearchStartingID() 
+    this.props.increaseSearchStartingID()
   }
 
   jumpToTopOfResults(event) {
@@ -95,6 +98,7 @@ export class SearchLayoutAndLogic extends Component {
 
         <SearchBar
           handleSearchSubmit={this.handleSearchSubmit}
+          loadSearchTerms={this.props.loadSearchTerms}
         />
 
         <ClearSearchButton
