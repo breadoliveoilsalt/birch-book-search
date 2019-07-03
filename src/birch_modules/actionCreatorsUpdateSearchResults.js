@@ -18,7 +18,7 @@ export function loadSearchResults(results) {
   )
 }
 
-export function loadResultNumber(num) {
+export function loadResultsNumber(num) {
   return (
     {type: 'LOAD_RESULT_NUMBER',
     payload: num}

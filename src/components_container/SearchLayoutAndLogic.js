@@ -102,7 +102,7 @@ export class SearchLayoutAndLogic extends Component {
 
         <SearchResultsList
           results={this.props.results}
-          resultNumber={this.props.resultNumber}
+          resultsNumber={this.props.resultsNumber}
           makingBookAPIRequest={this.props.makingBookAPIRequest}
           handleLoadMoreResults={this.handleLoadMoreResults}
           jumpToTopOfResults={this.jumpToTopOfResults}
@@ -122,7 +122,7 @@ const mapStateToProps = (state) => {
     resultsPerSearch: state.currentSearch.resultsPerSearch,
     searchStartingID: state.currentSearch.searchStartingID,
     results: state.currentSearch.results,
-    resultNumber: state.currentSearch.resultNumber
+    resultsNumber: state.currentSearch.resultsNumber
   }
 }
 

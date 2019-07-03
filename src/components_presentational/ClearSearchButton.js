@@ -1,10 +1,10 @@
 import React from 'react'
 
-const ClearSearchButton = (props) => {
+const ClearSearchButton = ({ clearSearch }) => {
 
   return (
     <div className="">
-      <form onSubmit={props.clearSearch}>
+      <form onSubmit={clearSearch}>
         <input id="clear-search-button" type="submit" value="Clear Search" />
       </form>
     </div>

@@ -4,9 +4,14 @@ import SearchResultsHeader from './SearchResultsHeader'
 import BookRecord from './BookRecord'
 import SearchResultsFooter from './SearchResultsFooter'
 
-const SearchResultsList = ({ results, resultNumber, makingBookAPIRequest, handleLoadMoreResults, jumpToTopOfResults}) => {
+const SearchResultsList = ({
+  results,
+  resultsNumber,
+  makingBookAPIRequest,
+  handleLoadMoreResults,
+  jumpToTopOfResults }) => {
 
-  const resultsDisplayed = results.length
+  let resultsDisplayed = results.length
 
   const listToDisplay = results.map( (result, index) => {
     return (
@@ -18,14 +23,14 @@ const SearchResultsList = ({ results, resultNumber, makingBookAPIRequest, handle
     <div className="search-results-container">
 
       <SearchResultsHeader
-        resultNumber={resultNumber}
+        resultsNumber={resultsNumber}
       />
 
       {listToDisplay}
 
       <SearchResultsFooter
         makingBookAPIRequest={makingBookAPIRequest}
-        resultNumber={resultNumber}
+        resultsNumber={resultsNumber}
         resultsDisplayed={resultsDisplayed}
         handleLoadMoreResults={handleLoadMoreResults}
         jumpToTopOfResults={jumpToTopOfResults}

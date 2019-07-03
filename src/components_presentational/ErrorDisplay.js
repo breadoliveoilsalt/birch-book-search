@@ -1,11 +1,11 @@
 import React from 'react'
 
-const ErrorDisplay = (props) => {
+const ErrorDisplay = ({ errorMessage }) => {
 
-  if (props.errorMessage) {
+  if (errorMessage) {
     return (
       <div className="error-display">
-        {props.errorMessage}
+        {errorMessage}
       </div>
     )
   } else {

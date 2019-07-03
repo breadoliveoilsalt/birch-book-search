@@ -1,5 +1,5 @@
 import { endBookAPIRequest, loadError } from './actionCreatorsAppStatus'
-import { loadSearchResults, loadResultNumber } from './actionCreatorsUpdateSearchResults'
+import { loadSearchResults, loadResultsNumber } from './actionCreatorsUpdateSearchResults'
 
 export function getBookRecordsBasicSearch( {request, ModelToReturn} ) {
 
@@ -11,7 +11,7 @@ export function getBookRecordsBasicSearch( {request, ModelToReturn} ) {
           throw Error(data.message)
         } else {
           dispatch(endBookAPIRequest())
-          dispatch(loadResultNumber(data.totalItems))
+          dispatch(loadResultsNumber(data.totalItems))
           let bookRecordsForState = createBookRecords(data.items)
           dispatch(loadSearchResults(bookRecordsForState))
         }

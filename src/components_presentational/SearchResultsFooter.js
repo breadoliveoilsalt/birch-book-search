@@ -2,24 +2,29 @@ import React from 'react'
 
 import Loader from './Loader'
 
-const SearchResultsFooter = (props) => {
+const SearchResultsFooter = ({
+  makingBookAPIRequest,
+  resultsDisplayed,
+  resultsNumber,
+  handleLoadMoreResults,
+  jumpToTopOfResults }) => {
 
-  if (props.makingBookAPIRequest) {
+  if (makingBookAPIRequest) {
     return (
       <div className="search-results-footer">
         <Loader />
       </div>
     )
-  } else if (props.resultsDisplayed < props.resultNumber) {
+  } else if (resultsNumber > resultsDisplayed) {
     return (
       <div className="search-results-footer">
-        <form onSubmit={props.handleLoadMoreResults}>
+        <form onSubmit={handleLoadMoreResults}>
           <input id="search-sumbit-button" type="submit" value="Load More Results" />
         </form>
-        <p><a className="bold-text" href="" onClick={props.jumpToTopOfResults}> Jump To Top of Results </a> </p>
+        <p><a className="bold-text" href="" onClick={jumpToTopOfResults}> Jump To Top of Results </a> </p>
       </div>
     )
-  } else if (props.resultsNumber > 0 && props.resultsDisplayed >= props.resultNumber) {
+  } else if (resultsNumber > 0 && resultsDisplayed >= resultsNumber) {
     return (
       <div className="search-results-footer">
         <p> End of results. </p>
@@ -32,7 +37,7 @@ const SearchResultsFooter = (props) => {
       </div>
     )
   }
-  
+
 }
 
 export default SearchResultsFooter
