@@ -4,7 +4,7 @@ const PageNotFound = () => {
 
   return (
     <div className="info-page">
-      <p> Sorry, the page you were looking for does not exist.  Please use one of the links above to navigage. </p>
+      <p>Sorry, the page you were looking for does not exist.  Please use one of the links above to navigage to another page.</p>
     </div>
   )
 
