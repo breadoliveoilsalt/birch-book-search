@@ -27,9 +27,7 @@ export class SearchLayoutAndLogic extends Component {
     event.preventDefault()
     this.props.deleteError()
     this.props.clearPriorSearch()
-    // this.props.resetSearch()
     this.props.beginBookAPIRequest()
-    // let searchTerms = this.getSearchTerms()
     let escapedSearchTerms = this.escapeSearchTerms(this.props.userSearchTerms)
     if (escapedSearchTerms === "") {
       this.props.endBookAPIRequest()
@@ -45,14 +43,6 @@ export class SearchLayoutAndLogic extends Component {
 
     this.props.getBookRecordsBasicSearch(this.searchParameters(searchProperties))
   }
-  //
-  // getSearchTerms(event) {
-  //   debugger
-  //
-  // }
-  // getSearchTerms() {
-  //   return document.getElementById("search-input").value
-  // }
 
   escapeSearchTerms(searchTerms) {
     return searchTerms.trim()
