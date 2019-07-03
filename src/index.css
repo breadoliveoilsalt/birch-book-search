@@ -78,7 +78,9 @@ input {
 /* Necessary to override browser's built in rendering */
 input[type="submit"] {
   border: .25em solid black;
-  height: 2.5em;
+  height: 2.6em;
+  border-radius: 0px;
+  background-color: #e7e7e7;
 }
 
 #search-input {
