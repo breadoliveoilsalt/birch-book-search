@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Header = () => {
+const AboutPage = () => {
 
   return (
     <div className="about-page bold-text">
@@ -17,4 +17,4 @@ const Header = () => {
 
 }
 
-export default Header
+export default AboutPage
