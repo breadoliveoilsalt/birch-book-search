@@ -5,6 +5,7 @@ import Header from './components_presentational/Header'
 import NavBar from './components_presentational/NavBar'
 import SearchLayoutAndLogic from './components_container/SearchLayoutAndLogic'
 import AboutPage from './components_presentational/AboutPage'
+import PageNotFound from './components_presentational/PageNotFound'
 
 const App = () => {
 
@@ -20,6 +21,7 @@ const App = () => {
         <Switch>
             <Route path="/" exact component={SearchLayoutAndLogic} />
             <Route path="/about" exact component={AboutPage} />
+            <Route component={PageNotFound} />
           </Switch>
 
       </div>

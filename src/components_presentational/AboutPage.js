@@ -3,7 +3,7 @@ import React from 'react'
 const AboutPage = () => {
 
   return (
-    <div className="about-page bold-text">
+    <div className="info-page">
 
       <p>Thanks for visiting Birch, a tool to search for your next favorite book!</p>
 
