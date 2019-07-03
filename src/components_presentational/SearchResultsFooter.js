@@ -1,6 +1,7 @@
 import React from 'react'
 
 import Loader from './Loader'
+import LoadMoreResultsButton from './LoadMoreResultsButton'
 
 const SearchResultsFooter = ({
   makingBookAPIRequest,
@@ -18,9 +19,7 @@ const SearchResultsFooter = ({
   } else if (resultsNumber > resultsDisplayed) {
     return (
       <div className="search-results-footer">
-        <form onSubmit={handleLoadMoreResults}>
-          <input id="search-sumbit-button" type="submit" value="Load More Results" />
-        </form>
+        <LoadMoreResultsButton handleLoadMoreResults={handleLoadMoreResults} />
         <p><a className="bold-text" href="" onClick={jumpToTopOfResults}> Jump To Top of Results </a> </p>
       </div>
     )
