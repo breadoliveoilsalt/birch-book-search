@@ -1,5 +1,5 @@
 const defaultState = {
-  userSearchTerms: null,
+  userSearchTerms: "",
   resultsPerSearch: 20,
   searchStartingID: 0,
   results: [],
