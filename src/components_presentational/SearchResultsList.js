@@ -33,7 +33,6 @@ const SearchResultsList = ({
         resultsNumber={resultsNumber}
         resultsDisplayed={resultsDisplayed}
         handleLoadMoreResults={handleLoadMoreResults}
-        jumpToTopOfResults={jumpToTopOfResults}
       />
 
     </div>

@@ -92,13 +92,13 @@ input[type="submit"] {
   padding-left: .5em; /* so curser is not right up against edge */
 }
 
-#search-submit-button {
+/* #search-submit-button {
   display: inline-block;
   border: 1em solid black;
   height: 100%;
   width: 20%;
   max-width: 200px;
-}
+} */
 
 #clear-search-button {
   width: 60%;

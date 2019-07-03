@@ -3,8 +3,6 @@ import React from 'react'
 import Loader from './Loader'
 import LoadMoreResultsButton from './LoadMoreResultsButton'
 
-// jump to top of results not needed here or in parent
-
 const SearchResultsFooter = ({
   makingBookAPIRequest,
   resultsDisplayed,

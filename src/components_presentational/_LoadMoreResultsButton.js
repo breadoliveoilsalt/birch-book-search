@@ -3,7 +3,9 @@ import React from 'react'
 const LoadMoreResultsButton = ({ handleLoadMoreResults }) => {
 
   return (
-    <input type="submit" onClick={handleLoadMoreResults} value="Load More Results" />
+    <form onSubmit={handleLoadMoreResults}>
+      <input type="submit" value="Load More Results" />
+    </form>
   )
 
 }

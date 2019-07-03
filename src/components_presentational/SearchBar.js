@@ -10,7 +10,7 @@ const SearchBar = ({ handleSearchSubmit, loadSearchTerms, userSearchTerms }) => 
           value={userSearchTerms}
           onChange={(event) => loadSearchTerms(event.target.value)}
         />
-        <input id="search-sumbit-button" type="submit" value="Search" />
+        <input type="submit" value="Search" />
       </form>
     </div>
   )
