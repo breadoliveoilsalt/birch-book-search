@@ -11,11 +11,14 @@ const SearchResultsFooter = ({
 
   let display = <p> Use the Search Bar above to begin! </p>
 
+  let moreResultsToDisplay = resultsDisplayed < resultsNumber
+  let allResultsDisplayed = resultsNumber > 0 && resultsDisplayed >= resultsNumber
+
   if (makingBookAPIRequest) {
     display = <Loader />
-  } else if (resultsNumber > resultsDisplayed) {
+  } else if (moreResultsToDisplay) {
     display = <LoadMoreResultsButton handleLoadMoreResults={handleLoadMoreResults} />
-  } else if (resultsNumber > 0 && resultsDisplayed >= resultsNumber) {
+  } else if (allResultsDisplayed) {
     display = <p> End of results. </p>
   }
 

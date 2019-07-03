@@ -94,7 +94,7 @@ export class SearchLayoutAndLogic extends Component {
         />
 
         <ClearSearchButton
-          clearSearch={this.handleClearSearch}
+          handleClearSearch={this.handleClearSearch}
         />
 
         <ErrorDisplay

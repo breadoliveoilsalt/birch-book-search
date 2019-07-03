@@ -1,9 +1,9 @@
 import React from 'react'
 
-const ClearSearchButton = ({ clearSearch }) => {
+const ClearSearchButton = ({ handleClearSearch }) => {
 
   return (
-    <input id="clear-search-button" type="submit" onClick={clearSearch} value="Clear Search" />
+    <input id="clear-search-button" type="submit" onClick={handleClearSearch} value="Clear Search" />
   )
 
 }
