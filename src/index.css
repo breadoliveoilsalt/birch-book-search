@@ -94,14 +94,6 @@ input[type="submit"] {
   padding-left: .5em; /* so curser is not right up against edge */
 }
 
-/* #search-submit-button {
-  display: inline-block;
-  border: 1em solid black;
-  height: 100%;
-  width: 20%;
-  max-width: 200px;
-} */
-
 #clear-search-button {
   width: 60%;
   max-width: 600px;
@@ -141,10 +133,6 @@ input[type="submit"] {
   margin-top: 1em;
 }
 
-/* .search-results-header-text {
-  padding-bottom: .75em;
-} */
-
 .bold-text {
   font-weight: bold;
 }
@@ -171,7 +159,6 @@ input[type="submit"] {
 
 .loader {
   margin: 0 auto;
-  /* margin-bottom: 1em; */
   border: 10px solid #e7e7e7;
   border-top: 10px solid black;
   border-radius: 50%;
