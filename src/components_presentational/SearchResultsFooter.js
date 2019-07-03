@@ -3,39 +3,29 @@ import React from 'react'
 import Loader from './Loader'
 import LoadMoreResultsButton from './LoadMoreResultsButton'
 
+// jump to top of results not needed here or in parent
+
 const SearchResultsFooter = ({
   makingBookAPIRequest,
   resultsDisplayed,
   resultsNumber,
-  handleLoadMoreResults,
-  jumpToTopOfResults }) => {
+  handleLoadMoreResults }) => {
+
+  let display = <p> Use the Search Bar above to begin! </p>
 
   if (makingBookAPIRequest) {
-    return (
-      <div className="search-results-footer">
-        <Loader />
-      </div>
-    )
+    display = <Loader />
   } else if (resultsNumber > resultsDisplayed) {
-    return (
-      <div className="search-results-footer">
-        <LoadMoreResultsButton handleLoadMoreResults={handleLoadMoreResults} />
-        <p><a className="bold-text" href="" onClick={jumpToTopOfResults}> Jump To Top of Results </a> </p>
-      </div>
-    )
+    display = <LoadMoreResultsButton handleLoadMoreResults={handleLoadMoreResults} />
   } else if (resultsNumber > 0 && resultsDisplayed >= resultsNumber) {
-    return (
-      <div className="search-results-footer">
-        <p> End of results. </p>
-      </div>
-    )
-  } else {
-    return (
-      <div className="search-results-footer">
-        <p className="search-results-header-text"> Use the Search Bar above to begin! </p>
-      </div>
-    )
+    display = <p> End of results. </p>
   }
+
+  return (
+    <div className="search-results-footer">
+      {display}
+    </div>
+  )
 
 }
 

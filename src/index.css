@@ -139,9 +139,9 @@ input[type="submit"] {
   margin-top: 1em;
 }
 
-.search-results-header-text {
+/* .search-results-header-text {
   padding-bottom: .75em;
-}
+} */
 
 .bold-text {
   font-weight: bold;
@@ -158,6 +158,7 @@ input[type="submit"] {
 }
 .search-results-footer {
   padding-top: 1em;
+  padding-bottom: 1em;
   margin-top: 1em;
   margin-bottom: 3em;
   background-color: white;
@@ -166,7 +167,7 @@ input[type="submit"] {
 
 .loader {
   margin: 0 auto;
-  margin-bottom: 1em;
+  /* margin-bottom: 1em; */
   border: 10px solid #e7e7e7;
   border-top: 10px solid black;
   border-radius: 50%;
