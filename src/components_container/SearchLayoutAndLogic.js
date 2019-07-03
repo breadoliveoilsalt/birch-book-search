@@ -12,6 +12,7 @@ import SearchBar from '../components_presentational/SearchBar'
 import ClearSearchButton from '../components_presentational/ClearSearchButton'
 import ErrorDisplay from '../components_presentational/ErrorDisplay'
 import SearchResultsList from '../components_presentational/SearchResultsList'
+import JumpToTopButton from '../components_presentational/JumpToTopButton'
 
 export class SearchLayoutAndLogic extends Component {
 
@@ -20,7 +21,7 @@ export class SearchLayoutAndLogic extends Component {
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this)
     this.handleClearSearch = this.handleClearSearch.bind(this)
     this.handleLoadMoreResults = this.handleLoadMoreResults.bind(this)
-    this.jumpToTopOfResults = this.jumpToTopOfResults.bind(this)
+    this.jumpToTop = this.jumpToTop.bind(this)
   }
 
   handleSearchSubmit(event) {
@@ -75,16 +76,16 @@ export class SearchLayoutAndLogic extends Component {
     this.props.increaseSearchStartingID()
   }
 
-  jumpToTopOfResults(event) {
+  jumpToTop(event) {
     event.preventDefault()
-    document.getElementById("search-results-header").scrollIntoView(true)
+    document.getElementById("header").scrollIntoView(true)
   }
 
   render() {
 
     return(
 
-      <div className="">
+      <div>
 
         <SearchBar
           handleSearchSubmit={this.handleSearchSubmit}
@@ -105,7 +106,11 @@ export class SearchLayoutAndLogic extends Component {
           resultsNumber={this.props.resultsNumber}
           makingBookAPIRequest={this.props.makingBookAPIRequest}
           handleLoadMoreResults={this.handleLoadMoreResults}
-          jumpToTopOfResults={this.jumpToTopOfResults}
+        />
+
+        <JumpToTopButton
+          resultsNumber={this.props.resultsNumber}
+          jumpToTop={this.jumpToTop}
         />
 
       </div>
