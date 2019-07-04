@@ -19,10 +19,10 @@ const App = () => {
         <NavBar />
 
         <Switch>
-            <Route path="/" exact component={SearchLayoutAndLogic} />
-            <Route path="/about" exact component={AboutPage} />
-            <Route component={PageNotFound} />
-          </Switch>
+          <Route path="/" exact component={SearchLayoutAndLogic} />
+          <Route path="/about" exact component={AboutPage} />
+          <Route component={PageNotFound} />
+        </Switch>
 
       </div>
 

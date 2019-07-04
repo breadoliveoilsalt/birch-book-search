@@ -10,7 +10,7 @@ import Enzyme, { shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 
 import App from '../../App'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import Header from '../../components_presentational/Header'
 import NavBar from '../../components_presentational/NavBar'
@@ -28,16 +28,30 @@ describe("<App />", function() {
     ReactDOM.unmountComponentAtNode(div);
   })
 
-  it("renders the BrowserRouter, Header, NavBar, SearchLayoutAndLogic, and AboutPage Components", function() {
+  describe("<App /> renders children", function() {
 
-    let wrapper = shallow(<App />)
+    let wrapper
 
-    expect(wrapper.find(BrowserRouter)).to.exist
-    expect(wrapper.find(Header)).to.exist
-    expect(wrapper.find(NavBar)).to.exist
-    expect(wrapper.find(SearchLayoutAndLogic)).to.exist
-    expect(wrapper.find(AboutPage)).to.exist
-    
+    beforeEach(function() {
+      wrapper = shallow(<App />)
+    })
+
+    it("It renders the BrowserRouter, Header, NavBar, and Switch Components", function() {
+
+      expect(wrapper.find(BrowserRouter).exists()).to.be.true
+      expect(wrapper.find(Header)).to.exist
+      expect(wrapper.find(NavBar)).to.exist
+      expect(wrapper.find(Switch)).to.exist
+    })
+
+    it("It renders one <div> with the className 'app-container'", function() {
+
+      expect(wrapper.find("div")).to.have.lengthOf(1)
+      let div = wrapper.find("div").get(0)
+      expect(div.props.className).to.equal("app-container")
+
+    })
+
+
   })
-
 })
