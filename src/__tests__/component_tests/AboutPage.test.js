@@ -14,8 +14,8 @@ describe("<AboutPage />", function() {
       expect(wrapper.text()).to.not.be.null
   })
 
-  it("should have a class name 'about-page'", function() {
+  it("should have a class name 'info-page'", function() {
     const wrapper = shallow(<AboutPage />)
-    expect(wrapper.hasClass("about-page")).to.be.true
+    expect(wrapper.hasClass("info-page")).to.be.true
   })
 })
