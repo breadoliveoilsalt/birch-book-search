@@ -7,15 +7,19 @@ Enzyme.configure({ adapter: new Adapter() })
 
 import AboutPage from '../../components_presentational/AboutPage'
 
+let wrapper
+
+beforeEach(function() {
+  wrapper = shallow(<AboutPage />)
+})
+
 describe("<AboutPage />", function() {
 
   it("should render text", function() {
-      const wrapper = shallow(<AboutPage />)
-      expect(wrapper.text()).to.not.be.null
+    expect(wrapper.text()).to.not.be.null
   })
 
   it("should have a class name 'info-page'", function() {
-    const wrapper = shallow(<AboutPage />)
     expect(wrapper.hasClass("info-page")).to.be.true
   })
 })
