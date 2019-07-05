@@ -27,7 +27,7 @@ html {
   margin: 0em auto;
 }
 
-.header {
+#header {
   font-size: 400%;
   font-weight: bold;
   margin: 0 auto;
