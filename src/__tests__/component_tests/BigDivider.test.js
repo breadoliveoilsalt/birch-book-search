@@ -15,12 +15,9 @@ beforeEach(function() {
 
 describe("<BigDivider />", function() {
 
-  it("should render one div", function() {
+  it("should render one div with the className 'big-divider'", function() {
     expect(wrapper.find("div")).to.have.lengthOf(1)
-  })
-
-  it("should have a class name 'big-divider'", function() {
-    expect(wrapper.hasClass("big-divider")).to.be.true
+    expect(wrapper.find("div").hasClass("big-divider")).to.be.true
   })
 
   it("should have no text", function() {
