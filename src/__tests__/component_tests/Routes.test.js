@@ -1,43 +1,91 @@
-it("renders three Route components under the Switch Component", function(){
-  expect(wrapper.find(Route)).to.have.lengthOf(3)
-})
+import React from 'react'
 
-})
+import { Provider } from 'react-redux'
+import configureStore from '../../configureStore'
+import { MemoryRouter, Switch, Route } from 'react-router-dom'
 
-describe("<App />'s children depeding on the route: ", function(){
+import { expect } from 'chai'
+import Enzyme, { shallow, mount } from 'enzyme'
+import Adapter from 'enzyme-adapter-react-16'
 
-it("renders only the SearchLayoutAndLogic component when the route is '/'", function(){
+import Routes from '../../components_presentational/Routes'
+import SearchLayoutAndLogic from '../../components_container/SearchLayoutAndLogic'
+import AboutPage from '../../components_presentational/AboutPage'
+import PageNotFound from '../../components_presentational/PageNotFound'
 
-  let store = configureStore()
+Enzyme.configure({ adapter: new Adapter() })
 
-  const wrapper = mount(
-    <Provider store={store} >
-      <MemoryRouter exact initialEntries={[ '/' ]}>
-        <App />
-      </MemoryRouter>
-    </ Provider>
-  )
+describe("<Routes />", function() {
 
-  expect(wrapper.find(SearchLayoutAndLogic)).to.have.lengthOf(1)
-  expect(wrapper.find(AboutPage)).to.have.lengthOf(0)
-  expect(wrapper.find(PageNotFound)).to.have.lengthOf(0)
-})
+  it("renders the Switch Component", function(){
 
-it("renders only the AboutPage component when the route is '/about'", function(){
+    const wrapper = shallow(<Routes />)
+    expect(wrapper.find(Switch)).to.have.lengthOf(1)
 
-  console.log(BrowserRouter)
+  })
 
-  let store = configureStore()
+  it("renders the Switch component with three Route components on a shallow render", function() {
 
-  const wrapper = mount(
-    <Provider store={store} >
-      <MemoryRouter exact initialEntries={[ '/xcx' ]} initialIndex={1}>
-        <App />
-      </MemoryRouter>
-    </ Provider>
-  )
+    const wrapper = shallow(<Routes />)
+    expect(wrapper.find(Route)).to.have.lengthOf(3)
+    expect(wrapper.find(Switch).children()).to.have.lengthOf(3)
+    expect(wrapper.find(Switch).childAt(0).type()).to.equal(Route)
+    expect(wrapper.find(Switch).childAt(1).type()).to.equal(Route)
+    expect(wrapper.find(Switch).childAt(2).type()).to.equal(Route)
 
-  expect(wrapper.find(SearchLayoutAndLogic)).to.have.lengthOf(0)
-  expect(wrapper.find(AboutPage)).to.have.lengthOf(0)
-  expect(wrapper.find(PageNotFound)).to.have.lengthOf(0)
+  })
+
+  it("renders only the SearchLayoutAndLogic component when the route is '/'", function(){
+
+    let store = configureStore()
+
+    const wrapper = mount(
+      <Provider store={store} >
+        <MemoryRouter exact initialEntries={[ '/' ]}>
+          <Routes />
+        </MemoryRouter>
+      </ Provider>
+    )
+
+    expect(wrapper.find(SearchLayoutAndLogic)).to.have.lengthOf(1)
+    expect(wrapper.find(AboutPage)).to.have.lengthOf(0)
+    expect(wrapper.find(PageNotFound)).to.have.lengthOf(0)
+
+  })
+
+  it("renders only the AboutPage component when the route is '/about'", function(){
+
+    let store = configureStore()
+
+    const wrapper = mount(
+      <Provider store={store} >
+        <MemoryRouter exact initialEntries={[ '/about' ]} >
+          <Routes />
+        </MemoryRouter>
+      </ Provider>
+    )
+
+    expect(wrapper.find(SearchLayoutAndLogic)).to.have.lengthOf(0)
+    expect(wrapper.find(AboutPage)).to.have.lengthOf(1)
+    expect(wrapper.find(PageNotFound)).to.have.lengthOf(0)
+
+  })
+
+  it("renders the PageNotFound component when the route is neither '/' nor '/about'", function(){
+
+    let store = configureStore()
+
+    const wrapper = mount(
+      <Provider store={store} >
+        <MemoryRouter exact initialEntries={[ '/about123' ]} >
+          <Routes />
+        </MemoryRouter>
+      </ Provider>
+    )
+
+    expect(wrapper.find(SearchLayoutAndLogic)).to.have.lengthOf(0)
+    expect(wrapper.find(AboutPage)).to.have.lengthOf(0)
+    expect(wrapper.find(PageNotFound)).to.have.lengthOf(1)
+    
+  })
 })

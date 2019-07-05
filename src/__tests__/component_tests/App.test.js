@@ -1,20 +1,20 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-Enzyme.configure({ adapter: new Adapter() })
 import { Provider } from 'react-redux'
 import configureStore from '../../configureStore'
+import { BrowserRouter } from 'react-router-dom'
 
 import { expect } from 'chai'
-import Enzyme, { shallow, mount } from 'enzyme'
+import Enzyme, { shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 
 import App from '../../App'
-import { BrowserRouter } from 'react-router-dom'
-
 import Header from '../../components_presentational/Header'
 import NavBar from '../../components_presentational/NavBar'
 import Routes from '../../components_presentational/Routes'
+
+Enzyme.configure({ adapter: new Adapter() })
 
 describe("<App />", function() {
 
