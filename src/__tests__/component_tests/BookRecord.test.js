@@ -9,7 +9,7 @@ import BookRecord from '../../components_presentational/BookRecord'
 
 describe("<BookRecord />", function() {
 
-  it("should render a book image if imgageURL is specified in the relevant props object", function() {
+  it("should render a book image if props.imgageURL provides an image", function() {
 
     const bookInfo1 = {
       imageURL: "http://books.google.com/books/content?id=oxL9vQAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
@@ -25,7 +25,7 @@ describe("<BookRecord />", function() {
 
   })
 
-  it("should not render an image if imgageURL not is specified in the relevant props object and should instead render a message to that effect", function() {
+  it("should render a message that an image is not available if imgageURL is null", function() {
 
     const bookInfo2 = {
       imageURL: null,
@@ -42,7 +42,7 @@ describe("<BookRecord />", function() {
 
   })
 
-  it("should render a book title if one is specified in the relevant props object", function() {
+  it("should render a book title if props.title provides a title", function() {
 
     const bookInfo1 = {
       imageURL: "http://books.google.com/books/content?id=oxL9vQAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
@@ -58,7 +58,7 @@ describe("<BookRecord />", function() {
 
   })
 
-  it("should not render a book title if one is not specified in the relevant props object and instead render a message to that effect", function() {
+  it("should render a message that the book title is not available if props.title is null", function() {
 
     const bookInfo2 = {
       imageURL: null,
@@ -74,7 +74,7 @@ describe("<BookRecord />", function() {
 
   })
 
-  it("should display the book's authors if one is specified in the relevant props object", function() {
+  it("should display the book's authors if props.authors provides one or more authors", function() {
 
     const bookInfo1 = {
       imageURL: "http://books.google.com/books/content?id=oxL9vQAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
@@ -88,8 +88,9 @@ describe("<BookRecord />", function() {
 
     expect(wrapper1.text()).to.include(`Author(s):  ${bookInfo1.authors}`)
 
-    /// UP TO HERE.  MAKE MOST OF THEM LIKE THIS
-  it("should render a message that the book's author is not available if an author is not specified in the relevant props object", function() {
+  })
+
+  it("should render a message that the book's author is not available if props.authors is null", function() {
 
     const bookInfo2 = {
       imageURL: "http://books.google.com/books/content?id=oxL9vQAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
@@ -105,7 +106,7 @@ describe("<BookRecord />", function() {
 
   })
 
-  it("should display the book's publisher only if one is specified in the relevant props object", function() {
+  it("should display the book's publisher if props.publisher provides one", function() {
 
     const bookInfo1 = {
       imageURL: "http://books.google.com/books/content?id=oxL9vQAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
@@ -119,7 +120,9 @@ describe("<BookRecord />", function() {
 
     expect(wrapper1.text()).to.include(`Publisher:  ${bookInfo1.publisher}`)
 
-    /////
+  })
+
+  it("should render a message that the book's publisher is not available if props.publisher is null", function() {
 
     const bookInfo2 = {
       imageURL: "http://books.google.com/books/content?id=oxL9vQAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
@@ -135,7 +138,7 @@ describe("<BookRecord />", function() {
 
   })
 
-  it("should provide a link to an external resource for futher information only if one is specified in the relevant props object", function() {
+  it("should provide a link to an external resource for futher information if props.additionalInfoURL provides a link", function() {
 
     const bookInfo1 = {
       imageURL: "http://books.google.com/books/content?id=oxL9vQAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
@@ -150,7 +153,9 @@ describe("<BookRecord />", function() {
     expect(wrapper1.exists("a")).to.be.true
     expect(wrapper1.find("a").text()).to.equal("Click herefor more info!")
 
-    /////
+  })
+
+  it("should not render a message that additional information is available if props.additionalInfoURL is null", function() {
 
     const bookInfo2 = {
       imageURL: "http://books.google.com/books/content?id=oxL9vQAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
@@ -164,7 +169,6 @@ describe("<BookRecord />", function() {
 
     expect(wrapper2.exists("a")).to.be.false
     expect(wrapper2.text()).to.not.include("Click herefor more info!")
-
 
   })
 
