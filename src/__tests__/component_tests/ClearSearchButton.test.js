@@ -11,21 +11,19 @@ import ClearSearchButton from '../../components_presentational/ClearSearchButton
 
 describe("<ClearSearchButton />", function() {
 
-  it("renders a button within a form", function(){
+  it("renders an input tag of type submit", function(){
 
     const wrapper = shallow(<ClearSearchButton />)
+    expect(wrapper.find("input[type='submit']")).to.have.lengthOf(1)
 
-    expect(wrapper.exists("form input[type='submit']")).to.be.true
   })
 
-  it("clicking the button submits the form that calls the function passed via props", function(){
+  it("calls the function passed via props.handleClearSearch when clicked", function(){
 
-      const clearSearchSpy = sinon.spy()
-      const wrapper = shallow(<ClearSearchButton clearSearch={clearSearchSpy}/>)
-
-      wrapper.find("form").simulate("submit")
-
-      expect(clearSearchSpy.calledOnce).to.be.true
+      const handleClearSearchSpy = sinon.spy()
+      const wrapper = shallow(<ClearSearchButton handleClearSearch={handleClearSearchSpy}/>)
+      wrapper.find("input").simulate("click")
+      expect(handleClearSearchSpy.calledOnce).to.be.true
 
   })
 
