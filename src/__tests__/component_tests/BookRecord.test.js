@@ -9,7 +9,7 @@ import BookRecord from '../../components_presentational/BookRecord'
 
 describe("<BookRecord />", function() {
 
-  it("should render a book image only if imgageURL is specified in the relevant props object", function() {
+  it("should render a book image if imgageURL is specified in the relevant props object", function() {
 
     const bookInfo1 = {
       imageURL: "http://books.google.com/books/content?id=oxL9vQAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
@@ -23,7 +23,9 @@ describe("<BookRecord />", function() {
 
     expect(wrapper1.exists("img")).to.be.true
 
-    /////
+  })
+
+  it("should not render an image if imgageURL not is specified in the relevant props object and should instead render a message to that effect", function() {
 
     const bookInfo2 = {
       imageURL: null,
@@ -35,13 +37,12 @@ describe("<BookRecord />", function() {
 
     const wrapper2 = shallow(<BookRecord bookInfo={bookInfo2} />)
 
-    expect(wrapper2.text()).to.include("(No image Available)")
     expect(wrapper2.exists("img")).to.be.false
+    expect(wrapper2.text()).to.include("(No image Available)")
 
+  })
 
-    })
-
-  it("should indicate a book title only if one is specified in the relevant props object", function() {
+  it("should render a book title if one is specified in the relevant props object", function() {
 
     const bookInfo1 = {
       imageURL: "http://books.google.com/books/content?id=oxL9vQAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
@@ -55,7 +56,9 @@ describe("<BookRecord />", function() {
 
     expect(wrapper1.text()).to.include(`Title:  ${bookInfo1.title}`)
 
-    /////
+  })
+
+  it("should not render a book title if one is not specified in the relevant props object and instead render a message to that effect", function() {
 
     const bookInfo2 = {
       imageURL: null,
@@ -71,7 +74,7 @@ describe("<BookRecord />", function() {
 
   })
 
-  it("should display the book's authors only if one is specified in the relevant props object", function() {
+  it("should display the book's authors if one is specified in the relevant props object", function() {
 
     const bookInfo1 = {
       imageURL: "http://books.google.com/books/content?id=oxL9vQAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
@@ -85,7 +88,8 @@ describe("<BookRecord />", function() {
 
     expect(wrapper1.text()).to.include(`Author(s):  ${bookInfo1.authors}`)
 
-    /////
+    /// UP TO HERE.  MAKE MOST OF THEM LIKE THIS
+  it("should render a message that the book's author is not available if an author is not specified in the relevant props object", function() {
 
     const bookInfo2 = {
       imageURL: "http://books.google.com/books/content?id=oxL9vQAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
@@ -98,6 +102,7 @@ describe("<BookRecord />", function() {
     const wrapper2 = shallow(<BookRecord bookInfo={bookInfo2} />)
 
     expect(wrapper2.text()).to.include("Author(s):  Not Available")
+
   })
 
   it("should display the book's publisher only if one is specified in the relevant props object", function() {
@@ -142,8 +147,8 @@ describe("<BookRecord />", function() {
 
     const wrapper1 = shallow(<BookRecord bookInfo={bookInfo1} />)
 
-    expect(wrapper1.text()).to.include("Click here for more info!")
     expect(wrapper1.exists("a")).to.be.true
+    expect(wrapper1.find("a").text()).to.equal("Click herefor more info!")
 
     /////
 
@@ -157,8 +162,9 @@ describe("<BookRecord />", function() {
 
     const wrapper2 = shallow(<BookRecord bookInfo={bookInfo2} />)
 
-    expect(wrapper2.text()).to.not.include("Click here for more info!")
     expect(wrapper2.exists("a")).to.be.false
+    expect(wrapper2.text()).to.not.include("Click herefor more info!")
+
 
   })
 
