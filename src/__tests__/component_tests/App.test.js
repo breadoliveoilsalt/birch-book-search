@@ -22,9 +22,10 @@ describe("<App />", function() {
 
     let store = configureStore()
 
-    const div = document.createElement('div');
-    ReactDOM.render(<Provider store={store}> <App /> </Provider>, div);
-    ReactDOM.unmountComponentAtNode(div);
+    const div = document.createElement('div')
+    ReactDOM.render(<Provider store={store}> <App /> </Provider>, div)
+    ReactDOM.unmountComponentAtNode(div)
+    
   })
 
   describe("<App />'s children: ", function() {
@@ -41,6 +42,7 @@ describe("<App />", function() {
       expect(wrapper.find(Header)).to.exist
       expect(wrapper.find(NavBar)).to.exist
       expect(wrapper.find(Routes)).to.exist
+
     })
 
     it("renders one <div> with the className 'app-container'", function() {

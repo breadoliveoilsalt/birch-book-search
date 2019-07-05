@@ -15,17 +15,17 @@ describe("<ErrorDisplay />", function() {
     expect(wrapper.hasClass("error-display")).to.be.true
   })
 
-  it("should not render when the errorMessage props is null", function(){
+  it("should not render when props.errorMessage is null", function(){
     const wrapper = shallow(<ErrorDisplay errorMessage={null} />)
     expect(wrapper.isEmptyRender()).to.be.true
   })
 
-  it("should render when the errorMessage props is a string", function(){
+  it("should render when props.errorMessage is not null", function(){
     const wrapper = shallow(<ErrorDisplay errorMessage={"Big Error"} />)
     expect(wrapper.isEmptyRender()).to.be.false
   })
 
-  it("should dislay the errorMessage passed as a prop", function(){
+  it("should dislay props.errorMessage when it is not null", function(){
     let error = "Big Error"
     const wrapper = shallow(<ErrorDisplay errorMessage={error} />)
     expect(wrapper.text()).to.include(error)
