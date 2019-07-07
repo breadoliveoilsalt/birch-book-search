@@ -1,6 +1,6 @@
 import React from 'react'
 import { expect } from 'chai'
-import Enzyme, { shallow, mount } from 'enzyme'
+import Enzyme, { shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 
 Enzyme.configure({ adapter: new Adapter() })
@@ -12,21 +12,45 @@ import SearchResultsFooter from '../../components_presentational/SearchResultsFo
 
 describe("<SearchResultsList />", function() {
 
-  it("should render the SearchResultsHeader and SearchResultsFooter Components", function() {
+  let wrapper
 
-    const wrapper = shallow(<SearchResultsList results={[]}/>)
+  let props = {
+    results: [],
+    resultsNumber: 10,
+    makingBookAPIRequest: false,
+    handleLoadMoreResults: "Function 1",
+    jumpToTopOfResults: "Function 2"
+  }
 
-    expect(wrapper.find(SearchResultsHeader)).to.exist
-    expect(wrapper.find(SearchResultsFooter)).to.exist
-
+  beforeEach(function() {
+    wrapper = shallow(<SearchResultsList {...props} />)
   })
 
-  it("should render a BookRecord for every object in props.results", function() {
+  it("should render a div with the className 'search-results-container'", function() {
+    expect(wrapper.find("div.search-results-container")).to.have.lengthOf(1)
+  })
 
-    const wrapper1 = shallow(<SearchResultsList results={[]}/>)
-    expect(wrapper1.find(BookRecord).isEmptyRender()).to.be.true
+  it("should render <SearchResultsHeader /> and pass it props.resultsNumber", function(){
+    expect(wrapper.find(SearchResultsHeader)).to.have.lengthOf(1)
+    expect(wrapper.find(SearchResultsHeader).props().resultsNumber).to.equal(props.resultsNumber)
+  })
 
-    /////
+  it("should render <SearchResultsFooter /> and pass it props.makingBookAPIRequest, props.resultsNumber, and props.handleLoadMoreResults", function() {
+    expect(wrapper.find(SearchResultsFooter)).to.have.lengthOf(1)
+    expect(wrapper.find(SearchResultsFooter).props().makingBookAPIRequest).to.equal(props.makingBookAPIRequest)
+    expect(wrapper.find(SearchResultsFooter).props().resultsNumber).to.equal(props.resultsNumber)
+    expect(wrapper.find(SearchResultsFooter).props().handleLoadMoreResults).to.equal(props.handleLoadMoreResults)
+  })
+
+  it("should pass a new prop to <SearchResultsFooter />, resultsDisplayed, equal to the length of props.results", function() {
+    expect(wrapper.find(SearchResultsFooter).props().resultsDisplayed).to.equal(props.results.length)
+  })
+
+  it("should not render any <BookRecord />s if props.results is an empty array", function() {
+    expect(wrapper.find(BookRecord).isEmptyRender()).to.be.true
+  })
+
+  it("should render a <BookRecord /> for every result if props.results is not an empty array", function() {
 
     const mockResults = [{
       imageURL: "http://books.google.com/books/content?id=2o_mEBpjucUC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
@@ -43,9 +67,8 @@ describe("<SearchResultsList />", function() {
       additionalInfoURL: "http://books.google.com/books?id=OsbuBD3mkkkC&dq=jimmy&hl=&source=gbs_api"
     }]
 
-    const wrapper2 = shallow(<SearchResultsList results={mockResults}/>)
-    expect(wrapper2.find(BookRecord).length).to.equal(2)
-
+    wrapper = shallow(<SearchResultsList results={mockResults}/>)
+    expect(wrapper.find(BookRecord)).to.have.lengthOf(2)
   })
 
 })
