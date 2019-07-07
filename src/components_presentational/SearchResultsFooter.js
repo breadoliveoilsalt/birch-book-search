@@ -19,7 +19,7 @@ const SearchResultsFooter = ({
   } else if (moreResultsToDisplay) {
     display = <LoadMoreResultsButton handleLoadMoreResults={handleLoadMoreResults} />
   } else if (allResultsDisplayed) {
-    display = <p> End of results. </p>
+    display = <p>End of results.</p>
   }
 
   return (
