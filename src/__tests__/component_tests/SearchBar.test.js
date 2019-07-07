@@ -17,18 +17,52 @@ describe("<SearchBar />", function() {
 
     expect(wrapper.exists("form input[type='text']")).to.be.true
     expect(wrapper.exists("form input[type='submit']")).to.be.true
-
   })
 
-  it("clicking the button submits the form that calls the function passed via props", function(){
+  describe("<SearchBar />'s text input", function(){
 
-      const searchSpy = sinon.spy()
-      const wrapper = shallow(<SearchBar handleSearchSubmit={searchSpy}/>)
+    it("has a 'id' attribute equal to 'search-input'", function() {
 
-      wrapper.find("form").simulate("submit")
+        const wrapper = shallow(<SearchBar />)
 
-      expect(searchSpy.calledOnce).to.be.true
+        expect(wrapper.find("form input[type='text']").props().id).to.equal("search-input")
+    })
 
+    it("has a 'value' attribute equal to props.userSearchTerms", function() {
+        let testSearchTerms = "A Good Book"
+        const wrapper = shallow(<SearchBar userSearchTerms={testSearchTerms}/>)
+
+        expect(wrapper.find("form input[type='text']").props().value).to.equal(testSearchTerms)
+    })
+
+    it("calls the function passed via props.loadSearchTerms when there is a change to the text box", function(){
+
+      const loadSearchTermsSpy = sinon.spy()
+      const wrapper = shallow(<SearchBar loadSearchTerms={loadSearchTermsSpy}/>)
+      const event = {target: {value: "A Good Book"}}
+
+      wrapper.find("form input[type='text']").simulate("change", event)
+      expect(loadSearchTermsSpy.calledOnce).to.be.true
+    })
   })
 
+  describe("<SearchBar />'s submit input", function(){
+
+    it("has a 'value' attribute equal to 'Search'", function() {
+
+      const wrapper = shallow(<SearchBar/>)
+
+      expect(wrapper.find("form input[type='submit']").props().value).to.equal("Search")
+    })
+
+    it("calls the function passed via props.handleSearchSubmit when the submit button is clicked", function(){
+
+      const handleSearchSubmitSpy = sinon.spy()
+      const wrapper = shallow(<SearchBar handleSearchSubmit={handleSearchSubmitSpy}/>)
+
+      wrapper.find("form input[type='submit']").simulate("click")
+
+      expect(handleSearchSubmitSpy.calledOnce).to.be.true
+    })
+  })
 })
