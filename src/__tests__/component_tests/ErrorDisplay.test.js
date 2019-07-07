@@ -7,7 +7,6 @@ Enzyme.configure({ adapter: new Adapter() })
 
 import ErrorDisplay from '../../components_presentational/ErrorDisplay'
 
-
 describe("<ErrorDisplay />", function() {
 
   it("should have a class name 'error-display'", function() {
