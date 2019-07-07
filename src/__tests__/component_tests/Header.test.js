@@ -15,7 +15,7 @@ beforeEach(function(){
 
 describe("<Header />", function() {
 
-  it("has a div with an id equal to 'header'", function() {
+  it("renders a div with an id equal to 'header'", function() {
     expect(wrapper.find("div#header")).to.have.lengthOf(1)
   })
 
