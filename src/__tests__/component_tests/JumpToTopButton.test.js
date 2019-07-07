@@ -1,5 +1,6 @@
 import React from 'react'
 import { expect } from 'chai'
+import sinon from 'sinon'
 import Enzyme, { shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 
@@ -16,33 +17,32 @@ describe("<JumpToTopButton />", function() {
 
   describe("when props.resultsNumber is greater than 0", function() {
 
+    let wrapper
+    let jumpToTopSpy = sinon.spy()
+
+    beforeEach(function() {
+      wrapper = shallow(<JumpToTopButton resultsNumber={1} jumpToTop={jumpToTopSpy}/>)
+    })
+
     it("should render an input of type 'submit'", function(){
-      const wrapper = shallow(<JumpToTopButton resultsNumber={1} />)
       expect(wrapper.find("input[type='submit']")).to.have.lengthOf(1)
     })
 
     describe("The input of type 'submit'", function(){
-      it("should have an id equal to 'jump-to-top-button'", function(){
 
+      it("should have an id equal to 'jump-to-top-button'", function(){
+        expect(wrapper.find("input[type='submit']").props().id).to.equal("jump-to-top-button")
       })
 
-      // UP TO HERE
+      it("should have a value equal to 'Jump To Top'", function(){
+        expect(wrapper.find("input[type='submit']").props().value).to.equal("Jump To Top")
+      })
+
+      it("should call props.jumpToTop when clicked'", function(){
+        wrapper.find("input[type='submit']").simulate("click")
+        expect(jumpToTopSpy.calledOnce).to.be.true
+      })
+
     })
-
-  // it("should have a class name 'error-display'", function() {
-  //   const wrapper = shallow(<ErrorDisplay errorMessage={"Something went wrong."}/>)
-  //   expect(wrapper.hasClass("error-display")).to.be.true
-  // })
-  // it("should render when props.errorMessage is not null", function(){
-  //   const wrapper = shallow(<ErrorDisplay errorMessage={"Big Error"} />)
-  //   expect(wrapper.isEmptyRender()).to.be.false
-  // })
-  //
-  // it("should dislay props.errorMessage when it is not null", function(){
-  //   let error = "Big Error"
-  //   const wrapper = shallow(<ErrorDisplay errorMessage={error} />)
-  //   expect(wrapper.text()).to.include(error)
-  // })
-
   })
 })
