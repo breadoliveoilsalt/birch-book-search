@@ -6,8 +6,8 @@ import sinon from 'sinon'
 
 import { getBookRecordsBasicSearch } from '../../birch_modules/getBookRecordsThunk'
 
-import { loadError, beginBookAPIRequest, endBookAPIRequest } from '../../birch_modules/actionCreatorsAppStatus'
-import { loadSearchTerms, loadSearchResults, loadResultNumber } from '../../birch_modules/actionCreatorsUpdateSearchResults'
+import { loadError, beginBookAPIRequest, endBookAPIRequest } from '../../actions/actionCreatorsAppStatus'
+import { loadSearchTerms, loadSearchResults, loadResultNumber } from '../../actions/actionCreatorsUpdateSearchResults'
 
 ///// SET UP /////
 const middlewares = [thunk]

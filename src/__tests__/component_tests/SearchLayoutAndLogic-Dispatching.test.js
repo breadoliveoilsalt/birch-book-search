@@ -10,8 +10,8 @@ import ConnectedSearchLayoutAndLogic, { SearchLayoutAndLogic } from '../../compo
 const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
 
-import * as actionCreatorsAppStatus from '../../birch_modules/actionCreatorsAppStatus'
-import * as actionCreatorsUpdateSearchResults from '../../birch_modules/actionCreatorsUpdateSearchResults'
+import * as actionCreatorsAppStatus from '../../actions/actionCreatorsAppStatus'
+import * as actionCreatorsUpdateSearchResults from '../../actions/actionCreatorsUpdateSearchResults'
 
 import Enzyme, { shallow, mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'

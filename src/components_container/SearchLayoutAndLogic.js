@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 
 import { connect } from 'react-redux'
-import { loadError, deleteError, beginBookAPIRequest, endBookAPIRequest } from '../birch_modules/actionCreatorsAppStatus'
-import { loadSearchTerms, increaseSearchStartingID, clearPriorSearch, resetSearch } from '../birch_modules/actionCreatorsUpdateSearchResults'
+import { loadError, deleteError, beginBookAPIRequest, endBookAPIRequest } from '../actions/actionCreatorsAppStatus'
+import { loadSearchTerms, increaseSearchStartingID, clearPriorSearch, resetSearch } from '../actions/actionCreatorsUpdateSearchResults'
 import { getBookRecordsBasicSearch } from '../birch_modules/getBookRecordsThunk'
 
 import { FetchRequest } from '../birch_modules/fetchRequestClass'

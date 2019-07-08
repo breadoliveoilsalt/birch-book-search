@@ -1,8 +1,8 @@
-import rootReducer from '../../reducers/rootReducer' 
+import rootReducer from '../../reducers/rootReducer'
 
 import { expect } from 'chai'
-import { loadError, deleteError, beginBookAPIRequest, endBookAPIRequest } from '../../birch_modules/actionCreatorsAppStatus'
-import { loadSearchTerms, increaseSearchStartingID, loadSearchResults, loadResultNumber, resetSearch } from '../../birch_modules/actionCreatorsUpdateSearchResults'
+import { loadError, deleteError, beginBookAPIRequest, endBookAPIRequest } from '../../actions/actionCreatorsAppStatus'
+import { loadSearchTerms, increaseSearchStartingID, loadSearchResults, loadResultNumber, resetSearch } from '../../actions/actionCreatorsUpdateSearchResults'
 
 const expectedInitialState = {
       appStatus: {

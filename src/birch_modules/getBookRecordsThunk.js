@@ -1,5 +1,5 @@
-import { endBookAPIRequest, loadError } from './actionCreatorsAppStatus'
-import { loadSearchResults, loadResultsNumber } from './actionCreatorsUpdateSearchResults'
+import { endBookAPIRequest, loadError } from '../actions/actionCreatorsAppStatus'
+import { loadSearchResults, loadResultsNumber } from '../actions/actionCreatorsUpdateSearchResults'
 
 export function getBookRecordsBasicSearch( {request, ModelToReturn} ) {
 
