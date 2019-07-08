@@ -6,7 +6,7 @@ const defaultState = {
   resultsNumber: 0
 }
 
-function currentSearchReducer(state = defaultState, action) {
+function currentSearch(state = defaultState, action) {
   switch(action.type) {
     case 'LOAD_SEARCH_TERMS':
       return Object.assign({}, state, {userSearchTerms: action.payload})
@@ -25,4 +25,4 @@ function currentSearchReducer(state = defaultState, action) {
   }
 }
 
-export default currentSearchReducer
+export default currentSearch

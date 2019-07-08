@@ -3,7 +3,7 @@ const defaultState = {
   currentError: null
 }
 
-function appStatusReducer(state = defaultState, action) {
+function appStatus(state = defaultState, action) {
   switch(action.type) {
     case 'LOAD_ERROR':
       return Object.assign({}, state, {currentError: action.payload})
@@ -18,4 +18,4 @@ function appStatusReducer(state = defaultState, action) {
   }
 }
 
-export default appStatusReducer
+export default appStatus

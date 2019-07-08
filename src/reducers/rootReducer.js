@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux'
-import appStatusReducer from './appStatusReducer'
-import currentSearchReducer from './currentSearchReducer'
+import appStatus from './appStatus'
+import currentSearch from './currentSearch'
 
 
 const rootReducer = combineReducers(
   {
-    appStatus: appStatusReducer,
-    currentSearch: currentSearchReducer
+    appStatus: appStatus,
+    currentSearch: currentSearch
   }
 )
 
