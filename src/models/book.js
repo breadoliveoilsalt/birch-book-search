@@ -1,4 +1,4 @@
-export class BookRecord {
+export class Book {
 
   constructor(properties) {
     validateProperties(properties)

@@ -6,7 +6,7 @@ import { loadSearchTerms, increaseSearchStartingID, clearPriorSearch, resetSearc
 import { getBookRecordsBasicSearch } from '../birch_modules/getBookRecordsThunk'
 
 import { FetchRequest } from '../birch_modules/fetchRequestClass'
-import { BookRecord } from '../birch_modules/bookRecordModel'
+import { Book } from '../models/book'
 
 import SearchBar from '../components_presentational/SearchBar'
 import ClearSearchButton from '../components_presentational/ClearSearchButton'
@@ -52,7 +52,7 @@ export class SearchLayoutAndLogic extends Component {
   searchParameters(searchProperties) {
     return {
         request: new FetchRequest(searchProperties).basicSearch(),
-        ModelToReturn: BookRecord
+        ModelToReturn: Book
       }
   }
 
