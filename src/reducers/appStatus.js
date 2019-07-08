@@ -1,3 +1,5 @@
+import * as types from '../actions/actionTypes'
+
 const defaultState = {
   makingBookAPIRequest: false,
   currentError: null
@@ -5,13 +7,13 @@ const defaultState = {
 
 function appStatus(state = defaultState, action) {
   switch(action.type) {
-    case 'LOAD_ERROR':
+    case types.LOAD_ERROR:
       return Object.assign({}, state, {currentError: action.payload})
-    case 'DELETE_ERROR':
+    case types.DELETE_ERROR:
       return Object.assign({}, state, {currentError: null})
-    case 'BEGIN_BOOK_API_REQUEST':
+    case types.BEGIN_BOOK_API_REQUEST:
       return Object.assign({}, state, {makingBookAPIRequest: true})
-    case 'END_BOOK_API_REQUEST':
+    case types.END_BOOK_API_REQUEST:
       return Object.assign({}, state, {makingBookAPIRequest: false})
     default:
       return state
