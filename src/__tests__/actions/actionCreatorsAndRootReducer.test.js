@@ -2,7 +2,7 @@ import rootReducer from '../../reducers/rootReducer'
 
 import { expect } from 'chai'
 import { loadError, deleteError, beginBookAPIRequest, endBookAPIRequest } from '../../actions/actionCreatorsAppStatus'
-import { loadSearchTerms, increaseSearchStartingID, loadSearchResults, loadResultNumber, resetSearch } from '../../actions/actionCreatorsUpdateSearchResults'
+import { loadSearchTerms, increaseSearchStartingID, loadSearchResults, loadResultsNumber, resetSearch } from '../../actions/actionCreatorsUpdateSearchResults'
 
 const expectedInitialState = {
       appStatus: {
@@ -10,11 +10,11 @@ const expectedInitialState = {
         currentError: null
       },
       currentSearch:
-       { userSearchTerms: null,
+       { userSearchTerms: "",
          resultsPerSearch: 20,
          searchStartingID: 0,
          results: [],
-         resultNumber: 0
+         resultsNumber: 0
        }
      }
 
@@ -38,11 +38,11 @@ describe("Root reducer", function() {
              currentError: "You need more specific search terms"
            },
            currentSearch:
-            { userSearchTerms: null,
+            { userSearchTerms: "",
               resultsPerSearch: 20,
               searchStartingID: 0,
               results: [],
-              resultNumber: 0
+              resultsNumber: 0
             }
           }
 
@@ -53,18 +53,18 @@ describe("Root reducer", function() {
    })
 
    it("should replace an error message in the state with null when called with #deleteError(message)", function() {
-
+``
      const currentState = {
            appStatus: {
              makingBookAPIRequest: false,
              currentError: "You need more specific search terms"
            },
            currentSearch:
-            { userSearchTerms: null,
+            { userSearchTerms: "",
               resultsPerSearch: 20,
               searchStartingID: 0,
               results: [],
-              resultNumber: 0
+              resultsNumber: 0
             }
           }
 
@@ -83,11 +83,11 @@ describe("Root reducer", function() {
               currentError: null
             },
             currentSearch:
-             { userSearchTerms: null,
+             { userSearchTerms: "",
                resultsPerSearch: 20,
                searchStartingID: 0,
                results: [],
-               resultNumber: 0
+               resultsNumber: 0
              }
            }
 
@@ -105,11 +105,11 @@ describe("Root reducer", function() {
              currentError: null
            },
            currentSearch:
-            { userSearchTerms: null,
+            { userSearchTerms: "",
               resultsPerSearch: 20,
               searchStartingID: 0,
               results: [],
-              resultNumber: 0
+              resultsNumber: 0
             }
           }
 
@@ -132,7 +132,7 @@ describe("Root reducer", function() {
               resultsPerSearch: 20,
               searchStartingID: 0,
               results: [],
-              resultNumber: 0
+              resultsNumber: 0
             }
           }
 
@@ -151,11 +151,11 @@ describe("Root reducer", function() {
              currentError: null
            },
            currentSearch:
-            { userSearchTerms: null,
+            { userSearchTerms: "",
               resultsPerSearch: 20,
               searchStartingID: 20,
               results: [],
-              resultNumber: 0
+              resultsNumber: 0
             }
           }
 
@@ -172,11 +172,11 @@ describe("Root reducer", function() {
              currentError: null
            },
            currentSearch:
-            { userSearchTerms: null,
+            { userSearchTerms: "",
               resultsPerSearch: 20,
               searchStartingID: 40,
               results: [],
-              resultNumber: 0
+              resultsNumber: 0
             }
           }
 
@@ -209,11 +209,11 @@ describe("Root reducer", function() {
              currentError: null
            },
            currentSearch:
-            { userSearchTerms: null,
+            { userSearchTerms: "",
               resultsPerSearch: 20,
               searchStartingID: 0,
               results: searchResults1,
-              resultNumber: 0
+              resultsNumber: 0
             }
           }
 
@@ -237,11 +237,11 @@ describe("Root reducer", function() {
               currentError: null
             },
             currentSearch:
-             { userSearchTerms: null,
+             { userSearchTerms: "",
                resultsPerSearch: 20,
                searchStartingID: 0,
                results: [...searchResults1, ...searchResults2],
-               resultNumber: 0
+               resultsNumber: 0
              }
            }
 
@@ -251,7 +251,7 @@ describe("Root reducer", function() {
 
    })
 
-   it("should add the search results number into the state when called with #loadResultNumber", function() {
+   it("should add the search results number into the state when called with #loadResultsNumber", function() {
 
      const expectedNewState = {
            appStatus: {
@@ -259,15 +259,15 @@ describe("Root reducer", function() {
              currentError: null
            },
            currentSearch:
-            { userSearchTerms: null,
+            { userSearchTerms: "",
               resultsPerSearch: 20,
               searchStartingID: 0,
               results: [],
-              resultNumber: 15
+              resultsNumber: 15
             }
           }
 
-     const newState = rootReducer(expectedInitialState, loadResultNumber(15))
+     const newState = rootReducer(expectedInitialState, loadResultsNumber(15))
 
      expect(newState).to.deep.equal(expectedNewState)
    })
@@ -284,7 +284,7 @@ describe("Root reducer", function() {
               resultsPerSearch: 20,
               searchStartingID: 0,
               results: [{title: "Nothing"}, {author: "Nobody"}],
-              resultNumber: 2
+              resultsNumber: 2
             }
           }
 
