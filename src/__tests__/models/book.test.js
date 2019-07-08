@@ -7,22 +7,22 @@ describe("Book", function() {
   it("should throw an error if not initialized with an object that is a hash", function(){
 
     let properties1 = "A Good Book"
-    expect(() => new BookRecord(properties1)).to.throw()
+    expect(() => new Book(properties1)).to.throw()
 
     let properties2 = ["joe", "How I Make Pie"]
-    expect(() => new BookRecord(properties2)).to.throw()
+    expect(() => new Book(properties2)).to.throw()
 
   })
 
-  it("should return an instance of BookRecord", function() {
+  it("should return an instance of Book", function() {
 
     let properties = {title: "A Good Book", author: "A Good Friend"}
-    let record = new BookRecord(properties)
-    expect(record).to.be.an.instanceof(BookRecord)
+    let record = new Book(properties)
+    expect(record).to.be.an.instanceof(Book)
 
   })
 
-  describe("a BookRecord instance", function() {
+  describe("a Book instance", function() {
     it("should have properties only for imageURL, title, authors, publisher, and additionalInfoURL", function() {
 
       let properties = {
@@ -33,7 +33,7 @@ describe("Book", function() {
         additionalInfoURL: "http://books.google.com/books?id=TwkNkgEACAAJ&dq=apples&hl=&source=gbs_api"
       }
 
-      let record = new BookRecord(properties)
+      let record = new Book(properties)
 
       expect(record).to.have.property('imageURL')
       expect(record).to.have.property('title')
@@ -55,14 +55,14 @@ describe("Book", function() {
         publisher: "Live Oak Media (NY)",
       }
 
-      let record1 = new BookRecord(properties1)
+      let record1 = new Book(properties1)
 
       expect(record1.authors).to.equal(null)
       expect(record1.additionalInfoURL).to.equal(null)
 
       let properties2 = { }
 
-      let record2 = new BookRecord(properties2)
+      let record2 = new Book(properties2)
 
       expect(record2.imageURL).to.equal(null)
       expect(record2.title).to.equal(null)
@@ -82,7 +82,7 @@ describe("Book", function() {
         additionalInfoURL: "http://books.google.com/books?id=TwkNkgEACAAJ&dq=apples&hl=&source=gbs_api"
       }
 
-      let record = new BookRecord(properties)
+      let record = new Book(properties)
 
       expect(record.authors).to.equal("Gail Gibbons & Tony Robbins & Bart Simpson")
 

@@ -7,7 +7,7 @@ import sinon from 'sinon'
 import { getBookRecordsBasicSearch } from '../../birch_modules/getBookRecordsThunk'
 
 import { loadError, beginBookAPIRequest, endBookAPIRequest } from '../../actions/actionCreatorsAppStatus'
-import { loadSearchTerms, loadSearchResults, loadResultNumber } from '../../actions/actionCreatorsUpdateSearchResults'
+import { loadSearchTerms, loadSearchResults, loadResultsNumber } from '../../actions/actionCreatorsUpdateSearchResults'
 
 ///// SET UP /////
 const middlewares = [thunk]
@@ -52,7 +52,7 @@ describe('#getBookBasicSearch', function() {
 
   })
 
-  it("if there is no data.error property from the response to the request function, it dispatches #endBookAPIRequest, #loadResultNumber, and #loadSearchResults", function() {
+  it("if there is no data.error property from the response to the request function, it dispatches #endBookAPIRequest, #loadResultsNumber, and #loadSearchResults", function() {
 
       let store = mockStore({})
 
@@ -67,7 +67,7 @@ describe('#getBookBasicSearch', function() {
 
       let expectedActions = [
         endBookAPIRequest(),
-        loadResultNumber(mockData.totalItems),
+        loadResultsNumber(mockData.totalItems),
         loadSearchResults(mockLoadResults)
       ]
 
