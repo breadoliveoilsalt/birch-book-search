@@ -5,8 +5,7 @@ import { loadError, deleteError, beginBookAPIRequest, endBookAPIRequest } from '
 import { loadSearchTerms, increaseSearchStartingID, clearPriorSearch, resetSearch } from '../actions/actionCreatorsUpdateSearchResults'
 import { getBookRecords } from '../birch_modules/getBookRecordsThunk'
 
-import { GoogleBooksAPIRequest } from '../birch_modules/fetchRequestClass'
-// import { Book } from '../models/book'
+import GoogleBooksAPIRequest from '../api/googleBooksAPIRequest'
 
 import SearchBar from '../components_presentational/SearchBar'
 import ClearSearchButton from '../components_presentational/ClearSearchButton'

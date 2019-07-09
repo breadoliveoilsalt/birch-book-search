@@ -1,16 +1,7 @@
-import 'isomorphic-fetch'
+import FetchRequest from './fetchRequest'
 import Book from '../models/book'
 
-class FetchRequest {
-
-  constructor(searchProperties) {
-    this.fetch = fetch
-    this.searchTerms = searchProperties.searchTerms || null
-  }
-
-}
-
-export class GoogleBooksAPIRequest extends FetchRequest {
+class GoogleBooksAPIRequest extends FetchRequest {
 
   constructor(searchProperties) {
     super(searchProperties)
@@ -194,3 +185,5 @@ function _checkDataForResultsNumber(data) {
   }
   return resultsNumberStatus
 }
+
+export default GoogleBooksAPIRequest
