@@ -159,7 +159,7 @@ class BookBuilder {
 // Do I need message: null?? console.log so I see this.
 
 function _checkResponseForErrors(response) {
-  let status = {error: false, message: null}
+  let status = {error: false}
   let statusCodeIndicator = Math.floor(response.status/100)
   if (statusCodeIndicator === 4) {
     status.error = true
@@ -172,7 +172,7 @@ function _checkResponseForErrors(response) {
 }
 
 function _checkDataForErrors(data) {
-  let status = {error: false, message: null}
+  let status = {error: false}
   if (data.error) {
     try {
       let longerMessage = data.error.errors[0].message + "//" + data.error.errors[0].reason
