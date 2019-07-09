@@ -1,5 +1,7 @@
 import FetchRequest from './fetchRequest'
-import Book from '../models/book'
+import BookBuilder from '../models/bookBuilder'
+
+// UP TO IMPORT BOOK BUILDER!! MAKE SURE IT WORKS! DELETE ALL COMMENTS, ESP FROM BOOK CLASS
 
 class GoogleBooksAPIRequest extends FetchRequest {
 
@@ -108,40 +110,6 @@ class GoogleBooksAPIRequest extends FetchRequest {
   }
 }
 
-class BookBuilder {
-
-  constructor() {}
-
-  setImageURL(url) {
-    this.imageURL = url
-    return this
-  }
-
-  setTitle(title) {
-    this.title = title
-    return this
-  }
-
-  setAuthors(authors) {
-    this.authors = authors
-    return this
-  }
-
-  setPublisher(publisher) {
-    this.publisher = publisher
-    return this
-  }
-
-  setAdditionalInfoURL(url) {
-    this.additionalInfoURL = url
-    return this
-  }
-
-  build() {
-    return new Book(this)
-  }
-
-}
 
 
 ///// PRIVATE FUNCTIONS
