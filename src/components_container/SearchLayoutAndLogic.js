@@ -3,10 +3,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { loadError, deleteError, beginBookAPIRequest, endBookAPIRequest } from '../actions/actionCreatorsAppStatus'
 import { loadSearchTerms, increaseSearchStartingID, clearPriorSearch, resetSearch } from '../actions/actionCreatorsUpdateSearchResults'
-import { getBookRecordsBasicSearch } from '../birch_modules/getBookRecordsThunk'
+import { getBookRecords } from '../birch_modules/getBookRecordsThunk'
 
 import { GoogleBooksAPIRequest } from '../birch_modules/fetchRequestClass'
-import { Book } from '../models/book'
+// import { Book } from '../models/book'
 
 import SearchBar from '../components_presentational/SearchBar'
 import ClearSearchButton from '../components_presentational/ClearSearchButton'
@@ -42,19 +42,22 @@ export class SearchLayoutAndLogic extends Component {
       resultsPerSearch: this.props.resultsPerSearch
     }
 
-    this.props.getBookRecordsBasicSearch(this.searchParameters(searchProperties))
+    let apiRequest = new GoogleBooksAPIRequest(searchProperties).basicSearchWithAPIKey()
+
+    this.props.getBookRecords(apiRequest)
+    // this.props.getBookRecords(this.searchParameters(searchProperties))
   }
 
   escapeSearchTerms(searchTerms) {
     return searchTerms.trim()
   }
 
-  searchParameters(searchProperties) {
-    return {
-        request: new GoogleBooksAPIRequest(searchProperties).basicSearchWithAPIKey(),
-        ModelToReturn: Book
-      }
-  }
+  // searchParameters(searchProperties) {
+  //   return {
+  //       request: new GoogleBooksAPIRequest(searchProperties).basicSearchWithAPIKey()// ,
+  //       // ModelToReturn: Book
+  //     }
+  // }
 
   handleClearSearch(event) {
     event.preventDefault()
@@ -62,19 +65,23 @@ export class SearchLayoutAndLogic extends Component {
     this.props.resetSearch()
   }
 
-  handleLoadMoreResults(event) {
-    event.preventDefault()
-    this.props.beginBookAPIRequest()
-
-    let searchProperties = {
-      searchTerms: this.props.userSearchTerms,
-      searchStartingID: this.props.searchStartingID + this.props.resultsPerSearch,
-      resultsPerSearch: this.props.resultsPerSearch
-    }
-
-    this.props.getBookRecordsBasicSearch(this.searchParameters(searchProperties))
-    this.props.increaseSearchStartingID()
+  handleLoadMoreResults() {
+    return
   }
+
+  // handleLoadMoreResults(event) {
+  //   event.preventDefault()
+  //   this.props.beginBookAPIRequest()
+  //
+  //   let searchProperties = {
+  //     searchTerms: this.props.userSearchTerms,
+  //     searchStartingID: this.props.searchStartingID + this.props.resultsPerSearch,
+  //     resultsPerSearch: this.props.resultsPerSearch
+  //   }
+  //
+  //   this.props.getBookRecordsBasicSearch(this.searchParameters(searchProperties))
+  //   this.props.increaseSearchStartingID()
+  // }
 
   jumpToTop(event) {
     event.preventDefault()
@@ -141,7 +148,7 @@ const mapDispatchToProps = (dispatch) => {
     increaseSearchStartingID: () => dispatch(increaseSearchStartingID()),
     clearPriorSearch: () => dispatch(clearPriorSearch()),
     resetSearch: () => dispatch(resetSearch()),
-    getBookRecordsBasicSearch: (searchParameters) => dispatch(getBookRecordsBasicSearch(searchParameters))
+    getBookRecords: (apiRequest) => dispatch(getBookRecords(apiRequest))
   }
 }
 
