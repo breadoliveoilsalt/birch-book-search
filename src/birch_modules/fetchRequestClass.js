@@ -60,9 +60,7 @@ export class GoogleBooksAPIRequest extends FetchRequest {
     }
 
     function _parseAndValidateBookData(data) {
-      let booksSeedData = []
-
-      data.items.forEach( record => {
+      return data.items.map( record => {
         let bookData = {}
         let baseInfo = record.volumeInfo
 
@@ -100,12 +98,8 @@ export class GoogleBooksAPIRequest extends FetchRequest {
           bookData.additionalInfoURL = null
         }
 
-        booksSeedData.push(bookData)
-
+        return bookData
       })
-
-      return booksSeedData
-
     }
 
     function _buildBooks(bookData) {
