@@ -5,7 +5,7 @@ import { loadError, deleteError, beginBookAPIRequest, endBookAPIRequest } from '
 import { loadSearchTerms, increaseSearchStartingID, clearPriorSearch, resetSearch } from '../actions/actionCreatorsUpdateSearchResults'
 import { getBookRecordsBasicSearch } from '../birch_modules/getBookRecordsThunk'
 
-import { FetchRequest } from '../birch_modules/fetchRequestClass'
+import { GoogleBooksAPIRequest } from '../birch_modules/fetchRequestClass'
 import { Book } from '../models/book'
 
 import SearchBar from '../components_presentational/SearchBar'
@@ -51,7 +51,7 @@ export class SearchLayoutAndLogic extends Component {
 
   searchParameters(searchProperties) {
     return {
-        request: new FetchRequest(searchProperties).basicSearch(),
+        request: new GoogleBooksAPIRequest(searchProperties).basicSearchWithAPIKey(),
         ModelToReturn: Book
       }
   }

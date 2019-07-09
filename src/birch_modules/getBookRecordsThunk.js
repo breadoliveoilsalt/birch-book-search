@@ -1,7 +1,7 @@
 import { endBookAPIRequest, loadError } from '../actions/actionCreatorsAppStatus'
 import { loadSearchResults, loadResultsNumber } from '../actions/actionCreatorsUpdateSearchResults'
 
-export function getBookRecordsBasicSearch( {request, ModelToReturn} ) {
+export function getBookRecordsBasicSearch({ request, ModelToReturn }) {
 
   return function(dispatch) {
 
@@ -11,9 +11,10 @@ export function getBookRecordsBasicSearch( {request, ModelToReturn} ) {
           throw Error(data.message)
         } else {
           dispatch(endBookAPIRequest())
-          dispatch(loadResultsNumber(data.totalItems))
-          let bookRecordsForState = createBookRecords(data.items)
-          dispatch(loadSearchResults(bookRecordsForState))
+          dispatch(loadResultsNumber(data.resultsNumber))
+          // let bookRecordsForState = createBookRecords(data.items)
+          dispatch(loadSearchResults(data.books))
+          // dispatch(loadSearchResults(bookRecordsForState))
         }
       })
       .catch(error => {
@@ -21,19 +22,6 @@ export function getBookRecordsBasicSearch( {request, ModelToReturn} ) {
         let message = error.message ? error.message : "Sorry, something went wrong. Please try again."
         dispatch(loadError(message))
       })
-  }
-
-  function createBookRecords(arrayOfAPIReturns) {
-
-    let bookRecordsForState = []
-
-    arrayOfAPIReturns.forEach( bookRecord => {
-      let bookRecordForState = new ModelToReturn(bookRecord.volumeInfo)
-      bookRecordsForState.push(bookRecordForState)
-    })
-
-    return bookRecordsForState
-
   }
 
 }

@@ -1,22 +1,37 @@
 import 'isomorphic-fetch'
 
-export class FetchRequest {
+class FetchRequest {
 
   constructor(searchProperties) {
-      this.apiKey = process.env.REACT_APP_GOOGLE_BOOKS_API_KEY
-      this.baseURL = `https://www.googleapis.com/books/v1/volumes?key=${this.apiKey}`
-      this.searchTerms = searchProperties.searchTerms || null
+    this.fetch = fetch
+    this.searchTerms = searchProperties.searchTerms || null
+      // this.apiKey = process.env.REACT_APP_GOOGLE_BOOKS_API_KEY
+      // this.baseURL = `https://www.googleapis.com/books/v1/volumes?key=${this.apiKey}`
+
         // Re: next line: Without '|| 0', searchStartingID === undefined when searchProperties.searchStartingID = 0
-      this.searchStartingID = searchProperties.searchStartingID || 0
-      this.resultsPerSearch = searchProperties.resultsPerSearch || 20
+      // this.searchStartingID = searchProperties.searchStartingID || 0
+      // this.resultsPerSearch = searchProperties.resultsPerSearch || 20
     }
+}
 
-  basicSearch() {
+export class GoogleBooksAPIRequest extends FetchRequest {
 
-    let url = this.baseURL + "&q=" + this.searchTerms + "&startIndex=" + this.searchStartingID + "&maxResults=" + this.resultsPerSearch
+  constructor(searchProperties) {
+    super(searchProperties)
+    this.apiKey = process.env.REACT_APP_GOOGLE_BOOKS_API_KEY
+    this.searchStartingID = searchProperties.searchStartingID || 0
+    this.resultsPerSearch = searchProperties.resultsPerSearch || 20
+    // this.baseURL = `https://www.googleapis.com/books/v1/volumes?key=${this.apiKey}`
+  }
+
+  basicSearchWithAPIKey() {
+
+    const baseURL = `https://www.googleapis.com/books/v1/volumes?key=${this.apiKey}`
+    const url = baseURL + "&q=" + this.searchTerms + "&startIndex=" + this.searchStartingID + "&maxResults=" + this.resultsPerSearch
+
+    const fetch = this.fetch
 
     return function() {
-
       return fetch(url)
         .then(response => {
           let responseStatus = checkResponse(response)
@@ -29,12 +44,23 @@ export class FetchRequest {
           let dataStatus = checkData(data)
           if (dataStatus.error) {
             return dataStatus
-          } else
-            return data
-          })
+          } else {
+            let dataToDispatch = formatData(data)
+            return dataToDispatch
+          }
+        })
         .catch(object => object)
-
     }
+
+    function formatData(data) {
+      let dataToDispatch = {}
+      dataToDispatch.resultsNumber = data.totalItems
+      dataToDispatch.books = [] //buildBooks(data)
+      return dataToDispatch
+    }
+
+
+
   }
 
 }
@@ -76,3 +102,16 @@ function checkData(data) {
 
   return status
 }
+
+// function createBookRecords(arrayOfAPIReturns) {
+//
+//   let bookRecordsForState = []
+//
+//   arrayOfAPIReturns.forEach( bookRecord => {
+//     let bookRecordForState = new ModelToReturn(bookRecord.volumeInfo)
+//     bookRecordsForState.push(bookRecordForState)
+//   })
+//
+//   return bookRecordsForState
+//
+// }
