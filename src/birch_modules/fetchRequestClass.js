@@ -108,22 +108,16 @@ export class GoogleBooksAPIRequest extends FetchRequest {
 
     }
 
-// refactor to use map
     function _buildBooks(bookData) {
-      let bookObjects = []
-
-      bookData.forEach( record => {
-        let book = new BookBuilder()
+      return bookData.map( record => {
+        return new BookBuilder()
           .setImageURL(record.imageURL)
           .setTitle(record.title)
           .setAuthors(record.authors)
           .setPublisher(record.publisher)
           .setAdditionalInfoURL(record.additionalInfoURL)
           .build()
-        bookObjects.push(book)
       })
-
-      return bookObjects
     }
 
   }
