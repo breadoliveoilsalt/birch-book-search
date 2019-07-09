@@ -5,7 +5,7 @@ class FetchRequest {
 
   constructor(searchProperties) {
     this.fetch = fetch
-    this.searchTerms = searchProperties.searchTerms || null
+    this.searchTerms = searchProperties.searchTerms //|| null
       // this.apiKey = process.env.REACT_APP_GOOGLE_BOOKS_API_KEY
       // this.baseURL = `https://www.googleapis.com/books/v1/volumes?key=${this.apiKey}`
 
@@ -51,9 +51,9 @@ export class GoogleBooksAPIRequest extends FetchRequest {
             return data }
           })
         .then(data => {
-          let dataResults = _checkDataForResults(data)
-          if (dataResults.error) {
-            throw dataResults
+          let resultsNumberStatus = _checkDataForResultsNumber(data)
+          if (resultsNumberStatus.error) {
+            throw resultsNumberStatus
           } else {
             return data
           }
@@ -62,17 +62,71 @@ export class GoogleBooksAPIRequest extends FetchRequest {
         //    return {resultsNumber: data.totalItems, books: []}
         // })
         .then(data => {
-          let parsedData = _parseData(data)
-          return parsedData
+          let bookData = _parseAndValidateBookData(data)
+          // debugger
+          let bookObjects = _buildBooks(bookData)
+          return {resultsNumber: data.totalItems, books: bookObjects}
+
+          // let parsedData = _parseData(data)
+          // return parsedData
         })
         .catch(object => object)
     }
+    //
+    // function _parseData(data) {
+    //   let parsedData = {}
+    //   parsedData.resultsNumber = data.totalItems
+    //   parsedData.books = _organizeBookData(data)
+    //   return parsedData
+    // }
 
-    function _parseData(data) {
-      let parsedData = {}
-      parsedData.resultsNumber = data.totalItems
-      parsedData.books = []
-      return parsedData
+    function _parseAndValidateBookData(data) {
+      let books = []
+
+      data.items.forEach( record => {
+        let bookData = {}
+        let baseInfo = record.volumeInfo
+
+        try {
+          bookData.imageURL = baseInfo.imageLinks.thumbnail
+        } catch {
+          bookData.imageURL = null
+        }
+
+        try {
+          bookData.title = baseInfo.title
+        } catch {
+          bookData.title = null
+        }
+
+        try {
+          let authorsString = baseInfo.authors[0]
+          for (let i = 1; i < baseInfo.authors.length; i++) {
+            authorsString += ` & ${baseInfo.authors[i]}`
+          }
+          bookData.authors = authorsString
+        } catch {
+          bookData.authors = null
+        }
+
+        try {
+          bookData.publisher = baseInfo.publisher
+        } catch {
+          bookData.publisher = null
+        }
+
+        try {
+          bookData.additionalInfoURL = baseInfo.infoLink
+        } catch {
+          bookData.additionalInfoURL = null
+        }
+
+        books.push(bookData)
+
+      })
+
+      return books
+
     }
 
         //     }
@@ -103,24 +157,25 @@ export class GoogleBooksAPIRequest extends FetchRequest {
     //   return dataToDispatch
     // }
 
-    function buildBooks(apiBooksArray) {
-      debugger
-      let books = []
-      apiBooksArray.forEach( record => {
-        debugger
+    function _buildBooks(bookData) {
+      let bookObjects = []
+      // bookData is ok
+      // debugger
+      bookData.forEach( record => {
+        // debugger
         // try{
           let book = new BookBuilder()
-            .setImageURL(record.volumeInfo.imageLinks.thumbnail)
-            .setTitle(record.volumeInfo.title)
-            .setAuthors(record.volumeInfo.authors)
-            .setPublisher(record.volumeInfo.publisher)
-            .setAdditionalInfoURL(record.volumeInfo.infoLink)
+            .setImageURL(record.imageURL)
+            .setTitle(record.title)
+            .setAuthors(record.authors)
+            .setPublisher(record.publisher)
+            .setAdditionalInfoURL(record.additionalInfoURL)
             .build()
-          debugger
-          books.push(book)
+          // debugger
+          bookObjects.push(book)
         // } catch(error) {console.warn(error)}
       })
-      return books
+      return bookObjects
     }
 
 
@@ -147,57 +202,58 @@ class BookBuilder {
   constructor() {}
 
   setImageURL(url) {
-    debugger
-    try {
+    // // debugger
+    // try {
       this.imageURL = url
-    } catch {
-      this.imageURL = null
-    }
+    // } catch {
+    //   this.imageURL = null
+    // }
     return this
   }
 
   setTitle(title) {
-    debugger
-    try {
+    // debugger
+    // try {
       this.title = title
-    } catch {
-      this.title = null
-    }
+    // } catch {
+    //   this.title = null
+    // }
     // debugger
     return this
   }
 
   setAuthors(authors) {
-    debugger
-    try {
-      let authorsString = authors[0]
-      for (let i = 1; i < authors.length; i++) {
-        authorsString += ` & ${authors[i]}`
-      }
-      this.authors = authorsString
-    } catch {
-      this.authors = null
-    }
+    // debugger
+    // try {
+    //   let authorsString = authors[0]
+    //   for (let i = 1; i < authors.length; i++) {
+    //     authorsString += ` & ${authors[i]}`
+    //   }
+    //   this.authors = authorsString
+    // } catch {
+    //   this.authors = null
+    // }
+    this.authors = authors
     return this
   }
 
   setPublisher(publisher) {
-    debugger
-    try {
+    // debugger
+    // try {
       this.publisher = publisher
-    } catch {
-      this.publisher = null
-    }
+    // } catch {
+    //   this.publisher = null
+    // }
     return this
   }
 
   setAdditionalInfoURL(url) {
-    debugger
-    try {
+    // debugger
+    // try {
       this.additionalInfoURL = url
-    } catch {
-      this.additionalInfoURL = null
-    }
+    // } catch {
+      // this.additionalInfoURL = null
+    // }
     return this
   }
 
@@ -258,11 +314,11 @@ function _checkDataForErrors(data) {
   return status
 }
 
-function _checkDataForResults(data) {
-  let dataResults = {error: false}
+function _checkDataForResultsNumber(data) {
+  let resultsNumberStatus = {error: false}
   if (!data.hasOwnProperty("totalItems") || data.totalItems === 0){
-    dataResults.error = true
-    dataResults.message = "Sorry, there were no results. Please try another search."
+    resultsNumberStatus.error = true
+    resultsNumberStatus.message = "Sorry, there were no results. Please try another search."
   }
-  return dataResults
+  return resultsNumberStatus
 }
