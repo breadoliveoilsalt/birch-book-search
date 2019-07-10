@@ -19,11 +19,12 @@ describe("<SearchLayoutAndLogic /> - Testing What Functions Call: ", function() 
       const props = {
         deleteError: sinon.spy(),
         resetSearch: sinon.spy(),
+        clearPriorSearch: sinon.spy(),
         beginBookAPIRequest: sinon.spy(),
         loadError: sinon.spy(),
         endBookAPIRequest: sinon.spy(),
         loadSearchTerms: sinon.spy(),
-        getBookRecordsBasicSearch: sinon.spy()
+        getBookRecords: sinon.spy()
       }
 
       const wrapper = shallow(<SearchLayoutAndLogic {...props} />)
@@ -47,22 +48,20 @@ describe("<SearchLayoutAndLogic /> - Testing What Functions Call: ", function() 
           expect(wrapper.instance().props.deleteError.called).to.be.true
       })
 
-      it("calls #this.props.resetSearch", function() {
-          expect(wrapper.instance().props.resetSearch.called).to.be.true
+      it("calls #this.props.clearPriorSearch", function() {
+          expect(wrapper.instance().props.clearPriorSearch.called).to.be.true
       })
 
       it("calls #this.props.beginBookAPIRequest", function() {
           expect(wrapper.instance().props.beginBookAPIRequest.called).to.be.true
       })
 
-      it("calls SearchLayoutAndLogic#getSearchTerms and SearchLayoutAndLogic#escapeSearchTerms", function() {
-          expect(wrapper.instance().getSearchTerms.called).to.be.true
+      it("calls prototype.escapeSearchTerms", function() {
           expect(wrapper.instance().escapeSearchTerms.called).to.be.true
       })
 
-      it("calls #this.props.loadSearchTerms and #this.props.getBookRecordsBasicSearch, and not #this.props.endBookAPIRequest or #this.props.loadError, if escapeSearchTerms returns a non-empty string", function(){
-        expect(wrapper.instance().props.loadSearchTerms.called).to.be.true
-        expect(wrapper.instance().props.getBookRecordsBasicSearch.called).to.be.true
+      it("calls #this.props.getBookRecords, and not #this.props.endBookAPIRequest or #this.props.loadError, if escapeSearchTerms returns a non-empty string", function(){
+        expect(wrapper.instance().props.getBookRecords.called).to.be.true
         expect(wrapper.instance().props.endBookAPIRequest.called).to.be.false
         expect(wrapper.instance().props.loadError.called).to.be.false
       })
@@ -74,6 +73,7 @@ describe("<SearchLayoutAndLogic /> - Testing What Functions Call: ", function() 
       const props = {
         deleteError: sinon.spy(),
         resetSearch: sinon.spy(),
+        clearPriorSearch: sinon.spy(),
         beginBookAPIRequest: sinon.spy(),
         loadError: sinon.spy(),
         endBookAPIRequest: sinon.spy(),
@@ -103,16 +103,15 @@ describe("<SearchLayoutAndLogic /> - Testing What Functions Call: ", function() 
           expect(wrapper.instance().props.deleteError.called).to.be.true
       })
 
-      it("calls #this.props.resetSearch", function() {
-          expect(wrapper.instance().props.resetSearch.called).to.be.true
+      it("calls #this.props.clearPriorSearch", function() {
+          expect(wrapper.instance().props.clearPriorSearch.called).to.be.true
       })
 
       it("calls #this.props.beginBookAPIRequest", function() {
           expect(wrapper.instance().props.beginBookAPIRequest.called).to.be.true
       })
 
-      it("calls SearchLayoutAndLogic#getSearchTerms and SearchLayoutAndLogic#escapeSearchTerms", function() {
-          expect(wrapper.instance().getSearchTerms.called).to.be.true
+      it("calls prototype.escapeSearchTerms", function() {
           expect(wrapper.instance().escapeSearchTerms.called).to.be.true
       })
 
@@ -123,22 +122,6 @@ describe("<SearchLayoutAndLogic /> - Testing What Functions Call: ", function() 
         expect(wrapper.instance().props.loadSearchTerms.called).to.be.false
         expect(wrapper.instance().props.getBookRecordsBasicSearch.called).to.be.false
       })
-
-    })
-
-  })
-
-  describe("#getSearchTerms", function() {
-
-    it("calls document.getElementById", function(){
-
-      const wrapper = shallow(<SearchLayoutAndLogic />)
-
-      global.window.document.getElementById = sinon.stub().returns({value: "Some Search Terms"})
-
-      wrapper.instance().getSearchTerms()
-
-      expect(global.window.document.getElementById.called).to.be.true
 
     })
 
@@ -192,10 +175,6 @@ describe("<SearchLayoutAndLogic /> - Testing What Functions Call: ", function() 
       expect(props.resetSearch.called).to.be.true
     })
 
-    it("calls document.getElementById", function() {
-      expect(global.window.document.getElementById.called).to.be.true
-    })
-
   })
 
   describe("#handleLoadMoreResults", function() {
@@ -207,7 +186,7 @@ describe("<SearchLayoutAndLogic /> - Testing What Functions Call: ", function() 
       loadError: sinon.spy(),
       endBookAPIRequest: sinon.spy(),
       loadSearchTerms: sinon.spy(),
-      getBookRecordsBasicSearch: sinon.spy(),
+      getBookRecords: sinon.spy(),
       increaseSearchStartingID: sinon.spy()
     }
 
@@ -227,8 +206,8 @@ describe("<SearchLayoutAndLogic /> - Testing What Functions Call: ", function() 
       expect(wrapper.instance().props.beginBookAPIRequest.called).to.be.true
     })
 
-    it("calls this.props.getBookRecordsBasicSearch()", function() {
-      expect(wrapper.instance().props.getBookRecordsBasicSearch.called).to.be.true
+    it("calls this.props.getBookRecords()", function() {
+      expect(wrapper.instance().props.getBookRecords.called).to.be.true
     })
 
     it("calls this.props.increaseSearchStartingID()", function() {
