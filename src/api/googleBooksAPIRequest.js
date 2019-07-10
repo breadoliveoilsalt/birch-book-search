@@ -1,5 +1,5 @@
 import FetchRequest from './fetchRequest'
-import BookBuilder from '../models/bookBuilder'
+import BookBuilder from '../builders/bookBuilder'
 
 class GoogleBooksAPIRequest extends FetchRequest {
 

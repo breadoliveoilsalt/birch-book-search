@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import BookBuilder from '../../models/bookBuilder'
+import BookBuilder from '../../builders/bookBuilder'
 import Book from '../../models/book'
 
 describe("BookBuilder class", function() {
