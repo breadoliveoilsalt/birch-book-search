@@ -103,7 +103,9 @@ function _parseAndValidateBookData(data) {
     let baseInfo = record.volumeInfo
 
     try {
-      bookData.imageURL = baseInfo.imageLinks.thumbnail
+      let unsecureAddress = baseInfo.imageLinks.thumbnail
+      let secureAddress = unsecureAddress.replace("http://", "https://")
+      bookData.imageURL = secureAddress
     } catch {
       bookData.imageURL = null
     }
