@@ -2,8 +2,6 @@ import Book from '../models/book'
 
 class BookBuilder {
 
-  constructor() {}
-
   setImageURL(url) {
     this.imageURL = url
     return this
