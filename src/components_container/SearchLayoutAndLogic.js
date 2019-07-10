@@ -41,22 +41,12 @@ export class SearchLayoutAndLogic extends Component {
       resultsPerSearch: this.props.resultsPerSearch
     }
 
-    let apiRequest = new GoogleBooksAPIRequest(searchProperties).basicSearchWithAPIKey()
-
-    this.props.getBookRecords(apiRequest)
-    // this.props.getBookRecords(this.searchParameters(searchProperties))
+    this.props.getBookRecords(this.apiRequest(searchProperties))
   }
 
   escapeSearchTerms(searchTerms) {
     return searchTerms.trim()
   }
-
-  // searchParameters(searchProperties) {
-  //   return {
-  //       request: new GoogleBooksAPIRequest(searchProperties).basicSearchWithAPIKey()// ,
-  //       // ModelToReturn: Book
-  //     }
-  // }
 
   handleClearSearch(event) {
     event.preventDefault()
@@ -64,23 +54,23 @@ export class SearchLayoutAndLogic extends Component {
     this.props.resetSearch()
   }
 
-  handleLoadMoreResults() {
-    return
+  handleLoadMoreResults(event) {
+    event.preventDefault()
+    this.props.beginBookAPIRequest()
+
+    let searchProperties = {
+      searchTerms: this.props.userSearchTerms,
+      searchStartingID: this.props.searchStartingID + this.props.resultsPerSearch,
+      resultsPerSearch: this.props.resultsPerSearch
+    }
+
+    this.props.getBookRecords(this.apiRequest(searchProperties))
+    this.props.increaseSearchStartingID()
   }
 
-  // handleLoadMoreResults(event) {
-  //   event.preventDefault()
-  //   this.props.beginBookAPIRequest()
-  //
-  //   let searchProperties = {
-  //     searchTerms: this.props.userSearchTerms,
-  //     searchStartingID: this.props.searchStartingID + this.props.resultsPerSearch,
-  //     resultsPerSearch: this.props.resultsPerSearch
-  //   }
-  //
-  //   this.props.getBookRecordsBasicSearch(this.searchParameters(searchProperties))
-  //   this.props.increaseSearchStartingID()
-  // }
+  apiRequest(searchProperties) {
+    return new GoogleBooksAPIRequest(searchProperties).basicSearchWithAPIKey()
+  }
 
   jumpToTop(event) {
     event.preventDefault()
@@ -88,7 +78,6 @@ export class SearchLayoutAndLogic extends Component {
   }
 
   render() {
-
     return(
 
       <div>
