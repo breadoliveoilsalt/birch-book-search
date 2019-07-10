@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { loadError, deleteError, beginBookAPIRequest, endBookAPIRequest } from '../actions/actionCreatorsAppStatus'
 import { loadSearchTerms, increaseSearchStartingID, clearPriorSearch, resetSearch } from '../actions/actionCreatorsUpdateSearchResults'
-import { getBookRecords } from '../birch_modules/getBookRecordsThunk'
+import { getBookRecords } from '../actions/getBookRecordsThunk'
 
 import GoogleBooksAPIRequest from '../api/googleBooksAPIRequest'
 
