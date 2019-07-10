@@ -1,8 +1,6 @@
 import FetchRequest from './fetchRequest'
 import BookBuilder from '../models/bookBuilder'
 
-// UP TO IMPORT BOOK BUILDER!! MAKE SURE IT WORKS! DELETE ALL COMMENTS, ESP FROM BOOK CLASS
-
 class GoogleBooksAPIRequest extends FetchRequest {
 
   constructor(searchProperties) {
@@ -52,70 +50,10 @@ class GoogleBooksAPIRequest extends FetchRequest {
         .catch(object => object)
     }
 
-    function _parseAndValidateBookData(data) {
-      return data.items.map( record => {
-        let bookData = {}
-        let baseInfo = record.volumeInfo
-
-        try {
-          bookData.imageURL = baseInfo.imageLinks.thumbnail
-        } catch {
-          bookData.imageURL = null
-        }
-
-        try {
-          bookData.title = baseInfo.title
-        } catch {
-          bookData.title = null
-        }
-
-        try {
-          let authorsString = baseInfo.authors[0]
-          for (let i = 1; i < baseInfo.authors.length; i++) {
-            authorsString += ` & ${baseInfo.authors[i]}`
-          }
-          bookData.authors = authorsString
-        } catch {
-          bookData.authors = null
-        }
-
-        try {
-          bookData.publisher = baseInfo.publisher
-        } catch {
-          bookData.publisher = null
-        }
-
-        try {
-          bookData.additionalInfoURL = baseInfo.infoLink
-        } catch {
-          bookData.additionalInfoURL = null
-        }
-
-        return bookData
-      })
-    }
-
-    function _buildBooks(bookData) {
-      return bookData.map( record => {
-        return new BookBuilder()
-          .setImageURL(record.imageURL)
-          .setTitle(record.title)
-          .setAuthors(record.authors)
-          .setPublisher(record.publisher)
-          .setAdditionalInfoURL(record.additionalInfoURL)
-          .build()
-      })
-    }
-
   }
 }
 
-
-
-///// PRIVATE FUNCTIONS
-
-
-// Do I need message: null?? console.log so I see this.
+///// PRIVATE FUNCTIONS /////
 
 function _checkResponseForErrors(response) {
   let status = {error: false}
@@ -152,6 +90,67 @@ function _checkDataForResultsNumber(data) {
     resultsNumberStatus.message = "Sorry, there were no results. Please try another search."
   }
   return resultsNumberStatus
+}
+
+  // #_parseAndValidateBookData is needed because some of the fields returned
+  // by the Google Books API can be inconsistent or missing, including nested
+  // fields.  This can result in errors during #_buildBooks, even before
+  // calling the BookBuilder methods.  Validating through the BookBuilder
+  // methods did not help.
+function _parseAndValidateBookData(data) {
+  return data.items.map( record => {
+    let bookData = {}
+    let baseInfo = record.volumeInfo
+
+    try {
+      bookData.imageURL = baseInfo.imageLinks.thumbnail
+    } catch {
+      bookData.imageURL = null
+    }
+
+    try {
+      bookData.title = baseInfo.title
+    } catch {
+      bookData.title = null
+    }
+
+    try {
+      let authorsString = baseInfo.authors[0]
+      for (let i = 1; i < baseInfo.authors.length; i++) {
+        authorsString += ` & ${baseInfo.authors[i]}`
+      }
+      bookData.authors = authorsString
+    } catch {
+      bookData.authors = null
+    }
+
+    try {
+      bookData.publisher = baseInfo.publisher
+    } catch {
+      bookData.publisher = null
+    }
+
+    try {
+      bookData.additionalInfoURL = baseInfo.infoLink
+    } catch {
+      bookData.additionalInfoURL = null
+    }
+
+    return bookData
+  })
+}
+
+function _buildBooks(bookData) {
+  return bookData.map( record => {
+    return new BookBuilder()
+      .setImageURL(record.imageURL)
+      .setTitle(record.title)
+      .setAuthors(record.authors)
+      .setPublisher(record.publisher)
+      .setAdditionalInfoURL(record.additionalInfoURL)
+      .build()
+  })
+
 }
 
 export default GoogleBooksAPIRequest
