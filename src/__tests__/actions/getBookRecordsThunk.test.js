@@ -4,7 +4,7 @@ import fetchMock from 'fetch-mock'
 import { expect } from 'chai'
 import sinon from 'sinon'
 
-import { getBookRecordsBasicSearch } from '../../birch_modules/getBookRecordsThunk'
+import { getBookRecords } from '../../actions/getBookRecordsThunk'
 
 import { loadError, beginBookAPIRequest, endBookAPIRequest } from '../../actions/actionCreatorsAppStatus'
 import { loadSearchTerms, loadSearchResults, loadResultsNumber } from '../../actions/actionCreatorsUpdateSearchResults'
@@ -13,7 +13,7 @@ import { loadSearchTerms, loadSearchResults, loadResultsNumber } from '../../act
 const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
 
-let mockFetchResponseItems = [{
+const mockFetchResponseItems = [{
   "imageURL": "http://books.google.com/books/content?id=2o_mEBpjucUC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
   "title": "Jimmy the Squirrel",
   "authors": "Amr Taher",
@@ -28,26 +28,26 @@ let mockFetchResponseItems = [{
   "additionalInfoURL": "http://books.google.com/books?id=OsbuBD3mkkkC&dq=jimmy&hl=&source=gbs_api"
 }]
 
-class MockObject {
-  constructor() {
-  }
-}
+// class MockObject {
+//   constructor() {
+//   }
+// }
 
-const mockLoadResults = mockFetchResponseItems.map(item => new MockObject)
-
+// const mockLoadResults = mockFetchResponseItems.map(item => new MockObject)
+const mockLoadResults = [{title: "A Good Book"}, {title: "Another Good Book"}]
 ///// END SET UP /////
 
 describe('#getBookBasicSearch', function() {
 
-  it("calling dispatch on #getBooksBasicSearch calls the request function passed with it", function(){
+  it("calling dispatch on #getBooksBasicSearch calls the apiRequest function passed to it", function(){
 
     let store = mockStore({})
 
         // Below, used Promise.resolve() to deal with fact that request() is followed by a .then
-    let requestMock = sinon.mock().returns(Promise.resolve())
+    let apiRequestMock = sinon.mock().returns(Promise.resolve())
 
-    return store.dispatch(getBookRecordsBasicSearch({request: requestMock, ModelToReturn: MockObject })).then(
-      expect(requestMock.calledOnce).to.be.true
+    return store.dispatch(getBookRecords(apiRequestMock)).then(
+      expect(apiRequestMock.calledOnce).to.be.true
     )
 
   })
@@ -56,21 +56,24 @@ describe('#getBookBasicSearch', function() {
 
       let store = mockStore({})
 
-      let mockData = {status: 200, totalItems: 3, items: mockFetchResponseItems}
+      // let mockData = {status: 200, resultsNumber: 2, results: mockFetchResponseItems}
 
-      let requestMock = sinon.mock().returns(Promise.resolve(mockData))
+      let mockData = {status: 200, resultsNumber: 2, results: mockLoadResults}
+
+      let apiRequestMock = sinon.mock().returns(Promise.resolve(mockData))
 
       let starterDispatch = async function() {
-        await store.dispatch(getBookRecordsBasicSearch({request: requestMock, ModelToReturn: MockObject }))
+        await store.dispatch(getBookRecords(apiRequestMock))
       }
-
 
       let expectedActions = [
         endBookAPIRequest(),
-        loadResultsNumber(mockData.totalItems),
+        loadResultsNumber(mockData.resultsNumber),
         loadSearchResults(mockLoadResults)
       ]
 
+      // console.log(expectedActions)
+      // starterDispatch().then(() => console.log(store.getActions()))
       return starterDispatch().then(() => expect(store.getActions()).to.deep.equal(expectedActions))
 
   })
@@ -82,10 +85,10 @@ describe('#getBookBasicSearch', function() {
 
       let mockData = {status: 200, totalItems: 3, items: mockFetchResponseItems, error: true, message: "Something went wrong"}
 
-      let requestMock = sinon.mock().returns(Promise.resolve(mockData))
+      let apiRequestMock = sinon.mock().returns(Promise.resolve(mockData))
 
       let starterDispatch = async function() {
-        await store.dispatch(getBookRecordsBasicSearch({request: requestMock, ModelToReturn: MockObject }))
+        await store.dispatch(getBookRecords(apiRequestMock))
       }
 
       let expectedActions = [
@@ -98,16 +101,16 @@ describe('#getBookBasicSearch', function() {
     })
 
 
-  it("if there is no data.error property from the response to the request function, it dispatches #loadSearchResults with instances of the ModelToReturn passed to #getBookRecordsBasicSearch", function() {
+  it("if there is no data.error property from the response to the request function, it dispatches #loadSearchResults with instances of the ModelToReturn passed to #getBookRecords", function() {
 
       let store = mockStore({})
 
       let mockData = {status: 200, totalItems: 3, items: mockFetchResponseItems}
 
-      let requestMock = sinon.mock().returns(Promise.resolve(mockData))
+      let apiRequestMock = sinon.mock().returns(Promise.resolve(mockData))
 
       let starterDispatch = async function() {
-        await store.dispatch(getBookRecordsBasicSearch({request: requestMock, ModelToReturn: MockObject }))
+        await store.dispatch(getBookRecords(apiRequestMock))
       }
 
       return starterDispatch().then(() => expect(store.getActions()[2].payload).to.deep.equal(mockLoadResults))
