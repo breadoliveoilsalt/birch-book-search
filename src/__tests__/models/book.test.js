@@ -1,25 +1,12 @@
 import { expect } from 'chai'
+import Book from '../../models/book'
 
-import { Book } from '../../models/book'
-
-describe("Book", function() {
-
-  it("should throw an error if not initialized with an object that is a hash", function(){
-
-    let properties1 = "A Good Book"
-    expect(() => new Book(properties1)).to.throw()
-
-    let properties2 = ["joe", "How I Make Pie"]
-    expect(() => new Book(properties2)).to.throw()
-
-  })
+describe("Book class", function() {
 
   it("should return an instance of Book", function() {
-
     let properties = {title: "A Good Book", author: "A Good Friend"}
     let record = new Book(properties)
     expect(record).to.be.an.instanceof(Book)
-
   })
 
   describe("a Book instance", function() {
@@ -44,7 +31,6 @@ describe("Book", function() {
       let numberOfProperties = Object.keys(record).length
 
       expect(numberOfProperties).to.equal(5)
-
     })
 
     it("should have properties with null values when instantiated with an object/hash that does not specifiy such properties", function() {
@@ -69,23 +55,6 @@ describe("Book", function() {
       expect(record2.authors).to.equal(null)
       expect(record2.publisher).to.equal(null)
       expect(record2.additionalInfoURL).to.equal(null)
-
-    })
-
-    it("should properly format a string value for the property authors when passed an array with multiple authors", function() {
-
-      let properties = {
-        imageURL: "http://books.google.com/books/content?id=TwkNkgEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api",
-        title: "Apples",
-        authors: ["Gail Gibbons", "Tony Robbins", "Bart Simpson"],
-        publisher: "Live Oak Media (NY)",
-        additionalInfoURL: "http://books.google.com/books?id=TwkNkgEACAAJ&dq=apples&hl=&source=gbs_api"
-      }
-
-      let record = new Book(properties)
-
-      expect(record.authors).to.equal("Gail Gibbons & Tony Robbins & Bart Simpson")
-
     })
   })
 })
