@@ -9,33 +9,10 @@ import { getBookRecords } from '../../actions/getBookRecordsThunk'
 import { loadError, beginBookAPIRequest, endBookAPIRequest } from '../../actions/actionCreatorsAppStatus'
 import { loadSearchTerms, loadSearchResults, loadResultsNumber } from '../../actions/actionCreatorsUpdateSearchResults'
 
-///// SET UP /////
 const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
 
-const mockFetchResponseItems = [{
-  "imageURL": "http://books.google.com/books/content?id=2o_mEBpjucUC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-  "title": "Jimmy the Squirrel",
-  "authors": "Amr Taher",
-  "publisher": "AuthorHouse",
-  "additionalInfoURL": "http://books.google.com/books?id=2o_mEBpjucUC&dq=jimmy&hl=&source=gbs_api"
-},
-{
-  "imageURL": "http://books.google.com/books/content?id=OsbuBD3mkkkC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-  "title": "Jimmy Page",
-  "authors": "George Case",
-  "publisher": "Hal Leonard Corporation",
-  "additionalInfoURL": "http://books.google.com/books?id=OsbuBD3mkkkC&dq=jimmy&hl=&source=gbs_api"
-}]
-
-// class MockObject {
-//   constructor() {
-//   }
-// }
-
-// const mockLoadResults = mockFetchResponseItems.map(item => new MockObject)
 const mockLoadResults = [{title: "A Good Book"}, {title: "Another Good Book"}]
-///// END SET UP /////
 
 describe('#getBookBasicSearch', function() {
 
@@ -52,11 +29,9 @@ describe('#getBookBasicSearch', function() {
 
   })
 
-  it("if there is no data.error property from the response to the request function, it dispatches #endBookAPIRequest, #loadResultsNumber, and #loadSearchResults", function() {
+  it("if there is no data.error property in the response, and there are data.resultsNumber and data.results properties, it dispatches #endBookAPIRequest, #loadResultsNumber, and #loadSearchResults", function() {
 
       let store = mockStore({})
-
-      // let mockData = {status: 200, resultsNumber: 2, results: mockFetchResponseItems}
 
       let mockData = {status: 200, resultsNumber: 2, results: mockLoadResults}
 
@@ -72,8 +47,6 @@ describe('#getBookBasicSearch', function() {
         loadSearchResults(mockLoadResults)
       ]
 
-      // console.log(expectedActions)
-      // starterDispatch().then(() => console.log(store.getActions()))
       return starterDispatch().then(() => expect(store.getActions()).to.deep.equal(expectedActions))
 
   })
@@ -83,7 +56,7 @@ describe('#getBookBasicSearch', function() {
 
       let store = mockStore({})
 
-      let mockData = {status: 200, totalItems: 3, items: mockFetchResponseItems, error: true, message: "Something went wrong"}
+      let mockData = {status: 200, resultsNumber: 2, results: mockLoadResults, error: true, message: "Something went wrong"}
 
       let apiRequestMock = sinon.mock().returns(Promise.resolve(mockData))
 
@@ -101,11 +74,11 @@ describe('#getBookBasicSearch', function() {
     })
 
 
-  it("if there is no data.error property from the response to the request function, it dispatches #loadSearchResults with instances of the ModelToReturn passed to #getBookRecords", function() {
+  it("if there is no data.error property from the response to the request function, but also no data.resultsNumber or data.results properties, it dispatches it dispatches #endBookAPIRequest and #loadError with a message", function() {
 
       let store = mockStore({})
 
-      let mockData = {status: 200, totalItems: 3, items: mockFetchResponseItems}
+      let mockData = {status: 200, resultsNumber: 3}
 
       let apiRequestMock = sinon.mock().returns(Promise.resolve(mockData))
 
@@ -113,7 +86,12 @@ describe('#getBookBasicSearch', function() {
         await store.dispatch(getBookRecords(apiRequestMock))
       }
 
-      return starterDispatch().then(() => expect(store.getActions()[2].payload).to.deep.equal(mockLoadResults))
+      let expectedActions = [
+        endBookAPIRequest(),
+        loadError("Sorry, the data returned from the server was incomplete. Please try again.")
+      ]
+
+      return starterDispatch().then(() => expect(store.getActions()).to.deep.equal(expectedActions))
 
   })
 
