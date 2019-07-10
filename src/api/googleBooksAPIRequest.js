@@ -45,7 +45,7 @@ class GoogleBooksAPIRequest extends FetchRequest {
         .then(data => {
           let booksSeedData = _parseAndValidateBookData(data)
           let bookObjects = _buildBooks(booksSeedData)
-          return {resultsNumber: data.totalItems, books: bookObjects}
+          return {resultsNumber: data.totalItems, results: bookObjects}
         })
         .catch(object => object)
     }
