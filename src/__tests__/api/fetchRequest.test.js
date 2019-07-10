@@ -1,5 +1,4 @@
 import { expect } from 'chai'
-import sinon from 'sinon'
 import fetchMock from 'fetch-mock'
 
 import FetchRequest from '../../api/FetchRequest'
