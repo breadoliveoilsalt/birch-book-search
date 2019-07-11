@@ -95,4 +95,4 @@ An an update, here is a summary of the latest refactoring steps:
 
 -----
 
-Thanks for stopping by!
+Thanks for stopping by! 
