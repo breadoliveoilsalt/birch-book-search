@@ -70,7 +70,7 @@ An an update, here is a summary of the latest refactoring steps:
 
 1. Add and modify a few components to improve UI. For example, add a `<PageNotFound>` component to render in response to an invalid browser path. Update `<JumpToTopButton>` so the button has a fixed position in the window once search results load, so the user doesn't have to scroll all the way to the bottom of the page to find the button.
 
-2. Clean up aspects of components that had been bothering me and try to increase readability. In addition, break responsibility of certain components into sub-components for better allocation of single-responsiblity and for easier testing.  For example, move `<BrowserRouter>`'s switch capabilities from `<App>` to a new `<Routes>` component, which enabled me to test whether different components would render properly depending on the browser's path.
+2. Clean up components to increase readability and remove warnings displayed in the developer console when Birch runs. In addition, break responsibility of certain components into sub-components for better allocation of single-responsiblity and for easier testing.  For example, move `<BrowserRouter>`'s switch capabilities from `<App>` to a new `<Routes>` component, which enabled me to test whether different components would render properly depending on the browser's path.
 
 3. Update tests to cover the new components and refactoring described above and below.  Try to DRY up tests, particularly relying more on `#beforeEach` for test set up.
 
@@ -95,4 +95,4 @@ An an update, here is a summary of the latest refactoring steps:
 
 -----
 
-Thanks for stopping by! 
+Thanks for stopping by!
