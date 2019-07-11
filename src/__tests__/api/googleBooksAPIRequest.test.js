@@ -112,6 +112,7 @@ describe("GoogleBooksAPIRequest class", function() {
       let expectedReturnValue = { error: true, message: 'Sorry, there were no results. Please try another search.' }
 
       return getReturnValue().then(result => expect(result).to.deep.equal(expectedReturnValue))
+      
     })
 
   })

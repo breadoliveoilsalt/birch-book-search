@@ -164,8 +164,6 @@ describe("Root reducer", function() {
 
     expect(newState1).to.deep.equal(expectedNewState1)
 
-    /////
-
     const expectedNewState2 = {
            appStatus: {
              makingBookAPIRequest: false,
@@ -220,8 +218,6 @@ describe("Root reducer", function() {
      const newState1 = rootReducer(expectedInitialState, loadSearchResults(searchResults1))
 
      expect(newState1).to.deep.equal(expectedNewState1)
-
-     /////
 
      let searchResults2 = [{
         "imageURL": "http://books.google.com/books/content?id=d0NEDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",

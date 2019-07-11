@@ -57,9 +57,10 @@ export class SearchLayoutAndLogic extends Component {
   handleLoadMoreResults(event) {
     event.preventDefault()
     this.props.beginBookAPIRequest()
+    let escapedSearchTerms = this.escapeSearchTerms(this.props.userSearchTerms)
 
     let searchProperties = {
-      searchTerms: this.props.userSearchTerms,
+      searchTerms: escapedSearchTerms,
       searchStartingID: this.props.searchStartingID + this.props.resultsPerSearch,
       resultsPerSearch: this.props.resultsPerSearch
     }

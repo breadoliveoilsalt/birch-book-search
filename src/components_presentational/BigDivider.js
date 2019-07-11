@@ -3,8 +3,7 @@ import React from 'react'
 const BigDivider = () => {
 
   return (
-    <div className="big-divider">
-    </div>
+    <div className="big-divider" />
   )
 
 }

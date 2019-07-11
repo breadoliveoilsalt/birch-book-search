@@ -14,8 +14,6 @@ describe("<SearchLayoutAndLogic /> - Testing What Functions Call: ", function() 
 
     describe("when SearchLayoutAndLogic#escapeSearchTerms returns a non-empty string", function() {
 
-      // Set up:
-
       const props = {
         deleteError: sinon.spy(),
         resetSearch: sinon.spy(),
@@ -37,8 +35,6 @@ describe("<SearchLayoutAndLogic /> - Testing What Functions Call: ", function() 
       }
 
       wrapper.instance().handleSearchSubmit(event)
-
-      // Tests:
 
       it("calls #preventDefault on the event", function(){
         expect(event.preventDefault.called).to.be.true
@@ -92,8 +88,6 @@ describe("<SearchLayoutAndLogic /> - Testing What Functions Call: ", function() 
       }
 
       wrapper.instance().handleSearchSubmit(event)
-
-      // Tests:
 
       it("calls #preventDefault on the event", function(){
         expect(event.preventDefault.called).to.be.true
@@ -187,7 +181,8 @@ describe("<SearchLayoutAndLogic /> - Testing What Functions Call: ", function() 
       endBookAPIRequest: sinon.spy(),
       loadSearchTerms: sinon.spy(),
       getBookRecords: sinon.spy(),
-      increaseSearchStartingID: sinon.spy()
+      increaseSearchStartingID: sinon.spy(),
+      userSearchTerms: "A Good Book"
     }
 
     const wrapper = shallow(<SearchLayoutAndLogic {...props} />)

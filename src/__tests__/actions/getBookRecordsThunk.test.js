@@ -20,7 +20,6 @@ describe('#getBookBasicSearch', function() {
 
     let store = mockStore({})
 
-        // Below, used Promise.resolve() to deal with fact that request() is followed by a .then
     let apiRequestMock = sinon.mock().returns(Promise.resolve())
 
     return store.dispatch(getBookRecords(apiRequestMock)).then(

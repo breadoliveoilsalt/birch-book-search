@@ -66,7 +66,7 @@ Creating the app was a lot of fun and lead to much learning about tests.  Here i
 
 ## Updates as of July 11, 2019
 
-Here is a summary of the latest refactoring steps:
+An an update, here is a summary of the latest refactoring steps:
 
 1. Add and modify a few components to improve UI. For example, add a PageNotFound component to render in response to an invalid browser path. Update "Jump To Top" button so the button has a fixed position in the window once search results load, so the user doesn't have to scroll all the way to the bottom of the page to find the button.
 
@@ -90,7 +90,7 @@ Here is a summary of the latest refactoring steps:
 
 - Who should have responsibility for validating the API data and information used to create `Book` instances?  In doing research, find some who recommend that the builder validate data, and other who recommend that the model validate data. Ultimately decide to validate API data prior to passing it to the builder, with a new private function `#__parseAndValidateBookData` in `GoogleBooksAPIRequest`.  Why?  
 
-  - I've noticed some inconsistencies in the data records returned from the Google Books API.  Most of the time, things worked as planned and expected fields for book information existed.  But sometimes they were not there.  And some of the expected fields that Birch needs are deeply nested.  Trying to call a builder setter method with an *expected* nested attribute field that didn't exist triggered errors even before the program tried to execute the setter method.  So `try/catch` patterns inside builder's setter methods to validate data wouldn't work.  As a result, I figured the best thing to do was to parse and validate the returned data from the Google Books API before calling on these methods.  Then we could call the builder's setter methods with this validated data.  Plus, in theory, I think this would tend to make the builder more extendable to other APIs in the future, as it wouldn't be embedded with validators specific to the Google Books API return data. 
+  - I've noticed some inconsistencies in the data records returned from the Google Books API.  Most of the time, things worked as planned and expected fields for book information existed.  But sometimes they were not there.  And some of the expected fields that Birch needs are deeply nested.  Trying to call a builder setter method with an *expected* nested attribute field that didn't exist triggered errors even before the program tried to execute the setter method.  So `try/catch` patterns inside builder's setter methods to validate data wouldn't work.  As a result, I figured the best thing to do was to parse and validate the returned data from the Google Books API before calling on these methods.  Then we could call the builder's setter methods with this validated data.  Plus, in theory, I think this would tend to make the builder more extendable to other APIs in the future, as it wouldn't be embedded with validators specific to the Google Books API return data.
 
 
 -----

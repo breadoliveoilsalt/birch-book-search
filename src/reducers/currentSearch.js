@@ -21,7 +21,7 @@ function currentSearch(state = defaultState, action) {
     case types.CLEAR_PRIOR_SEARCH:
       return Object.assign({}, state, {searchStartingID: 0, results: [], resultsNumber: 0})
     case types.RESET_SEARCH:
-      return defaultState
+      return Object.assign({}, defaultState)
     default:
       return state
   }
