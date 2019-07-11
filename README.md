@@ -68,7 +68,7 @@ Creating the app was a lot of fun and lead to much learning about tests.  Here i
 
 An an update, here is a summary of the latest refactoring steps:
 
-1. Add and modify a few components to improve UI. For example, add a PageNotFound component to render in response to an invalid browser path. Update "Jump To Top" button so the button has a fixed position in the window once search results load, so the user doesn't have to scroll all the way to the bottom of the page to find the button.
+1. Add and modify a few components to improve UI. For example, add a `<PageNotFound>` component to render in response to an invalid browser path. Update `<JumpToTopButton>` so the button has a fixed position in the window once search results load, so the user doesn't have to scroll all the way to the bottom of the page to find the button.
 
 2. Clean up aspects of components that had been bothering me and try to increase readability. In addition, break responsibility of certain components into sub-components for better allocation of single-responsiblity and for easier testing.  For example, move `<BrowserRouter>`'s switch capabilities from `<App>` to a new `<Routes>` component, which enabled me to test whether different components would render properly depending on the browser's path.
 
@@ -76,7 +76,7 @@ An an update, here is a summary of the latest refactoring steps:
 
 4. Clean up folder structure and file names for better organization and navigation.  For example, move action creators and thunk to new `/actions` folder.  Implement `actionTypes` file in `/actions` for keeping track of the app's actions.  Create folder `/models` for models, create folder `/builders` for object builders (as part of implementing builder pattern, described below), and create folder `/api` to hold classes responsible for making API requests.  Remove redundancies in file names where a folder name makes it clear what the file contains.  For example, remove 'reducer' from the names of files that are in the `/reducers` folder (except for `rootReducer`, since research seems indicate this is standard). Remove 'model' from the file name for the `Book` model, which is now just `book.js` under the `/models` folder. Remove 'class' from the file name for the `FetchRequest` class, which is now just `fetchRequest.js` under the `/api` folder.
 
-5. Attempt to make previous `FetchRequest` class extendable to different APIs in the future by separating it from the functions and properties needed to make a request to the Google Books API.  That is, move the functions and properties relevant to a Google Books API request to a new class, `GoogleBooksAPIRequest`, and specify it as a sub-class of the FetchRequest class.  An instance of the `FetchRequest` class now has only the fetching functionality and a `searchTerms` property, and ideally `FetchRequest` could be extended to other sub-classes making different API requests in the future.  The `FetchRequest` and `GoogleBooksAPIRequest` classes are now under the new `/api` folder.
+5. Attempt to make previous `FetchRequest` class extendable to different APIs in the future by separating it from the functions and properties needed to make a request to the Google Books API.  That is, move the functions and properties relevant to a Google Books API request to a new class, `GoogleBooksAPIRequest`, which is a sub-class of the `FetchRequest` class.  An instance of the `FetchRequest` class now has only the fetching functionality and a `searchTerms` property, and ideally `FetchRequest` could be extended to other sub-classes making different API requests in the future.  The `FetchRequest` and `GoogleBooksAPIRequest` classes are now under the new `/api` folder.
 
 6. Chew on the prior version of `#getBookRecords` thunk, which previously had responsibility for (1) triggering an API request, (2) funneling the returned data through a model to create instances, and then (3) dispatching the instances to the Redux store.  Decide that (2) is out of place -- there's no need for the thunk to know *what* it is dispatching -- and the thunk should only have responsibility for (1) and (3).  Refactor the thunk accordingly. But...
 
@@ -86,7 +86,7 @@ An an update, here is a summary of the latest refactoring steps:
 
 8. As part of Step 7, wrestle a bit further with the following:
 
-- Does `GoogleBooksAPIRequest` class now know too much about the `BookBuilder` class and, in turn, the `Book` model? Do we have a dependency problem? Ultimately decide this might be something we can live with for the time being, since `GoogleBooksAPIRequest` is all about books on its face.  
+- Does `GoogleBooksAPIRequest` class now know too much about the `BookBuilder` class and, in turn, the `Book` model? Do we have a dependency problem? Ultimately decide this might be something we can live with, since `GoogleBooksAPIRequest` is all about books on its face.  
 
 - Who should have responsibility for validating the API data and information used to create `Book` instances?  In doing research, find some who recommend that the builder validate data, and other who recommend that the model validate data. Ultimately decide to validate API data prior to passing it to the builder, with a new private function `#__parseAndValidateBookData` in `GoogleBooksAPIRequest`.  Why?  
 
