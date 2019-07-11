@@ -147,7 +147,6 @@ function _buildBooks(bookData) {
       .setAdditionalInfoURL(record.additionalInfoURL)
       .build()
   })
-
 }
 
 export default GoogleBooksAPIRequest
