@@ -1,4 +1,4 @@
-# Birch 
+# Birch
 
 Welcome to Birch, a tool to search for your next favorite book!
 
@@ -63,6 +63,22 @@ Creating the app was a lot of fun and lead to much learning about tests.  Here i
 - Side Note: There are definitely areas where the testing could be improved.  In particular:
   - The tests for the SearchResultsFooter component need to be beefed up to cover all sub-components.  Drafts of the tests were going poorly, perhaps due to too much conditional rendering in this component as-is.  
   - The tests in SearchLayoutAndLogic-FunctionCalls (testing the functions belonging to the SearchLayoutAndLogic component) should be extended to functions that call #document.getElementById.  Drafts of such tests were not up to snuff, particularly for getting and setting values using #document.getElementById.   
+
+## Updates as of July 10, 2019
+
+Here is a summary of the latest refactoring steps:
+
+1. Add components to update UI. For example, add a PageNotFound component to render in response to an invalide URL. Update "Jump To Top" button to have a fixed position once results load, so the user doesn't have to scroll to the bottom to get to jump to the top.
+
+2. Clean up aspects of components that had been bothering me and try to increase readability. Break responsibility of certain components into sub-components for better allocation of single-responsiblity and for easier testing (for example, create a new Routes component).
+
+3. Update tests to cover the new components and further refactoring described above and below.  Try to DRY up tests, particularly relying more on `#beforeEach` for test set up.
+
+4. Clean up folder structure and file names for better organization and navigation.  For example, move action creators and thunk to new `/actions` folder.  Implement `actionTypes` file in `/actions` for organization of app's actions.  Create folder `/models` for models, create folder `/builders` for object builders (as part of implementing builder pattern), and create folder `/api` to hold classes responsible for making API requests.  Remove redundancies in file names where the folder name makes it clear what the file contains.  For example, remove 'reducer' from the names of files that are in the `/reducers` folder (except for `rootReducer`), and remove 'model' from the file name for the book model, which is now under the `/models` folder.
+
+5. Rather than rely on a Book model to instantiate book objects, implement
+
+
 
 -----
 

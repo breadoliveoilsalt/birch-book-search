@@ -96,7 +96,7 @@ function _checkDataForResultsNumber(data) {
   // by the Google Books API can be inconsistent or missing, including nested
   // fields.  This can result in errors during #_buildBooks, even before
   // calling the BookBuilder methods.  Validating through the BookBuilder
-  // methods did not help.
+  // methods did work as a solution to protect against these errors.
 function _parseAndValidateBookData(data) {
   return data.items.map( record => {
     let bookData = {}
