@@ -92,11 +92,6 @@ function _checkDataForResultsNumber(data) {
   return resultsNumberStatus
 }
 
-  // #_parseAndValidateBookData is needed because some of the fields returned
-  // by the Google Books API can be inconsistent or missing, including nested
-  // fields.  This can result in errors during #_buildBooks, even before
-  // calling the BookBuilder methods.  Validating through the BookBuilder
-  // methods did work as a solution to protect against these errors.
 function _parseAndValidateBookData(data) {
   return data.items.map( record => {
     let bookData = {}
